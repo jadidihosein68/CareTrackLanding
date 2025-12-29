@@ -35,7 +35,7 @@ export function PrivacyPolicy() {
             Privacy Policy
           </h1>
           <p className="text-slate-600 mb-8">
-            Last updated: December 29, 2024
+            Last updated: December 29, 2025
           </p>
 
           <div className="prose prose-slate max-w-none">
