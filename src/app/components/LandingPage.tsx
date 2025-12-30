@@ -221,7 +221,11 @@ export function LandingPage() {
               <ul className="space-y-2 text-slate-400">
 
                 <li><a href="#" className="hover:text-white transition-colors">Download</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
+                <li>
+                  <Link to="/support" className="hover:text-white transition-colors">
+                    Support
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
