@@ -7,12 +7,35 @@ export function Support() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [context, setContext] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const subject = encodeURIComponent('CareTrack Support');
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nContext:\n${context}`);
-    window.location.href = `mailto:info@osacore.com?subject=${subject}&body=${body}`;
+    setStatus('sending');
+    const formData = new FormData(event.currentTarget);
+    const encoded = new URLSearchParams();
+    formData.forEach((value, key) => {
+      encoded.append(key, String(value));
+    });
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encoded.toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send support request');
+      }
+
+      setStatus('sent');
+      setName('');
+      setEmail('');
+      setContext('');
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
   return (
@@ -47,11 +70,20 @@ export function Support() {
             CareTrack Support
           </h1>
           <p className="text-slate-600 mb-10">
-            Tell us what you need help with and we will open your email client with a prefilled
-            message.
+            Tell us what you need help with and we will send it to our support team.
           </p>
 
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form
+            className="space-y-6"
+            onSubmit={handleSubmit}
+            name="support"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="support" />
+            <input type="hidden" name="subject" value="CareTrack Support" />
+            <input type="hidden" name="bot-field" />
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2" htmlFor="name">
                 Name
@@ -100,20 +132,83 @@ export function Support() {
               />
             </div>
 
-            <button
-              type="submit"
-              className="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors"
-            >
-              Send Email
-            </button>
+            <div className="flex flex-col gap-3">
+              <button
+                type="submit"
+                className="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                disabled={status === 'sending'}
+              >
+                {status === 'sending' ? 'Sending...' : 'Send Email'}
+              </button>
+              {status === 'sent' && (
+                <p className="text-emerald-600">Thanks! Your support request was sent.</p>
+              )}
+              {status === 'error' && (
+                <p className="text-rose-600">
+                  We could not send your request. Please email
+                  {' '}
+                  <a
+                    className="underline text-rose-600 hover:text-rose-700"
+                    href="mailto:info@osacore.com?subject=CareTrack%20Support"
+                  >
+                    info@osacore.com
+                  </a>
+                  {' '}
+                  instead.
+                </p>
+              )}
+            </div>
           </form>
         </div>
       </div>
 
       {/* Footer */}
       <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto text-center text-slate-400">
-          <p>&copy; 2025 CareTrack. All rights reserved.</p>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <img
+                  src={icon}
+                  alt="CareTrack logo"
+                  className="w-8 h-8 rounded-md object-contain"
+                />
+                <span className="text-xl">CareTrack</span>
+              </div>
+              <p className="text-slate-400">
+                The smart way to track your gecko's care schedule
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-4">Product</h4>
+              <ul className="space-y-2 text-slate-400">
+                <li><a href="#" className="hover:text-white transition-colors">Download</a></li>
+                <li>
+                  <Link to="/support" className="hover:text-white transition-colors">
+                    Support
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="mb-4">Legal</h4>
+              <ul className="space-y-2 text-slate-400">
+                <li>
+                  <Link to="/privacy" className="hover:text-white transition-colors">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/terms" className="hover:text-white transition-colors">
+                    Terms of Service
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="pt-8 border-t border-slate-800 text-center text-slate-400">
+            <p>&copy; 2025 CareTrack. All rights reserved. Made by gecko Lovers for gecko's lovers</p>
+          </div>
         </div>
       </footer>
     </div>
