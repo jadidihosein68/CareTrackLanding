@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './shared/ImageWithFallback';
-import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone } from 'lucide-react';
+import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone, ShieldCheck } from 'lucide-react';
 import geico from '../assets/geico.jpeg';
 import icon from '../assets/icon.png';
 
@@ -10,21 +10,24 @@ export function LandingPage() {
       {/* Navigation */}
       <nav className="border-b bg-white/80 backdrop-blur-sm fixed w-full top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
-              <img
-                src={icon}
-                alt="CareTrack logo"
-                className="w-8 h-8 rounded-md object-contain"
-              />
-              <span className="text-xl font-semibold text-slate-900">CareTrack</span>
+          <div className="flex items-center h-16">
+            <div className="flex items-center gap-6">
+              <Link to="/" className="flex items-center gap-2">
+                <img
+                  src={icon}
+                  alt="CareTrack logo"
+                  className="w-8 h-8 rounded-md object-contain"
+                />
+                <span className="text-xl font-semibold text-slate-900">CareTrack</span>
+              </Link>
+              <Link
+                to="/privacy"
+                className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                Privacy Policy
+              </Link>
             </div>
-            <Link 
-              to="/privacy" 
-              className="text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Privacy Policy
-            </Link>
           </div>
         </div>
       </nav>
