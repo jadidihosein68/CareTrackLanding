@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './shared/ImageWithFallback';
 import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone } from 'lucide-react';
@@ -5,6 +6,49 @@ import geico from '../assets/geico.jpeg';
 import icon from '../assets/icon.png';
 
 export function LandingPage() {
+  const [isTesterOpen, setIsTesterOpen] = useState(false);
+  const [testerEmail, setTesterEmail] = useState('');
+  const [testerStatus, setTesterStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
+  const openTesterModal = () => {
+    setIsTesterOpen(true);
+    setTesterStatus('idle');
+  };
+
+  const closeTesterModal = () => {
+    setIsTesterOpen(false);
+    setTesterEmail('');
+    setTesterStatus('idle');
+  };
+
+  const handleTesterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setTesterStatus('sending');
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const encoded = new URLSearchParams();
+    formData.forEach((value, key) => {
+      encoded.append(key, String(value));
+    });
+
+    try {
+      const response = await fetch(form.getAttribute('action') ?? '/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encoded.toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit early access request');
+      }
+
+      setTesterStatus('sent');
+      setTesterEmail('');
+    } catch (error) {
+      setTesterStatus('error');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Navigation */}
@@ -40,12 +84,13 @@ export function LandingPage() {
               <p className="text-xl text-slate-600 mb-8">
                 Never forget a feeding or supplement again. CareTrack helps you provide the best care for your gecko with smart reminders and a built-in knowledge base.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors">
-                  Download on iOS
-                </button>
-                <button className="bg-slate-900 text-white px-8 py-3 rounded-lg hover:bg-slate-800 transition-colors">
-                  Download on Android
+              <div className="flex flex-col sm:flex-row gap-4 items-start">
+                <button
+                  type="button"
+                  onClick={openTesterModal}
+                  className="bg-slate-900 text-white px-8 py-3 rounded-lg hover:bg-slate-800 transition-colors"
+                >
+                  Test it early
                 </button>
               </div>
             </div>
@@ -249,6 +294,80 @@ export function LandingPage() {
           </div>
         </div>
       </footer>
+
+      {isTesterOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+          <div
+            className="absolute inset-0 bg-slate-900/50"
+            onClick={closeTesterModal}
+          />
+          <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl sm:p-8">
+            <div className="flex items-start justify-between gap-4 mb-6">
+              <div>
+                <h3 className="text-2xl text-slate-900">Join the tester program</h3>
+                <p className="text-slate-600 mt-2">
+                  Enter your email to join. We will send you an email in a few days with next steps.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={closeTesterModal}
+                className="text-slate-500 hover:text-slate-700 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+
+            <form
+              className="space-y-6"
+              onSubmit={handleTesterSubmit}
+              name="early-access"
+              method="POST"
+              action="/?submitted=early-access"
+              encType="application/x-www-form-urlencoded"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+            >
+              <input type="hidden" name="form-name" value="early-access" />
+              <input type="hidden" name="subject" value="CareTrack Early Access" />
+              <input type="hidden" name="bot-field" />
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2" htmlFor="tester-email">
+                  Email
+                </label>
+                <input
+                  id="tester-email"
+                  name="email"
+                  type="email"
+                  value={testerEmail}
+                  onChange={(event) => setTesterEmail(event.target.value)}
+                  required
+                  className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <button
+                  type="submit"
+                  className="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                  disabled={testerStatus === 'sending'}
+                >
+                  {testerStatus === 'sending' ? 'Sending...' : 'Join tester program'}
+                </button>
+                {testerStatus === 'sent' && (
+                  <p className="text-emerald-600">Thanks! You are on the list.</p>
+                )}
+                {testerStatus === 'error' && (
+                  <p className="text-rose-600">
+                    We could not submit your request. Please try again later.
+                  </p>
+                )}
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

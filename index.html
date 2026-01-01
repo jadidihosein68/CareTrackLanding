@@ -9,12 +9,18 @@
     </head>
 
     <body>
-      <form name="support" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <form name="support" method="POST" action="/?submitted=support" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
         <input type="hidden" name="form-name" value="support" />
         <input type="hidden" name="subject" value="CareTrack Support" />
         <input type="text" name="name" />
         <input type="email" name="email" />
         <textarea name="context"></textarea>
+        <input type="text" name="bot-field" />
+      </form>
+      <form name="early-access" method="POST" action="/?submitted=early-access" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="early-access" />
+        <input type="hidden" name="subject" value="CareTrack Early Access" />
+        <input type="email" name="email" />
         <input type="text" name="bot-field" />
       </form>
       <div id="root"></div>

@@ -12,14 +12,15 @@ export function Support() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus('sending');
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const encoded = new URLSearchParams();
     formData.forEach((value, key) => {
       encoded.append(key, String(value));
     });
 
     try {
-      const response = await fetch('/', {
+      const response = await fetch(form.getAttribute('action') ?? '/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encoded.toString(),
@@ -78,6 +79,8 @@ export function Support() {
             onSubmit={handleSubmit}
             name="support"
             method="POST"
+            action="/?submitted=support"
+            encType="application/x-www-form-urlencoded"
             data-netlify="true"
             data-netlify-honeypot="bot-field"
           >
