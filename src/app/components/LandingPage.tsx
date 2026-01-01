@@ -237,8 +237,12 @@ export function LandingPage() {
             Join gecko owners who trust CareTrack for their reptile care needs
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-emerald-600 px-8 py-3 rounded-lg hover:bg-emerald-50 transition-colors">
-              Download Now
+            <button
+              type="button"
+              onClick={openTesterModal}
+              className="bg-white text-emerald-600 px-8 py-3 rounded-lg hover:bg-emerald-50 transition-colors"
+            >
+              Test it early
             </button>
           </div>
         </div>
@@ -264,8 +268,15 @@ export function LandingPage() {
             <div>
               <h4 className="mb-4">Product</h4>
               <ul className="space-y-2 text-slate-400">
-
-                <li><a href="#" className="hover:text-white transition-colors">Download</a></li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={openTesterModal}
+                    className="hover:text-white transition-colors bg-transparent p-0 text-left"
+                  >
+                    Download
+                  </button>
+                </li>
                 <li>
                   <Link to="/support" className="hover:text-white transition-colors">
                     Support
@@ -307,6 +318,17 @@ export function LandingPage() {
                 <h3 className="text-2xl text-slate-900">Join the tester program</h3>
                 <p className="text-slate-600 mt-2">
                   Enter your email to join. We will send you an email in a few days with next steps.
+                </p>
+                <p className="text-sm text-slate-500 mt-3">
+                  Google Play is only available for registered users. Access the listing here:{' '}
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.osacore.caretrack&pcampaignid=web_share"
+                    className="text-emerald-600 hover:text-emerald-700 underline"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Google Play link
+                  </a>
                 </p>
               </div>
               <button
