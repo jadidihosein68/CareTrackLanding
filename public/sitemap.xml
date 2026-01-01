@@ -6,6 +6,71 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://thecaretrack.netlify.app/learn</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/category/gecko</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/category/spider</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/category/amphibian</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/category/snake</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/species/leopard-gecko</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/species/crested-gecko</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/species/curly-hair-tarantula</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/species/pink-toe-tarantula</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/species/whites-tree-frog</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/species/axolotl</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/species/corn-snake</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thecaretrack.netlify.app/learn/species/ball-python</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://thecaretrack.netlify.app/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>

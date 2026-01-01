@@ -1,32 +1,22 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import icon from '../assets/icon.png';
+import { Footer } from './shared/Footer';
+import { TopNav } from './shared/TopNav';
 
 export function TermsOfService() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="border-b bg-white/80 backdrop-blur-sm fixed w-full top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link to="/" className="flex items-center gap-2">
-              <img
-                src={icon}
-                alt="CareTrack logo"
-                className="w-8 h-8 rounded-md object-contain"
-              />
-              <span className="text-xl font-semibold text-slate-900">CareTrack</span>
-            </Link>
-            <Link
-              to="/"
-              className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <TopNav
+        rightSlot={(
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Home
+          </Link>
+        )}
+      />
 
       {/* Terms Content */}
       <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
@@ -186,12 +176,7 @@ export function TermsOfService() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto text-center text-slate-400">
-          <p>&copy; 2025 CareTrack. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

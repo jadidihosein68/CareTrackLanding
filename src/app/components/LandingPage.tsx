@@ -1,14 +1,60 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, type SVGProps } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ImageWithFallback } from './shared/ImageWithFallback';
-import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone } from 'lucide-react';
-import geico from '../assets/geico.jpeg';
-import icon from '../assets/icon.png';
+import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone, Turtle } from 'lucide-react';
+import geico from '../assets/geico.webp';
+import { Footer } from './shared/Footer';
+import { TopNav } from './shared/TopNav';
+
+type IconProps = SVGProps<SVGSVGElement>;
+
+const SnakeIcon = (props: IconProps) => (
+  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
+    <path d="M6 36c6-10 18-10 24 0s18 10 28 0" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="58" cy="36" r="2" />
+    <path d="M60 36l4 2-4 2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const GeckoIcon = (props: IconProps) => (
+  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
+    <path
+      d="M22 34c2-8 10-14 20-12 8 2 12 8 12 14 0 8-8 14-18 14-8 0-14-4-16-10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M22 36c-10 2-16 10-12 18 2 4 8 4 12 2" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="42" cy="24" r="2" />
+    <path d="M30 24l-8-6" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M38 24l8-6" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M28 44l-8 8" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M40 44l8 8" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="22" cy="18" r="2" />
+    <circle cx="50" cy="18" r="2" />
+    <circle cx="20" cy="52" r="2" />
+    <circle cx="52" cy="52" r="2" />
+  </svg>
+);
+
+const SpiderIcon = (props: IconProps) => (
+  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
+    <circle cx="32" cy="22" r="4" />
+    <circle cx="32" cy="32" r="6" />
+    <path d="M18 22l10 6" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M14 30l12 2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M18 40l10-4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M46 22l-10 6" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M50 30l-12 2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M46 40l-10-4" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
 export function LandingPage() {
   const [isTesterOpen, setIsTesterOpen] = useState(false);
   const [testerEmail, setTesterEmail] = useState('');
   const [testerStatus, setTesterStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const openTesterModal = () => {
     setIsTesterOpen(true);
@@ -19,6 +65,9 @@ export function LandingPage() {
     setIsTesterOpen(false);
     setTesterEmail('');
     setTesterStatus('idle');
+    if (new URLSearchParams(location.search).has('early-access')) {
+      navigate('/', { replace: true });
+    }
   };
 
   const handleTesterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,19 +98,219 @@ export function LandingPage() {
     }
   };
 
+  useEffect(() => {
+    if (new URLSearchParams(location.search).get('early-access') === '1') {
+      setIsTesterOpen(true);
+    }
+  }, [location.search]);
+
+  const heroIcons = [
+    {
+      id: 'snake-1',
+      Icon: SnakeIcon,
+      className: 'left-[5%] top-[10%] h-10 w-10 sm:h-14 sm:w-14 text-slate-900/10 float-slow',
+      delay: '0.3s',
+    },
+    {
+      id: 'gecko-1',
+      Icon: GeckoIcon,
+      className: 'right-[8%] top-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/10 float-medium',
+      delay: '1.1s',
+    },
+    {
+      id: 'spider-1',
+      Icon: SpiderIcon,
+      className: 'left-[10%] bottom-[18%] h-9 w-9 sm:h-12 sm:w-12 text-slate-900/10 float-sway',
+      delay: '0.8s',
+    },
+    {
+      id: 'turtle-1',
+      Icon: Turtle,
+      className: 'right-[10%] bottom-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/10 float-slow',
+      delay: '1.8s',
+      strokeWidth: 1.4,
+    },
+    {
+      id: 'snake-2',
+      Icon: SnakeIcon,
+      className: 'left-[32%] top-[6%] h-8 w-8 text-slate-900/5 float-medium hidden md:block',
+      delay: '2.4s',
+    },
+    {
+      id: 'gecko-2',
+      Icon: GeckoIcon,
+      className: 'right-[35%] top-[22%] h-8 w-8 text-slate-900/5 float-sway hidden md:block',
+      delay: '1.6s',
+    },
+    {
+      id: 'spider-2',
+      Icon: SpiderIcon,
+      className: 'left-[40%] bottom-[6%] h-8 w-8 text-slate-900/5 float-slow hidden md:block',
+      delay: '0.9s',
+    },
+    {
+      id: 'turtle-2',
+      Icon: Turtle,
+      className: 'right-[26%] bottom-[30%] h-9 w-9 text-slate-900/5 float-medium hidden md:block',
+      delay: '2.1s',
+      strokeWidth: 1.3,
+    },
+    {
+      id: 'snake-3',
+      Icon: SnakeIcon,
+      className: 'right-[12%] top-[45%] h-8 w-8 text-slate-900/5 float-slow hidden lg:block',
+      delay: '0.7s',
+    },
+    {
+      id: 'gecko-3',
+      Icon: GeckoIcon,
+      className: 'left-[18%] top-[40%] h-8 w-8 text-slate-900/5 float-medium hidden lg:block',
+      delay: '1.9s',
+    },
+    {
+      id: 'spider-3',
+      Icon: SpiderIcon,
+      className: 'right-[40%] bottom-[18%] h-8 w-8 text-slate-900/5 float-sway hidden lg:block',
+      delay: '1.2s',
+    },
+    {
+      id: 'snake-4',
+      Icon: SnakeIcon,
+      className: 'left-[12%] top-[52%] h-8 w-8 text-slate-900/6 float-medium hidden md:block',
+      delay: '2.6s',
+    },
+    {
+      id: 'snake-5',
+      Icon: SnakeIcon,
+      className: 'right-[18%] bottom-[40%] h-9 w-9 text-slate-900/6 float-slow hidden md:block',
+      delay: '0.6s',
+    },
+    {
+      id: 'snake-6',
+      Icon: SnakeIcon,
+      className: 'left-[46%] top-[18%] h-8 w-8 text-slate-900/5 float-sway hidden lg:block',
+      delay: '1.4s',
+    },
+    {
+      id: 'snake-7',
+      Icon: SnakeIcon,
+      className: 'right-[48%] bottom-[8%] h-7 w-7 text-slate-900/5 float-medium hidden lg:block',
+      delay: '2.2s',
+    },
+    {
+      id: 'spider-4',
+      Icon: SpiderIcon,
+      className: 'right-[6%] top-[38%] h-8 w-8 text-slate-900/6 float-sway hidden md:block',
+      delay: '0.4s',
+    },
+    {
+      id: 'spider-5',
+      Icon: SpiderIcon,
+      className: 'left-[24%] bottom-[30%] h-9 w-9 text-slate-900/6 float-slow hidden md:block',
+      delay: '1.7s',
+    },
+    {
+      id: 'spider-6',
+      Icon: SpiderIcon,
+      className: 'left-[52%] top-[42%] h-7 w-7 text-slate-900/5 float-medium hidden lg:block',
+      delay: '2.8s',
+    },
+    {
+      id: 'spider-7',
+      Icon: SpiderIcon,
+      className: 'right-[32%] top-[58%] h-7 w-7 text-slate-900/5 float-slow hidden lg:block',
+      delay: '0.9s',
+    },
+  ];
+
+  const featuresIcons = [
+    {
+      id: 'features-snake-1',
+      Icon: SnakeIcon,
+      className: 'left-[6%] top-[12%] h-10 w-10 sm:h-14 sm:w-14 text-slate-900/8 float-slow',
+      delay: '0.6s',
+    },
+    {
+      id: 'features-spider-1',
+      Icon: SpiderIcon,
+      className: 'right-[8%] top-[18%] h-10 w-10 sm:h-14 sm:w-14 text-slate-900/8 float-sway',
+      delay: '1.2s',
+    },
+  ];
+
+  const howIcons = [
+    {
+      id: 'how-snake-1',
+      Icon: SnakeIcon,
+      className: 'left-[8%] top-[14%] h-10 w-10 sm:h-14 sm:w-14 text-slate-900/8 float-medium',
+      delay: '0.8s',
+    },
+    {
+      id: 'how-spider-1',
+      Icon: SpiderIcon,
+      className: 'right-[12%] top-[10%] h-10 w-10 sm:h-14 sm:w-14 text-slate-900/8 float-sway',
+      delay: '1.4s',
+    },
+  ];
+
+  const ctaIcons = [
+    {
+      id: 'cta-snake-1',
+      Icon: SnakeIcon,
+      className: 'left-[8%] top-[18%] h-9 w-9 text-white/12 float-slow',
+      delay: '0.7s',
+    },
+    {
+      id: 'cta-spider-1',
+      Icon: SpiderIcon,
+      className: 'right-[10%] top-[12%] h-9 w-9 text-white/12 float-sway',
+      delay: '1.5s',
+    },
+    {
+      id: 'cta-snake-2',
+      Icon: SnakeIcon,
+      className: 'right-[16%] bottom-[16%] h-7 w-7 text-white/10 float-medium hidden md:block',
+      delay: '2.4s',
+    },
+    {
+      id: 'cta-spider-2',
+      Icon: SpiderIcon,
+      className: 'left-[18%] bottom-[20%] h-7 w-7 text-white/10 float-slow hidden md:block',
+      delay: '1.1s',
+    },
+  ];
+
+  const renderFloatingIcons = (
+    icons: {
+      id: string;
+      Icon: React.ComponentType<IconProps>;
+      className: string;
+      delay: string;
+      strokeWidth?: number;
+    }[],
+  ) => (
+    <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+      {icons.map(({ id, Icon, className, delay, strokeWidth }) => (
+        <Icon
+          key={id}
+          className={`absolute ${className} motion-reduce:animate-none`}
+          strokeWidth={strokeWidth}
+          style={{ animationDelay: delay }}
+        />
+      ))}
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      {/* Navigation */}
-      <nav className="border-b bg-white/80 backdrop-blur-sm fixed w-full top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link to="/" className="flex items-center gap-2">
-              <img
-                src={icon}
-                alt="CareTrack logo"
-                className="w-8 h-8 rounded-md object-contain"
-              />
-              <span className="text-xl font-semibold text-slate-900">CareTrack</span>
+      <TopNav
+        rightSlot={(
+          <div className="flex items-center gap-4">
+            <Link
+              to="/learn"
+              className="text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              Learn
             </Link>
             <Link
               to="/privacy"
@@ -70,12 +319,13 @@ export function LandingPage() {
               Privacy Policy
             </Link>
           </div>
-        </div>
-      </nav>
+        )}
+      />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {renderFloatingIcons(heroIcons)}
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl text-slate-900 mb-6">
@@ -106,8 +356,9 @@ export function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+        {renderFloatingIcons(featuresIcons)}
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
               Everything You Need for Gecko Care
@@ -182,8 +433,9 @@ export function LandingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {renderFloatingIcons(howIcons)}
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
               Simple, Yet Powerful
@@ -228,8 +480,9 @@ export function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-600">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-600 relative overflow-hidden">
+        {renderFloatingIcons(ctaIcons)}
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-3xl sm:text-4xl text-white mb-6">
             Ready to Provide Better Care?
           </h2>
@@ -248,63 +501,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <img
-                  src={icon}
-                  alt="CareTrack logo"
-                  className="w-8 h-8 rounded-md object-contain"
-                />
-                <span className="text-xl">CareTrack</span>
-              </div>
-              <p className="text-slate-400">
-                The smart way to track your gecko's care schedule
-              </p>
-            </div>
-            <div>
-              <h4 className="mb-4">Product</h4>
-              <ul className="space-y-2 text-slate-400">
-                <li>
-                  <button
-                    type="button"
-                    onClick={openTesterModal}
-                    className="hover:text-white transition-colors bg-transparent p-0 text-left"
-                  >
-                    Download
-                  </button>
-                </li>
-                <li>
-                  <Link to="/support" className="hover:text-white transition-colors">
-                    Support
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="mb-4">Legal</h4>
-              <ul className="space-y-2 text-slate-400">
-                <li>
-                  <Link to="/privacy" className="hover:text-white transition-colors">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/terms" className="hover:text-white transition-colors">
-                    Terms of Service
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="pt-8 border-t border-slate-800 text-center text-slate-400">
-            <p>&copy; 2025 CareTrack. All rights reserved. Made by gecko lovers for gecko lovers</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {isTesterOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
