@@ -3,12 +3,20 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
+import { usePageMeta } from '../utils/usePageMeta';
 
 export function Support() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [context, setContext] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
+  usePageMeta({
+    title: 'CareTrack Support | Contact Us',
+    description:
+      'Contact CareTrack support for help with the gecko care tracker app, reminders, and account questions.',
+    path: '/support',
+  });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -2,8 +2,16 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
+import { usePageMeta } from '../utils/usePageMeta';
 
 export function PrivacyPolicy() {
+  usePageMeta({
+    title: 'CareTrack Privacy Policy',
+    description:
+      'Read the CareTrack privacy policy for our offline-first gecko care tracking app and how we handle your data.',
+    path: '/privacy',
+  });
+
   return (
     <div className="min-h-screen bg-white">
       <TopNav

@@ -2,8 +2,16 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
+import { usePageMeta } from '../utils/usePageMeta';
 
 export function TermsOfService() {
+  usePageMeta({
+    title: 'CareTrack Terms of Service',
+    description:
+      'Review the CareTrack terms of service for using the gecko care tracker app and related features.',
+    path: '/terms',
+  });
+
   return (
     <div className="min-h-screen bg-white">
       <TopNav

@@ -5,6 +5,7 @@ import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone, Turtle } from
 import geico from '../assets/geico.webp';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
+import { usePageMeta } from '../utils/usePageMeta';
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -103,6 +104,13 @@ export function LandingPage() {
       setIsTesterOpen(true);
     }
   }, [location.search]);
+
+  usePageMeta({
+    title: 'CareTrack | Gecko Care Tracker',
+    description:
+      'CareTrack helps gecko owners track feeding, supplements, and health with smart reminders and offline-first care logs.',
+    path: '/',
+  });
 
   const heroIcons = [
     {

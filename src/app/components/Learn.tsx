@@ -5,12 +5,20 @@ import { categories, speciesData, type SpeciesData } from '../data/learn-data';
 import { getRecentlyViewed } from '../utils/recently-viewed';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
+import { usePageMeta } from '../utils/usePageMeta';
 
 export function Learn() {
   const recentSpecies = getRecentlyViewed()
     .map((item) => speciesData.find((species) => species.id === item.speciesId))
     .filter((species): species is SpeciesData => Boolean(species))
     .slice(0, 5);
+
+  usePageMeta({
+    title: 'Learn | CareTrack',
+    description:
+      'CareTrack Learn provides evidence-based care guides for geckos, snakes, amphibians, and tarantulas.',
+    path: '/learn',
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">

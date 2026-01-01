@@ -4,11 +4,24 @@ import { categories, getSpeciesByCategory } from '../data/learn-data';
 import { ImageWithFallback } from './shared/ImageWithFallback';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
+import { usePageMeta } from '../utils/usePageMeta';
 
 export function LearnCategory() {
   const { categoryId } = useParams<{ categoryId: string }>();
   const category = categories.find((item) => item.id === categoryId);
   const speciesList = getSpeciesByCategory(categoryId ?? '');
+  const metaTitle = category
+    ? `${category.name} Care Guides | CareTrack Learn`
+    : 'Learn | CareTrack';
+  const metaDescription = category
+    ? `${category.description}. Explore CareTrack care guidance for ${category.name.toLowerCase()} keeping.`
+    : 'CareTrack Learn provides care guides for geckos, snakes, amphibians, and tarantulas.';
+
+  usePageMeta({
+    title: metaTitle,
+    description: metaDescription,
+    path: category ? `/learn/category/${category.id}` : '/learn',
+  });
 
   if (!category) {
     return (

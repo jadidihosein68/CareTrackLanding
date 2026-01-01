@@ -6,10 +6,23 @@ import { addToRecentlyViewed } from '../utils/recently-viewed';
 import { ImageWithFallback } from './shared/ImageWithFallback';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
+import { usePageMeta } from '../utils/usePageMeta';
 
 export function LearnSpecies() {
   const { speciesId } = useParams<{ speciesId: string }>();
   const species = getSpeciesById(speciesId ?? '');
+  const metaTitle = species
+    ? `${species.name} Care Guide | CareTrack Learn`
+    : 'Species Guide | CareTrack Learn';
+  const metaDescription = species
+    ? `CareTrack guidance for ${species.name} (${species.scientificName}) covering setup, feeding, and when to seek help.`
+    : 'Explore CareTrack species care guides with setup, feeding, and health guidance.';
+
+  usePageMeta({
+    title: metaTitle,
+    description: metaDescription,
+    path: species ? `/learn/species/${species.id}` : '/learn',
+  });
 
   useEffect(() => {
     if (species) {
