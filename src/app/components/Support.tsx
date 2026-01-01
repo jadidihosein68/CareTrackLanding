@@ -210,7 +210,7 @@ export function Support() {
             </div>
           </div>
           <div className="pt-8 border-t border-slate-800 text-center text-slate-400">
-            <p>&copy; 2025 CareTrack. All rights reserved. Made by Gecko lovers for Gecko lovers</p>
+            <p>&copy; 2025 CareTrack. All rights reserved. Made by gecko lovers for gecko lovers</p>
           </div>
         </div>
       </footer>
