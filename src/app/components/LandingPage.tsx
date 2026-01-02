@@ -1,40 +1,110 @@
 import { useEffect, useState, type SVGProps } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ImageWithFallback } from './shared/ImageWithFallback';
-import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone, Turtle } from 'lucide-react';
+import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone } from 'lucide-react';
 import geico from '../assets/geico.webp';
+import gackoRaw from '../assets/gacko.svg?raw';
+import turtiesRaw from '../assets/turties.svg?raw';
+import snakesRaw from '../assets/Snakes.svg?raw';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
 
 type IconProps = SVGProps<SVGSVGElement>;
 
-const SnakeIcon = (props: IconProps) => (
-  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
-    <path d="M6 36c6-10 18-10 24 0s18 10 28 0" strokeLinecap="round" strokeLinejoin="round" />
-    <circle cx="58" cy="36" r="2" />
-    <path d="M60 36l4 2-4 2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+const extractViewBox = (raw: string, fallback: string) => {
+  const viewBoxMatch = raw.match(/viewBox="([^"]+)"/i);
+  if (viewBoxMatch?.[1]) {
+    return viewBoxMatch[1];
+  }
+
+  const widthMatch = raw.match(/width="([^"]+)"/i);
+  const heightMatch = raw.match(/height="([^"]+)"/i);
+  if (widthMatch?.[1] && heightMatch?.[1]) {
+    const width = Number.parseFloat(widthMatch[1]);
+    const height = Number.parseFloat(heightMatch[1]);
+    if (Number.isFinite(width) && Number.isFinite(height)) {
+      return `0 0 ${width} ${height}`;
+    }
+  }
+
+  return fallback;
+};
+
+const stripSvg = (raw: string) =>
+  raw
+    .replace(/<\?xml[\s\S]*?\?>\s*/i, '')
+    .replace(/<!DOCTYPE[\s\S]*?>\s*/i, '')
+    .replace(/<svg[^>]*>/i, '')
+    .replace(/<\/svg>/i, '')
+    .trim();
+
+const removeWhiteBackground = (markup: string) =>
+  markup
+    .replace(
+      /<path[^>]*d="M0 0h[^"]+"[^>]*(?:fill=["']#fdfdfd["']|fill:#fdfdfd|fill=["']#ffffff["']|fill:#ffffff)[^>]*\/>\s*/i,
+      '',
+    )
+    .replace(
+      /<rect[^>]*(?:fill=["']#fdfdfd["']|fill:#fdfdfd|fill=["']#ffffff["']|fill:#ffffff)[^>]*\/>\s*/i,
+      '',
+    );
+
+const addGeckoEyeClasses = (markup: string) =>
+  markup
+    .replace(
+      /<path d="M31\.406 18\.656[^"]*"/,
+      (match) => match.replace('<path', '<path class="gecko-eye"'),
+    )
+    .replace(
+      /<path d="M38\.457 22\.75[^"]*"/,
+      (match) => match.replace('<path', '<path class="gecko-eye"'),
+    )
+    .replace(
+      /<path d="M31\.531 22\.668[^"]*"/,
+      (match) => match.replace('<path', '<path class="gecko-eye"'),
+    );
+
+const geckoViewBox = extractViewBox(gackoRaw, '0 0 100 67');
+const turtleViewBox = extractViewBox(turtiesRaw, '0 0 100 67');
+const snakeViewBox = extractViewBox(snakesRaw, '0 0 150 100');
+
+const gackoMarkup = addGeckoEyeClasses(removeWhiteBackground(stripSvg(gackoRaw)));
+const turtiesMarkup = removeWhiteBackground(stripSvg(turtiesRaw));
+const snakesMarkup = stripSvg(snakesRaw)
+  .replace(/fill:#000000/gi, 'fill:currentColor')
+  .replace(/fill:#000/gi, 'fill:currentColor')
+  .replace(/fill="#000000"/gi, 'fill="currentColor"')
+  .replace(/fill="#000"/gi, 'fill="currentColor"');
+
+const SnakeIcon = ({ className, ...props }: IconProps) => (
+  <svg
+    viewBox={snakeViewBox}
+    preserveAspectRatio="xMidYMid meet"
+    className={className}
+    {...props}
+    dangerouslySetInnerHTML={{ __html: snakesMarkup }}
+  />
 );
 
-const GeckoIcon = (props: IconProps) => (
-  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
-    <path
-      d="M22 34c2-8 10-14 20-12 8 2 12 8 12 14 0 8-8 14-18 14-8 0-14-4-16-10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path d="M22 36c-10 2-16 10-12 18 2 4 8 4 12 2" strokeLinecap="round" strokeLinejoin="round" />
-    <circle cx="42" cy="24" r="2" />
-    <path d="M30 24l-8-6" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M38 24l8-6" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M28 44l-8 8" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M40 44l8 8" strokeLinecap="round" strokeLinejoin="round" />
-    <circle cx="22" cy="18" r="2" />
-    <circle cx="50" cy="18" r="2" />
-    <circle cx="20" cy="52" r="2" />
-    <circle cx="52" cy="52" r="2" />
-  </svg>
+const TurtleIcon = ({ className, ...props }: IconProps) => (
+  <svg
+    viewBox={turtleViewBox}
+    preserveAspectRatio="xMidYMid meet"
+    className={className}
+    {...props}
+    dangerouslySetInnerHTML={{ __html: turtiesMarkup }}
+  />
+);
+
+const GeckoIcon = ({ className, ...props }: IconProps) => (
+  <svg
+    viewBox={geckoViewBox}
+    preserveAspectRatio="xMidYMid meet"
+    className={className ? `gecko-animated ${className}` : 'gecko-animated'}
+    {...props}
+    dangerouslySetInnerHTML={{ __html: gackoMarkup }}
+  />
 );
 
 const SpiderIcon = (props: IconProps) => (
@@ -171,7 +241,7 @@ export function LandingPage() {
     {
       id: 'gecko-1',
       Icon: GeckoIcon,
-      className: 'right-[8%] top-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/10 float-medium',
+      className: 'right-[8%] top-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/10 opacity-10 float-medium',
       delay: '1.1s',
     },
     {
@@ -182,8 +252,8 @@ export function LandingPage() {
     },
     {
       id: 'turtle-1',
-      Icon: Turtle,
-      className: 'right-[10%] bottom-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/10 float-slow',
+      Icon: TurtleIcon,
+      className: 'right-[10%] bottom-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/10 opacity-10 float-slow',
       delay: '1.8s',
       strokeWidth: 1.4,
     },
@@ -196,7 +266,7 @@ export function LandingPage() {
     {
       id: 'gecko-2',
       Icon: GeckoIcon,
-      className: 'right-[35%] top-[22%] h-8 w-8 text-slate-900/5 float-sway hidden md:block',
+      className: 'right-[35%] top-[22%] h-8 w-8 text-slate-900/5 opacity-5 float-sway hidden md:block',
       delay: '1.6s',
     },
     {
@@ -207,10 +277,28 @@ export function LandingPage() {
     },
     {
       id: 'turtle-2',
-      Icon: Turtle,
-      className: 'right-[26%] bottom-[30%] h-9 w-9 text-slate-900/5 float-medium hidden md:block',
+      Icon: TurtleIcon,
+      className: 'right-[26%] bottom-[30%] h-9 w-9 text-slate-900/5 opacity-5 float-medium hidden md:block',
       delay: '2.1s',
       strokeWidth: 1.3,
+    },
+    {
+      id: 'gecko-4',
+      Icon: GeckoIcon,
+      className: 'right-[22%] bottom-[24%] h-8 w-8 text-slate-900/6 opacity-5 float-slow hidden md:block',
+      delay: '2.3s',
+    },
+    {
+      id: 'turtle-3',
+      Icon: TurtleIcon,
+      className: 'left-[58%] top-[8%] h-8 w-8 text-slate-900/6 opacity-5 float-sway hidden lg:block',
+      delay: '2.5s',
+    },
+    {
+      id: 'turtle-4',
+      Icon: TurtleIcon,
+      className: 'left-[8%] top-[62%] h-9 w-9 text-slate-900/6 opacity-5 float-medium hidden md:block',
+      delay: '1.3s',
     },
     {
       id: 'snake-3',
@@ -221,7 +309,7 @@ export function LandingPage() {
     {
       id: 'gecko-3',
       Icon: GeckoIcon,
-      className: 'left-[18%] top-[40%] h-8 w-8 text-slate-900/5 float-medium hidden lg:block',
+      className: 'left-[18%] top-[40%] h-8 w-8 text-slate-900/5 opacity-5 float-medium hidden lg:block',
       delay: '1.9s',
     },
     {
@@ -293,6 +381,18 @@ export function LandingPage() {
       className: 'right-[8%] top-[18%] h-10 w-10 sm:h-14 sm:w-14 text-slate-900/8 float-sway',
       delay: '1.2s',
     },
+    {
+      id: 'features-gecko-1',
+      Icon: GeckoIcon,
+      className: 'right-[16%] bottom-[12%] h-9 w-9 text-slate-900/8 opacity-10 float-medium hidden md:block',
+      delay: '1.8s',
+    },
+    {
+      id: 'features-turtle-1',
+      Icon: TurtleIcon,
+      className: 'left-[12%] bottom-[14%] h-9 w-9 text-slate-900/8 opacity-10 float-slow hidden md:block',
+      delay: '0.9s',
+    },
   ];
 
   const howIcons = [
@@ -307,6 +407,18 @@ export function LandingPage() {
       Icon: SpiderIcon,
       className: 'right-[12%] top-[10%] h-10 w-10 sm:h-14 sm:w-14 text-slate-900/8 float-sway',
       delay: '1.4s',
+    },
+    {
+      id: 'how-gecko-1',
+      Icon: GeckoIcon,
+      className: 'right-[18%] bottom-[18%] h-9 w-9 text-slate-900/8 opacity-10 float-medium hidden md:block',
+      delay: '1.1s',
+    },
+    {
+      id: 'how-turtle-1',
+      Icon: TurtleIcon,
+      className: 'left-[14%] bottom-[20%] h-9 w-9 text-slate-900/8 opacity-10 float-slow hidden md:block',
+      delay: '0.5s',
     },
   ];
 

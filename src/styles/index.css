@@ -44,6 +44,18 @@
   }
 }
 
+@keyframes gecko-blink {
+  0%,
+  84%,
+  100% {
+    transform: scaleY(1);
+  }
+  88%,
+  92% {
+    transform: scaleY(0.08);
+  }
+}
+
 .float-slow {
   animation: float-slow 8s ease-in-out infinite;
 }
@@ -62,6 +74,12 @@
   transform-origin: center;
 }
 
+.gecko-animated .gecko-eye {
+  animation: gecko-blink 4.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .float-slow,
   .float-medium,
@@ -70,6 +88,10 @@
   }
 
   .spider-animated .spider-eye {
+    animation: none;
+  }
+
+  .gecko-animated .gecko-eye {
     animation: none;
   }
 }
