@@ -65,25 +65,66 @@ const addGeckoEyeClasses = (markup: string) =>
       (match) => match.replace('<path', '<path class="gecko-eye"'),
     );
 
+const addTurtleEyeClasses = (markup: string) =>
+  markup
+    .replace(
+      /<path d="M70\.11 22\.96[^"]*"/,
+      (match) => match.replace('<path', '<path class="turtle-eye"'),
+    )
+    .replace(
+      /<path d="M75\.043 23\.234[^"]*"/,
+      (match) => match.replace('<path', '<path class="turtle-eye"'),
+    )
+    .replace(
+      /<path d="M69\.465 23\.227[^"]*"/,
+      (match) => match.replace('<path', '<path class="turtle-eye"'),
+    )
+    .replace(
+      /<path d="M74\.543 23\.488[^"]*"/,
+      (match) => match.replace('<path', '<path class="turtle-eye"'),
+    );
+
+const addSnakeDetailClasses = (markup: string) =>
+  markup
+    .replace(
+      /<path d="M40\.18 26\.926[^"]*"/,
+      (match) => match.replace('<path', '<path class="snake-eye"'),
+    )
+    .replace(
+      /<path d="M47\.777 28\.098[^"]*"/,
+      (match) => match.replace('<path', '<path class="snake-eye"'),
+    );
+
 const geckoViewBox = extractViewBox(gackoRaw, '0 0 100 67');
 const turtleViewBox = extractViewBox(turtiesRaw, '0 0 100 67');
 const snakeViewBox = extractViewBox(snakesRaw, '0 0 150 100');
 
 const gackoMarkup = addGeckoEyeClasses(removeWhiteBackground(stripSvg(gackoRaw)));
-const turtiesMarkup = removeWhiteBackground(stripSvg(turtiesRaw));
-const snakesMarkup = stripSvg(snakesRaw)
+const turtiesMarkup = addTurtleEyeClasses(removeWhiteBackground(stripSvg(turtiesRaw)));
+const snakesMarkup = addSnakeDetailClasses(stripSvg(snakesRaw))
   .replace(/fill:#000000/gi, 'fill:currentColor')
   .replace(/fill:#000/gi, 'fill:currentColor')
   .replace(/fill="#000000"/gi, 'fill="currentColor"')
   .replace(/fill="#000"/gi, 'fill="currentColor"');
+const snakesMarkupWithMouth = `${snakesMarkup}
+  <path
+    class="snake-mouth"
+    d="M43.5 31.3 C45.5 32.4 48 32.4 50 31.3"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-opacity="0.7"
+  />`;
 
 const SnakeIcon = ({ className, ...props }: IconProps) => (
   <svg
     viewBox={snakeViewBox}
     preserveAspectRatio="xMidYMid meet"
-    className={className}
+    className={className ? `snake-animated ${className}` : 'snake-animated'}
     {...props}
-    dangerouslySetInnerHTML={{ __html: snakesMarkup }}
+    dangerouslySetInnerHTML={{ __html: snakesMarkupWithMouth }}
   />
 );
 
@@ -91,7 +132,7 @@ const TurtleIcon = ({ className, ...props }: IconProps) => (
   <svg
     viewBox={turtleViewBox}
     preserveAspectRatio="xMidYMid meet"
-    className={className}
+    className={className ? `turtle-animated ${className}` : 'turtle-animated'}
     {...props}
     dangerouslySetInnerHTML={{ __html: turtiesMarkup }}
   />
@@ -235,25 +276,25 @@ export function LandingPage() {
     {
       id: 'snake-1',
       Icon: SnakeIcon,
-      className: 'left-[5%] top-[10%] h-10 w-10 sm:h-14 sm:w-14 text-slate-900/10 float-slow',
+      className: 'left-[5%] top-[10%] h-10 w-10 sm:h-14 sm:w-14 text-slate-900/20 float-slow',
       delay: '0.3s',
     },
     {
       id: 'gecko-1',
       Icon: GeckoIcon,
-      className: 'right-[8%] top-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/10 opacity-10 float-medium',
+      className: 'right-[8%] top-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/20 opacity-20 float-medium',
       delay: '1.1s',
     },
     {
       id: 'spider-1',
       Icon: SpiderIcon,
-      className: 'left-[10%] bottom-[18%] h-9 w-9 sm:h-12 sm:w-12 text-slate-900/10 float-sway',
+      className: 'left-[10%] bottom-[18%] h-9 w-9 sm:h-12 sm:w-12 text-slate-900/20 float-sway',
       delay: '0.8s',
     },
     {
       id: 'turtle-1',
       Icon: TurtleIcon,
-      className: 'right-[10%] bottom-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/10 opacity-10 float-slow',
+      className: 'right-[10%] bottom-[12%] h-12 w-12 sm:h-16 sm:w-16 text-slate-900/20 opacity-20 float-slow',
       delay: '1.8s',
       strokeWidth: 1.4,
     },
@@ -384,13 +425,13 @@ export function LandingPage() {
     {
       id: 'features-gecko-1',
       Icon: GeckoIcon,
-      className: 'right-[16%] bottom-[12%] h-9 w-9 text-slate-900/8 opacity-10 float-medium hidden md:block',
+      className: 'right-[16%] bottom-[12%] h-9 w-9 text-slate-900/8 opacity-20 float-medium hidden md:block',
       delay: '1.8s',
     },
     {
       id: 'features-turtle-1',
       Icon: TurtleIcon,
-      className: 'left-[12%] bottom-[14%] h-9 w-9 text-slate-900/8 opacity-10 float-slow hidden md:block',
+      className: 'left-[12%] bottom-[14%] h-9 w-9 text-slate-900/8 opacity-20 float-slow hidden md:block',
       delay: '0.9s',
     },
   ];
@@ -411,13 +452,13 @@ export function LandingPage() {
     {
       id: 'how-gecko-1',
       Icon: GeckoIcon,
-      className: 'right-[18%] bottom-[18%] h-9 w-9 text-slate-900/8 opacity-10 float-medium hidden md:block',
+      className: 'right-[18%] bottom-[18%] h-9 w-9 text-slate-900/8 opacity-20 float-medium hidden md:block',
       delay: '1.1s',
     },
     {
       id: 'how-turtle-1',
       Icon: TurtleIcon,
-      className: 'left-[14%] bottom-[20%] h-9 w-9 text-slate-900/8 opacity-10 float-slow hidden md:block',
+      className: 'left-[14%] bottom-[20%] h-9 w-9 text-slate-900/8 opacity-20 float-slow hidden md:block',
       delay: '0.5s',
     },
   ];

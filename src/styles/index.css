@@ -56,6 +56,30 @@
   }
 }
 
+@keyframes turtle-blink {
+  0%,
+  86%,
+  100% {
+    transform: scaleY(1);
+  }
+  90%,
+  94% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes snake-chomp {
+  0%,
+  82%,
+  100% {
+    transform: rotate(0deg) scaleY(1);
+  }
+  88%,
+  92% {
+    transform: rotate(12deg) scaleY(0.5);
+  }
+}
+
 .float-slow {
   animation: float-slow 8s ease-in-out infinite;
 }
@@ -80,6 +104,18 @@
   transform-origin: center;
 }
 
+.turtle-animated .turtle-eye {
+  animation: turtle-blink 5.2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.snake-animated .snake-mouth {
+  animation: snake-chomp 5.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .float-slow,
   .float-medium,
@@ -92,6 +128,14 @@
   }
 
   .gecko-animated .gecko-eye {
+    animation: none;
+  }
+
+  .turtle-animated .turtle-eye {
+    animation: none;
+  }
+
+  .snake-animated .snake-mouth {
     animation: none;
   }
 }
