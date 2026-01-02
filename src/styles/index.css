@@ -32,6 +32,18 @@
   }
 }
 
+@keyframes spider-blink {
+  0%,
+  88%,
+  100% {
+    transform: scaleY(1);
+  }
+  92%,
+  96% {
+    transform: scaleY(0.08);
+  }
+}
+
 .float-slow {
   animation: float-slow 8s ease-in-out infinite;
 }
@@ -44,10 +56,20 @@
   animation: float-sway 9s ease-in-out infinite;
 }
 
+.spider-animated .spider-eye {
+  animation: spider-blink 4.2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .float-slow,
   .float-medium,
   .float-sway {
+    animation: none;
+  }
+
+  .spider-animated .spider-eye {
     animation: none;
   }
 }
