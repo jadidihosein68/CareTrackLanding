@@ -106,25 +106,14 @@ const snakesMarkup = addSnakeDetailClasses(stripSvg(snakesRaw))
   .replace(/fill:#000/gi, 'fill:currentColor')
   .replace(/fill="#000000"/gi, 'fill="currentColor"')
   .replace(/fill="#000"/gi, 'fill="currentColor"');
-const snakesMarkupWithMouth = `${snakesMarkup}
-  <path
-    class="snake-mouth"
-    d="M43.5 31.3 C45.5 32.4 48 32.4 50 31.3"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-opacity="0.7"
-  />`;
 
 const SnakeIcon = ({ className, ...props }: IconProps) => (
   <svg
     viewBox={snakeViewBox}
     preserveAspectRatio="xMidYMid meet"
-    className={className ? `snake-animated ${className}` : 'snake-animated'}
+    className={className}
     {...props}
-    dangerouslySetInnerHTML={{ __html: snakesMarkupWithMouth }}
+    dangerouslySetInnerHTML={{ __html: snakesMarkup }}
   />
 );
 

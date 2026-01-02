@@ -58,25 +58,15 @@
 
 @keyframes turtle-blink {
   0%,
-  86%,
+  85%,
   100% {
     transform: scaleY(1);
-  }
-  90%,
-  94% {
-    transform: scaleY(0.08);
-  }
-}
-
-@keyframes snake-chomp {
-  0%,
-  82%,
-  100% {
-    transform: rotate(0deg) scaleY(1);
+    opacity: 1;
   }
   88%,
   92% {
-    transform: rotate(12deg) scaleY(0.5);
+    transform: scaleY(0.05);
+    opacity: 0.08;
   }
 }
 
@@ -110,12 +100,6 @@
   transform-origin: center;
 }
 
-.snake-animated .snake-mouth {
-  animation: snake-chomp 5.6s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: left center;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .float-slow,
   .float-medium,
@@ -135,7 +119,4 @@
     animation: none;
   }
 
-  .snake-animated .snake-mouth {
-    animation: none;
-  }
 }
