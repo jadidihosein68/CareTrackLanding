@@ -3,13 +3,29 @@ import { ArrowLeft } from 'lucide-react';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
+import { SITE_URL } from '../utils/seo';
 
 export function TermsOfService() {
   usePageMeta({
-    title: 'CareTrack Terms of Service',
+    title: 'Terms of Service | CareTrack',
     description:
       'Review the CareTrack terms of service for using the gecko care tracker app and related features.',
     path: '/terms',
+    type: 'article',
+    image: '/og-image.jpeg',
+    imageAlt: 'CareTrack terms of service page',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'CareTrack Terms of Service',
+      url: `${SITE_URL}/terms`,
+      description: 'Terms of service for using the CareTrack pet care tracker.',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'CareTrack',
+        url: SITE_URL,
+      },
+    },
   });
 
   return (
@@ -27,7 +43,7 @@ export function TermsOfService() {
       />
 
       {/* Terms Content */}
-      <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl text-slate-900 mb-6">
             Terms of Service
@@ -169,6 +185,13 @@ export function TermsOfService() {
                   <strong>Response Time:</strong> We aim to respond to all inquiries within 48 hours
                 </p>
               </div>
+              <p className="text-slate-700 mt-4">
+                For app-related help, visit our{' '}
+                <Link to="/support" className="text-emerald-700 underline">
+                  Support page
+                </Link>
+                .
+              </p>
             </section>
           </div>
 
@@ -182,7 +205,7 @@ export function TermsOfService() {
             </Link>
           </div>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>

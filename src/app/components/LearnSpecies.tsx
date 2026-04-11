@@ -7,6 +7,7 @@ import { ImageWithFallback } from './shared/ImageWithFallback';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
+import { SITE_URL } from '../utils/seo';
 
 export function LearnSpecies() {
   const { speciesId } = useParams<{ speciesId: string }>();
@@ -21,7 +22,62 @@ export function LearnSpecies() {
   usePageMeta({
     title: metaTitle,
     description: metaDescription,
-    path: species ? `/learn/species/${species.id}` : '/learn',
+    path: species ? `/learn/species/${species.id}` : undefined,
+    type: 'article',
+    image: species?.heroImage ?? '/og-image.jpeg',
+    imageAlt: species
+      ? `${species.name} care guide hero image`
+      : 'CareTrack species care guide page',
+    noindex: !species,
+    structuredData: species
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: `${species.name} Care Guide`,
+            description: metaDescription,
+            image: [species.heroImage, species.setupImage].filter(Boolean),
+            dateModified: '2026-04-12',
+            mainEntityOfPage: `${SITE_URL}/learn/species/${species.id}`,
+            author: {
+              '@type': 'Organization',
+              name: 'CareTrack',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'CareTrack',
+              logo: {
+                '@type': 'ImageObject',
+                url: `${SITE_URL}/apple-touch-icon.png`,
+              },
+            },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: SITE_URL,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Learn',
+                item: `${SITE_URL}/learn`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: species.name,
+                item: `${SITE_URL}/learn/species/${species.id}`,
+              },
+            ],
+          },
+        ]
+      : undefined,
   });
 
   useEffect(() => {
@@ -86,7 +142,7 @@ export function LearnSpecies() {
           <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
             <ImageWithFallback
               src={species.heroImage}
-              alt={species.name}
+              alt={`${species.name} habitat and appearance reference image`}
               className="w-full h-auto lg:h-full object-cover block"
             />
           </div>
@@ -137,7 +193,7 @@ export function LearnSpecies() {
             <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
               <ImageWithFallback
                 src={species.setupImage}
-                alt={`${species.name} setup`}
+                alt={`Best setup reference image for ${species.name}`}
                 className="w-full h-auto lg:h-full object-cover block"
               />
             </div>
@@ -157,6 +213,13 @@ export function LearnSpecies() {
           <div className="mt-3 border-l-4 border-amber-300 pl-4 text-slate-700">
             {species.whenToSeekHelp}
           </div>
+          <p className="mt-4 text-slate-700">
+            Need help with app features? Visit{' '}
+            <Link to="/support" className="text-emerald-700 underline">
+              Support
+            </Link>
+            .
+          </p>
         </section>
       </main>
 

@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
+import { SITE_URL } from '../utils/seo';
 
 export function Support() {
   const [name, setName] = useState('');
@@ -12,10 +13,26 @@ export function Support() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   usePageMeta({
-    title: 'CareTrack Support | Contact Us',
+    title: 'CareTrack Support | Contact Pet Care App Support',
     description:
-      'Contact CareTrack support for help with the gecko care tracker app, reminders, and account questions.',
+      'Contact CareTrack support for help with reminders, learn guides, and pet care tracking app questions.',
     path: '/support',
+    type: 'website',
+    image: '/og-image.jpeg',
+    imageAlt: 'CareTrack support page',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'CareTrack Support',
+      url: `${SITE_URL}/support`,
+      description:
+        'Support contact page for the CareTrack pet care tracking application.',
+      mainEntity: {
+        '@type': 'Organization',
+        name: 'CareTrack',
+        email: 'info@osacore.com',
+      },
+    },
   });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -63,7 +80,7 @@ export function Support() {
       />
 
       {/* Support Content */}
-      <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl sm:text-5xl text-slate-900 mb-6">
             CareTrack Support
@@ -160,8 +177,21 @@ export function Support() {
               )}
             </div>
           </form>
+          <div className="mt-8 text-sm text-slate-600">
+            <p>
+              Before contacting support, you can check our{' '}
+              <Link to="/learn" className="text-emerald-700 underline">
+                Learn guides
+              </Link>{' '}
+              and review our{' '}
+              <Link to="/privacy" className="text-emerald-700 underline">
+                Privacy Policy
+              </Link>
+              .
+            </p>
+          </div>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>

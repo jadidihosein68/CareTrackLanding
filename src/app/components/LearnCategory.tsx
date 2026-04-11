@@ -5,6 +5,7 @@ import { ImageWithFallback } from './shared/ImageWithFallback';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
+import { SITE_URL } from '../utils/seo';
 
 export function LearnCategory() {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -20,7 +21,48 @@ export function LearnCategory() {
   usePageMeta({
     title: metaTitle,
     description: metaDescription,
-    path: category ? `/learn/category/${category.id}` : '/learn',
+    path: category ? `/learn/category/${category.id}` : undefined,
+    type: 'article',
+    image: '/og-image.jpeg',
+    imageAlt: category
+      ? `${category.name} category page on CareTrack Learn`
+      : 'CareTrack Learn category page',
+    noindex: !category,
+    structuredData: category
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `${category.name} Care Guides`,
+            url: `${SITE_URL}/learn/category/${category.id}`,
+            description: metaDescription,
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: SITE_URL,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Learn',
+                item: `${SITE_URL}/learn`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: category.name,
+                item: `${SITE_URL}/learn/category/${category.id}`,
+              },
+            ],
+          },
+        ]
+      : undefined,
   });
 
   if (!category) {
@@ -73,7 +115,7 @@ export function LearnCategory() {
         <div className="aspect-[21/9] relative overflow-hidden rounded-2xl shadow-lg">
           <ImageWithFallback
             src={category.image}
-            alt={category.name}
+            alt={`${category.name} hero image for CareTrack Learn`}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
@@ -94,7 +136,7 @@ export function LearnCategory() {
                 <div className="aspect-video relative overflow-hidden shrink-0">
                   <ImageWithFallback
                     src={species.heroImage}
-                    alt={species.name}
+                    alt={`${species.name} species guide cover image`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>

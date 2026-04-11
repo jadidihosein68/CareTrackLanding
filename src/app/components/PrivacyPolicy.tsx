@@ -3,13 +3,30 @@ import { ArrowLeft } from 'lucide-react';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
+import { SITE_URL } from '../utils/seo';
 
 export function PrivacyPolicy() {
   usePageMeta({
-    title: 'CareTrack Privacy Policy',
+    title: 'Privacy Policy | CareTrack',
     description:
       'Read the CareTrack privacy policy for our offline-first gecko care tracking app and how we handle your data.',
     path: '/privacy',
+    type: 'article',
+    image: '/og-image.jpeg',
+    imageAlt: 'CareTrack privacy policy page',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'CareTrack Privacy Policy',
+      url: `${SITE_URL}/privacy`,
+      description:
+        'Privacy policy for CareTrack, an offline-first pet care tracking application.',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'CareTrack',
+        url: SITE_URL,
+      },
+    },
   });
 
   return (
@@ -27,7 +44,7 @@ export function PrivacyPolicy() {
       />
 
       {/* Privacy Policy Content */}
-      <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl text-slate-900 mb-6">
             Privacy Policy
@@ -224,6 +241,13 @@ export function PrivacyPolicy() {
                   <strong>Response Time:</strong> We aim to respond to all inquiries within 48 hours
                 </p>
               </div>
+              <p className="text-slate-700 mt-4">
+                You can also use our{' '}
+                <Link to="/support" className="text-emerald-700 underline">
+                  Support form
+                </Link>{' '}
+                for product-related questions.
+              </p>
             </section>
 
             <section className="mb-8">
@@ -244,7 +268,7 @@ export function PrivacyPolicy() {
             </Link>
           </div>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>

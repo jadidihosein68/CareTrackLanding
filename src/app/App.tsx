@@ -6,6 +6,7 @@ import { Support } from './components/Support';
 import { Learn } from './components/Learn';
 import { LearnCategory } from './components/LearnCategory';
 import { LearnSpecies } from './components/LearnSpecies';
+import { NotFound } from './components/NotFound';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/support" element={<Support />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

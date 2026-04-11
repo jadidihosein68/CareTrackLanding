@@ -10,6 +10,7 @@ import { Footer } from './shared/Footer';
 import { GooglePlayLogo } from './shared/GooglePlayLogo';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
+import { SITE_URL, toAbsoluteUrl } from '../utils/seo';
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -209,6 +210,44 @@ export function LandingPage() {
     description:
       'CareTrack helps gecko owners track feeding, supplements, and health with smart reminders and offline-first care logs.',
     path: '/',
+    type: 'website',
+    image: '/og-image.jpeg',
+    imageAlt: 'CareTrack gecko and exotic pet care tracking app preview.',
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'CareTrack',
+        url: SITE_URL,
+        logo: toAbsoluteUrl('/apple-touch-icon.png'),
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            contactType: 'customer support',
+            email: 'info@osacore.com',
+            url: `${SITE_URL}/support`,
+          },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'CareTrack',
+        url: SITE_URL,
+        inLanguage: 'en-US',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'CareTrack',
+        operatingSystem: 'Android',
+        applicationCategory: 'LifestyleApplication',
+        url: SITE_URL,
+        downloadUrl: GOOGLE_PLAY_URL,
+        description:
+          'Offline-first pet care tracker for geckos and other exotic pets with feeding logs, reminders, and care guides.',
+      },
+    ],
   });
 
   const heroIcons = [
@@ -462,197 +501,222 @@ export function LandingPage() {
               Learn
             </Link>
             <Link
+              to="/support"
+              className="text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              Support
+            </Link>
+            <Link
               to="/privacy"
               className="text-slate-600 hover:text-slate-900 transition-colors"
             >
               Privacy Policy
             </Link>
+            <Link
+              to="/terms"
+              className="text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              Terms
+            </Link>
           </div>
         )}
       />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        {renderFloatingIcons(heroIcons)}
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-slate-900 mb-6">
-                Track Your Gecko's Care with Confidence
-              </h1>
-              <p className="text-xl text-slate-600 mb-8">
-                Never forget a feeding or supplement again. CareTrack helps you provide the best care for your gecko with smart reminders and a built-in knowledge base.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <a
-                  href={GOOGLE_PLAY_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-3 rounded-lg hover:bg-slate-800 transition-colors"
-                >
-                  <GooglePlayLogo className="h-5 w-5 shrink-0" />
-                  Get it on Google Play
-                </a>
+      <main>
+        {/* Hero Section */}
+        <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+          {renderFloatingIcons(heroIcons)}
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl text-slate-900 mb-6">
+                  Track Your Gecko's Care with Confidence
+                </h1>
+                <p className="text-xl text-slate-600 mb-8">
+                  Never forget a feeding or supplement again. CareTrack helps you provide the best care for your gecko with smart reminders and a built-in knowledge base.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 items-start">
+                  <a
+                    href={GOOGLE_PLAY_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-3 rounded-lg hover:bg-slate-800 transition-colors"
+                  >
+                    <GooglePlayLogo className="h-5 w-5 shrink-0" />
+                    Get it on Google Play
+                  </a>
+                </div>
+              </div>
+              <div className="relative">
+                <ImageWithFallback 
+                  src={geico}
+                  alt="Close-up leopard gecko used in the CareTrack landing page hero section"
+                  className="rounded-2xl shadow-2xl w-full"
+                />
               </div>
             </div>
-            <div className="relative">
-              <ImageWithFallback 
-                src={geico}
-                alt="Gecko"
-                className="rounded-2xl shadow-2xl w-full"
-              />
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+          {renderFloatingIcons(featuresIcons)}
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
+                Everything You Need for Gecko Care
+              </h2>
+              <p className="text-xl text-slate-600">
+                Designed specifically for reptile owners who want to provide the best care
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                  <Calendar className="w-6 h-6 text-emerald-600" />
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Feeding Tracker</h3>
+                <p className="text-slate-600">
+                  Log feedings with ease and track food types, quantities, and supplements applied.
+                </p>
+              </div>
+
+              <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <Bell className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Smart Reminders</h3>
+                <p className="text-slate-600">
+                  Never miss a feeding or supplement schedule with customizable notifications.
+                </p>
+              </div>
+
+              <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                  <BookOpen className="w-6 h-6 text-purple-600" />
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Knowledge Base</h3>
+                <p className="text-slate-600">
+                  Access expert gecko care guides right when you need them, completely offline.
+                </p>
+              </div>
+
+              <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                  <CheckCircle className="w-6 h-6 text-orange-600" />
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Health Logs</h3>
+                <p className="text-slate-600">
+                  Track shedding, weight, and behavioral observations to monitor your gecko's health.
+                </p>
+              </div>
+
+              <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+                  <Heart className="w-6 h-6 text-pink-600" />
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Multiple Pets</h3>
+                <p className="text-slate-600">
+                  Manage care for all your geckos in one place with individual profiles.
+                </p>
+              </div>
+
+              <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                  <Smartphone className="w-6 h-6 text-teal-600" />
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Offline First</h3>
+                <p className="text-slate-600">
+                  All features work without internet. Your data stays private on your device.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
-        {renderFloatingIcons(featuresIcons)}
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
-              Everything You Need for Gecko Care
+        {/* How It Works Section */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+          {renderFloatingIcons(howIcons)}
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
+                Simple, Yet Powerful
+              </h2>
+              <p className="text-xl text-slate-600">
+                Get started in minutes
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                  1
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Create a Profile</h3>
+                <p className="text-slate-600">
+                  Add your gecko's details - name, species, and age
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                  2
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Set Your Schedule</h3>
+                <p className="text-slate-600">
+                  Define feeding and supplement routines that work for you
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                  3
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Track with Ease</h3>
+                <p className="text-slate-600">
+                  One-tap feeding logs and automatic schedule updates
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-600 relative overflow-hidden">
+          {renderFloatingIcons(ctaIcons)}
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <h2 className="text-3xl sm:text-4xl text-white mb-6">
+              Ready to Provide Better Care?
             </h2>
-            <p className="text-xl text-slate-600">
-              Designed specifically for reptile owners who want to provide the best care
+            <p className="text-xl text-emerald-100 mb-8">
+              Join gecko owners who trust CareTrack for their reptile care needs
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={GOOGLE_PLAY_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 bg-white text-emerald-600 px-8 py-3 rounded-lg hover:bg-emerald-50 transition-colors"
+              >
+                <GooglePlayLogo className="h-5 w-5 shrink-0" />
+                Get it on Google Play
+              </a>
+            </div>
+            <p className="mt-4 text-emerald-100">
+              Need details first? Visit our{' '}
+              <Link to="/learn" className="underline hover:text-white transition-colors">
+                Learn guides
+              </Link>{' '}
+              or{' '}
+              <Link to="/support" className="underline hover:text-white transition-colors">
+                contact support
+              </Link>
+              .
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
-                <Calendar className="w-6 h-6 text-emerald-600" />
-              </div>
-              <h3 className="text-xl text-slate-900 mb-2">Feeding Tracker</h3>
-              <p className="text-slate-600">
-                Log feedings with ease and track food types, quantities, and supplements applied.
-              </p>
-            </div>
-
-            <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Bell className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-xl text-slate-900 mb-2">Smart Reminders</h3>
-              <p className="text-slate-600">
-                Never miss a feeding or supplement schedule with customizable notifications.
-              </p>
-            </div>
-
-            <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                <BookOpen className="w-6 h-6 text-purple-600" />
-              </div>
-              <h3 className="text-xl text-slate-900 mb-2">Knowledge Base</h3>
-              <p className="text-slate-600">
-                Access expert gecko care guides right when you need them, completely offline.
-              </p>
-            </div>
-
-            <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                <CheckCircle className="w-6 h-6 text-orange-600" />
-              </div>
-              <h3 className="text-xl text-slate-900 mb-2">Health Logs</h3>
-              <p className="text-slate-600">
-                Track shedding, weight, and behavioral observations to monitor your gecko's health.
-              </p>
-            </div>
-
-            <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
-                <Heart className="w-6 h-6 text-pink-600" />
-              </div>
-              <h3 className="text-xl text-slate-900 mb-2">Multiple Pets</h3>
-              <p className="text-slate-600">
-                Manage care for all your geckos in one place with individual profiles.
-              </p>
-            </div>
-
-            <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
-                <Smartphone className="w-6 h-6 text-teal-600" />
-              </div>
-              <h3 className="text-xl text-slate-900 mb-2">Offline First</h3>
-              <p className="text-slate-600">
-                All features work without internet. Your data stays private on your device.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        {renderFloatingIcons(howIcons)}
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
-              Simple, Yet Powerful
-            </h2>
-            <p className="text-xl text-slate-600">
-              Get started in minutes
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                1
-              </div>
-              <h3 className="text-xl text-slate-900 mb-2">Create a Profile</h3>
-              <p className="text-slate-600">
-                Add your gecko's details - name, species, and age
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                2
-              </div>
-              <h3 className="text-xl text-slate-900 mb-2">Set Your Schedule</h3>
-              <p className="text-slate-600">
-                Define feeding and supplement routines that work for you
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                3
-              </div>
-              <h3 className="text-xl text-slate-900 mb-2">Track with Ease</h3>
-              <p className="text-slate-600">
-                One-tap feeding logs and automatic schedule updates
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-600 relative overflow-hidden">
-        {renderFloatingIcons(ctaIcons)}
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl sm:text-4xl text-white mb-6">
-            Ready to Provide Better Care?
-          </h2>
-          <p className="text-xl text-emerald-100 mb-8">
-            Join gecko owners who trust CareTrack for their reptile care needs
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={GOOGLE_PLAY_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-white text-emerald-600 px-8 py-3 rounded-lg hover:bg-emerald-50 transition-colors"
-            >
-              <GooglePlayLogo className="h-5 w-5 shrink-0" />
-              Get it on Google Play
-            </a>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>

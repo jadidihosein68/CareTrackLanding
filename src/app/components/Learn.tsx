@@ -6,6 +6,7 @@ import { getRecentlyViewed } from '../utils/recently-viewed';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
+import { SITE_URL } from '../utils/seo';
 
 export function Learn() {
   const recentSpecies = getRecentlyViewed()
@@ -14,10 +15,21 @@ export function Learn() {
     .slice(0, 5);
 
   usePageMeta({
-    title: 'Learn | CareTrack',
+    title: 'Learn Exotic Pet Care Guides | CareTrack',
     description:
-      'CareTrack Learn provides evidence-based care guides for geckos, snakes, amphibians, and tarantulas.',
+      'Explore CareTrack Learn guides for geckos, snakes, amphibians, and tarantulas, including setup, feeding, and health guidance.',
     path: '/learn',
+    type: 'article',
+    image: '/og-image.jpeg',
+    imageAlt: 'CareTrack Learn page with exotic pet care categories.',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'CareTrack Learn',
+      url: `${SITE_URL}/learn`,
+      description:
+        'Evidence-based care guides for geckos, snakes, amphibians, and tarantulas.',
+    },
   });
 
   return (
@@ -65,7 +77,7 @@ export function Learn() {
                       <div className="aspect-video relative overflow-hidden shrink-0">
                         <ImageWithFallback
                           src={species.heroImage}
-                          alt={species.name}
+                          alt={`${species.name} care guide cover image`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
@@ -95,7 +107,7 @@ export function Learn() {
                     <div className="aspect-[4/3] relative overflow-hidden">
                       <ImageWithFallback
                         src={category.image}
-                        alt={category.name}
+                        alt={`${category.name} category cover image`}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
@@ -113,13 +125,14 @@ export function Learn() {
           </section>
 
           <section className="rounded-xl border border-slate-200 bg-white p-6">
-            <h3 className="text-xl text-slate-900 mb-3">About This Content</h3>
+            <h2 className="text-xl text-slate-900 mb-3">About This Content</h2>
             <p className="text-slate-700 mb-4">
               All care guidance is grounded in reputable veterinary and evidence-based sources.
               We use ranges and "depends on" wording to avoid absolute claims.
             </p>
             <p className="text-slate-700">
-              Content is stored locally for offline access in the CareTrack app.
+              Content is stored locally for offline access in the CareTrack app. If you need help
+              with app features, visit <Link to="/support" className="text-emerald-700 underline">Support</Link>.
             </p>
           </section>
         </div>
