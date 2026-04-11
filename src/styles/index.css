@@ -5,30 +5,30 @@
 @keyframes float-slow {
   0%,
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
-    transform: translate3d(0, -14px, 0);
+    transform: translate3d(0, -14px, 0) scale(1.04);
   }
 }
 
 @keyframes float-medium {
   0%,
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
-    transform: translate3d(12px, -8px, 0);
+    transform: translate3d(12px, -8px, 0) scale(1.05);
   }
 }
 
 @keyframes float-sway {
   0%,
   100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
   }
   50% {
-    transform: translate3d(-10px, 10px, 0) rotate(-8deg);
+    transform: translate3d(-10px, 10px, 0) rotate(-8deg) scale(1.06);
   }
 }
 

@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 import icon from '../../assets/icon.webp';
+import { GooglePlayLogo } from './GooglePlayLogo';
+
+const GOOGLE_PLAY_URL =
+  'https://play.google.com/store/apps/details?id=com.osacore.caretrack&hl=en-US&ah=UM3NhPrO8Bx2hZGtb5Ty2A9P-eY';
 
 export function Footer() {
   return (
@@ -28,9 +32,15 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/?early-access=1" className="hover:text-white transition-colors">
+                <a
+                  href={GOOGLE_PLAY_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <GooglePlayLogo className="h-4 w-4 shrink-0" />
                   Download
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/support" className="hover:text-white transition-colors">

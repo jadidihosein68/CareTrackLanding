@@ -1,5 +1,5 @@
-import { useEffect, useState, type SVGProps } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { type SVGProps } from 'react';
+import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './shared/ImageWithFallback';
 import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone } from 'lucide-react';
 import geico from '../assets/geico.webp';
@@ -7,6 +7,7 @@ import gackoRaw from '../assets/gacko.svg?raw';
 import turtiesRaw from '../assets/turties.svg?raw';
 import snakesRaw from '../assets/Snakes.svg?raw';
 import { Footer } from './shared/Footer';
+import { GooglePlayLogo } from './shared/GooglePlayLogo';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
 
@@ -137,6 +138,9 @@ const GeckoIcon = ({ className, ...props }: IconProps) => (
   />
 );
 
+const GOOGLE_PLAY_URL =
+  'https://play.google.com/store/apps/details?id=com.osacore.caretrack&hl=en-US&ah=UM3NhPrO8Bx2hZGtb5Ty2A9P-eY';
+
 const SpiderIcon = (props: IconProps) => (
   <svg viewBox="0 0 213 169" fill="none" preserveAspectRatio="xMidYMid meet" {...props}>
     <g className="spider-animated">
@@ -200,60 +204,6 @@ const SpiderIcon = (props: IconProps) => (
 );
 
 export function LandingPage() {
-  const [isTesterOpen, setIsTesterOpen] = useState(false);
-  const [testerEmail, setTesterEmail] = useState('');
-  const [testerStatus, setTesterStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const openTesterModal = () => {
-    setIsTesterOpen(true);
-    setTesterStatus('idle');
-  };
-
-  const closeTesterModal = () => {
-    setIsTesterOpen(false);
-    setTesterEmail('');
-    setTesterStatus('idle');
-    if (new URLSearchParams(location.search).has('early-access')) {
-      navigate('/', { replace: true });
-    }
-  };
-
-  const handleTesterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setTesterStatus('sending');
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const encoded = new URLSearchParams();
-    formData.forEach((value, key) => {
-      encoded.append(key, String(value));
-    });
-
-    try {
-      const response = await fetch(form.getAttribute('action') ?? '/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encoded.toString(),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit early access request');
-      }
-
-      setTesterStatus('sent');
-      setTesterEmail('');
-    } catch (error) {
-      setTesterStatus('error');
-    }
-  };
-
-  useEffect(() => {
-    if (new URLSearchParams(location.search).get('early-access') === '1') {
-      setIsTesterOpen(true);
-    }
-  }, [location.search]);
-
   usePageMeta({
     title: 'CareTrack | Gecko Care Tracker',
     description:
@@ -534,13 +484,15 @@ export function LandingPage() {
                 Never forget a feeding or supplement again. CareTrack helps you provide the best care for your gecko with smart reminders and a built-in knowledge base.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <button
-                  type="button"
-                  onClick={openTesterModal}
-                  className="bg-slate-900 text-white px-8 py-3 rounded-lg hover:bg-slate-800 transition-colors"
+                <a
+                  href={GOOGLE_PLAY_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-3 rounded-lg hover:bg-slate-800 transition-colors"
                 >
-                  Test it early
-                </button>
+                  <GooglePlayLogo className="h-5 w-5 shrink-0" />
+                  Get it on Google Play
+                </a>
               </div>
             </div>
             <div className="relative">
@@ -689,103 +641,20 @@ export function LandingPage() {
             Join gecko owners who trust CareTrack for their reptile care needs
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              type="button"
-              onClick={openTesterModal}
-              className="bg-white text-emerald-600 px-8 py-3 rounded-lg hover:bg-emerald-50 transition-colors"
+            <a
+              href={GOOGLE_PLAY_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 bg-white text-emerald-600 px-8 py-3 rounded-lg hover:bg-emerald-50 transition-colors"
             >
-              Test it early
-            </button>
+              <GooglePlayLogo className="h-5 w-5 shrink-0" />
+              Get it on Google Play
+            </a>
           </div>
         </div>
       </section>
 
       <Footer />
-
-      {isTesterOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-          <div
-            className="absolute inset-0 bg-slate-900/50"
-            onClick={closeTesterModal}
-          />
-          <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl sm:p-8">
-            <div className="flex items-start justify-between gap-4 mb-6">
-              <div>
-                <h3 className="text-2xl text-slate-900">Join the tester program</h3>
-                <p className="text-slate-600 mt-2">
-                  Enter your email to join. We will send you an email in a few days with next steps.
-                </p>
-                <p className="text-sm text-slate-500 mt-3">
-                  Google Play is only available for registered users. Access the listing here:{' '}
-                  <a
-                    href="https://play.google.com/store/apps/details?id=com.osacore.caretrack&pcampaignid=web_share"
-                    className="text-emerald-600 hover:text-emerald-700 underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Google Play link
-                  </a>
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={closeTesterModal}
-                className="text-slate-500 hover:text-slate-700 transition-colors"
-              >
-                Close
-              </button>
-            </div>
-
-            <form
-              className="space-y-6"
-              onSubmit={handleTesterSubmit}
-              name="early-access"
-              method="POST"
-              action="/?submitted=early-access"
-              encType="application/x-www-form-urlencoded"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
-            >
-              <input type="hidden" name="form-name" value="early-access" />
-              <input type="hidden" name="subject" value="CareTrack Early Access" />
-              <input type="hidden" name="bot-field" />
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2" htmlFor="tester-email">
-                  Email
-                </label>
-                <input
-                  id="tester-email"
-                  name="email"
-                  type="email"
-                  value={testerEmail}
-                  onChange={(event) => setTesterEmail(event.target.value)}
-                  required
-                  className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                  placeholder="you@example.com"
-                />
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <button
-                  type="submit"
-                  className="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-                  disabled={testerStatus === 'sending'}
-                >
-                  {testerStatus === 'sending' ? 'Sending...' : 'Join tester program'}
-                </button>
-                {testerStatus === 'sent' && (
-                  <p className="text-emerald-600">Thanks! You are on the list.</p>
-                )}
-                {testerStatus === 'error' && (
-                  <p className="text-rose-600">
-                    We could not submit your request. Please try again later.
-                  </p>
-                )}
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
