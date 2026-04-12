@@ -132,7 +132,19 @@ export function Learn() {
             </p>
             <p className="text-slate-700">
               Content is stored locally for offline access in the CareTrack app. If you need help
-              with app features, visit <Link to="/support" className="text-emerald-700 underline">Support</Link>.
+              with app features, visit{' '}
+              <Link to="/support" className="text-emerald-700 underline">
+                Support
+              </Link>
+              . For practical workflows, read{' '}
+              <Link to="/guides" className="text-emerald-700 underline">
+                Guides
+              </Link>{' '}
+              and our{' '}
+              <Link to="/faq" className="text-emerald-700 underline">
+                FAQ
+              </Link>
+              .
             </p>
           </section>
         </div>

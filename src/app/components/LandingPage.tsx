@@ -496,15 +496,34 @@ export function LandingPage() {
           <div className="flex items-center gap-4">
             <Link
               to="/learn"
+              className="md:hidden text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              Learn
+            </Link>
+            <div className="hidden md:flex items-center gap-4">
+            <Link
+              to="/learn"
               className="text-slate-600 hover:text-slate-900 transition-colors"
             >
               Learn
+            </Link>
+            <Link
+              to="/guides"
+              className="text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              Guides
             </Link>
             <Link
               to="/support"
               className="text-slate-600 hover:text-slate-900 transition-colors"
             >
               Support
+            </Link>
+            <Link
+              to="/faq"
+              className="text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              FAQ
             </Link>
             <Link
               to="/privacy"
@@ -518,6 +537,7 @@ export function LandingPage() {
             >
               Terms
             </Link>
+            </div>
           </div>
         )}
       />
@@ -682,6 +702,61 @@ export function LandingPage() {
           </div>
         </section>
 
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
+                Practical Reptile Care Articles
+              </h2>
+              <p className="text-xl text-slate-600">
+                Browse focused guides built for daily husbandry workflows.
+              </p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              <article className="rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-xl text-slate-900 mb-2">
+                  <Link to="/guides/gecko-care-logging" className="hover:text-emerald-700 transition-colors">
+                    Gecko Care Logging
+                  </Link>
+                </h3>
+                <p className="text-slate-600">
+                  Learn what to track every week for feeding, supplements, shedding, and behavior trends.
+                </p>
+              </article>
+              <article className="rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-xl text-slate-900 mb-2">
+                  <Link to="/guides/feeding-reminder-features" className="hover:text-emerald-700 transition-colors">
+                    Feeding Reminder Features
+                  </Link>
+                </h3>
+                <p className="text-slate-600">
+                  Build reminders that reduce missed feeding tasks and keep supplement routines on schedule.
+                </p>
+              </article>
+              <article className="rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-xl text-slate-900 mb-2">
+                  <Link to="/guides/breeder-recordkeeping" className="hover:text-emerald-700 transition-colors">
+                    Breeder Recordkeeping
+                  </Link>
+                </h3>
+                <p className="text-slate-600">
+                  Keep profile timelines and husbandry notes organized for breeding projects.
+                </p>
+              </article>
+              <article className="rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-xl text-slate-900 mb-2">
+                  <Link to="/guides/offline-reptile-care-logs" className="hover:text-emerald-700 transition-colors">
+                    Offline Reptile Care Logs
+                  </Link>
+                </h3>
+                <p className="text-slate-600">
+                  Understand why offline-first care tracking improves reliability and continuity.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-600 relative overflow-hidden">
           {renderFloatingIcons(ctaIcons)}
@@ -707,6 +782,14 @@ export function LandingPage() {
               Need details first? Visit our{' '}
               <Link to="/learn" className="underline hover:text-white transition-colors">
                 Learn guides
+              </Link>{' '}
+              and{' '}
+              <Link to="/guides" className="underline hover:text-white transition-colors">
+                feature articles
+              </Link>{' '}
+              or check the{' '}
+              <Link to="/faq" className="underline hover:text-white transition-colors">
+                FAQ
               </Link>{' '}
               or{' '}
               <Link to="/support" className="underline hover:text-white transition-colors">

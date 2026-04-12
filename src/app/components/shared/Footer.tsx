@@ -9,7 +9,7 @@ export function Footer() {
   return (
     <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <img
@@ -32,6 +32,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/guides" className="hover:text-white transition-colors">
+                  Guides
+                </Link>
+              </li>
+              <li>
                 <a
                   href={GOOGLE_PLAY_URL}
                   target="_blank"
@@ -45,6 +50,21 @@ export function Footer() {
               <li>
                 <Link to="/support" className="hover:text-white transition-colors">
                   Support
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="mb-4">Help</h4>
+            <ul className="space-y-2 text-slate-400">
+              <li>
+                <Link to="/faq" className="hover:text-white transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link to="/support" className="hover:text-white transition-colors">
+                  Contact Support
                 </Link>
               </li>
             </ul>

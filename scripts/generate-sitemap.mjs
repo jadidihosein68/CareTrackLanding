@@ -5,9 +5,11 @@ const SITE_URL = 'https://thecaretrack.netlify.app';
 const TODAY = new Date().toISOString().slice(0, 10);
 
 const learnDataPath = resolve('src/app/data/learn-data.ts');
+const seoGuidesPath = resolve('src/app/data/seo-guides.ts');
 const sitemapPath = resolve('public/sitemap.xml');
 
 const source = readFileSync(learnDataPath, 'utf8');
+const seoGuidesSource = readFileSync(seoGuidesPath, 'utf8');
 
 const extractIds = (blockLabel) => {
   const blockRegex = new RegExp(`${blockLabel}[\\s\\S]*?=\\s*\\[([\\s\\S]*?)\\];`);
@@ -26,9 +28,19 @@ const extractIds = (blockLabel) => {
 const categoryIds = extractIds('export const categories');
 const speciesIds = extractIds('export const speciesData');
 
+const guideIds = [];
+const guideIdRegex = /id:\s*'([^']+)'/g;
+let guideMatch = guideIdRegex.exec(seoGuidesSource);
+while (guideMatch) {
+  guideIds.push(guideMatch[1]);
+  guideMatch = guideIdRegex.exec(seoGuidesSource);
+}
+
 const entries = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/learn', changefreq: 'weekly', priority: '0.9' },
+  { path: '/guides', changefreq: 'weekly', priority: '0.8' },
+  { path: '/faq', changefreq: 'monthly', priority: '0.7' },
   ...categoryIds.map((id) => ({
     path: `/learn/category/${id}`,
     changefreq: 'monthly',
@@ -38,6 +50,11 @@ const entries = [
     path: `/learn/species/${id}`,
     changefreq: 'monthly',
     priority: '0.6',
+  })),
+  ...guideIds.map((id) => ({
+    path: `/guides/${id}`,
+    changefreq: 'monthly',
+    priority: '0.7',
   })),
   { path: '/privacy', changefreq: 'yearly', priority: '0.5' },
   { path: '/terms', changefreq: 'yearly', priority: '0.5' },

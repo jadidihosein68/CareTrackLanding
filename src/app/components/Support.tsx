@@ -183,11 +183,26 @@ export function Support() {
               <Link to="/learn" className="text-emerald-700 underline">
                 Learn guides
               </Link>{' '}
+              and{' '}
+              <Link to="/guides" className="text-emerald-700 underline">
+                feature articles
+              </Link>{' '}
+              in the{' '}
+              <Link to="/faq" className="text-emerald-700 underline">
+                FAQ
+              </Link>{' '}
               and review our{' '}
               <Link to="/privacy" className="text-emerald-700 underline">
                 Privacy Policy
               </Link>
               .
+            </p>
+            <p className="mt-2">
+              You can also review our{' '}
+              <Link to="/terms" className="text-emerald-700 underline">
+                Terms of Service
+              </Link>{' '}
+              for product usage details.
             </p>
           </div>
         </div>
