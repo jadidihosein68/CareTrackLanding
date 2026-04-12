@@ -6,6 +6,9 @@ export type GuideSection = {
 
 export type SeoGuideArticle = {
   id: string;
+  seoTitle: string;
+  seoDescription: string;
+  relatedSpeciesIds: string[];
   title: string;
   description: string;
   summary: string;
@@ -16,6 +19,10 @@ export type SeoGuideArticle = {
 export const seoGuides: SeoGuideArticle[] = [
   {
     id: 'gecko-care-logging',
+    seoTitle: 'How to Keep a Gecko Care Log (Free Tracker) | CareTrack',
+    seoDescription:
+      'Learn how to keep a gecko care log with a free tracker workflow. Record feeding, shedding, supplements, and behavior to catch health changes early.',
+    relatedSpeciesIds: ['leopard-gecko', 'crested-gecko'],
     title: 'Gecko Care Logging: What to Track Every Week',
     description:
       'Learn what to record in a gecko care log, including feeding, shedding, supplements, and behavior trends.',
@@ -54,6 +61,10 @@ export const seoGuides: SeoGuideArticle[] = [
   },
   {
     id: 'feeding-reminder-features',
+    seoTitle: 'Gecko Feeding Reminder Setup for Reptile Owners | CareTrack',
+    seoDescription:
+      'Set up gecko and reptile feeding reminders that reduce missed tasks. Use schedule templates, supplement cadence, and completion logs in CareTrack.',
+    relatedSpeciesIds: ['leopard-gecko', 'corn-snake', 'ball-python'],
     title: 'Feeding Reminder Features for Reptile Owners',
     description:
       'Set up reptile feeding reminders with schedules, supplement cadence, and completion history to avoid missed tasks.',
@@ -91,6 +102,10 @@ export const seoGuides: SeoGuideArticle[] = [
   },
   {
     id: 'breeder-recordkeeping',
+    seoTitle: 'Reptile Breeder Recordkeeping Guide and Tracker Tips | CareTrack',
+    seoDescription:
+      'Organize reptile breeder recordkeeping with profile timelines, feeding history, hatchling notes, and day-to-day husbandry logs in one workflow.',
+    relatedSpeciesIds: ['leopard-gecko', 'crested-gecko', 'ball-python'],
     title: 'Breeder Recordkeeping for Reptile Projects',
     description:
       'Organize breeder recordkeeping with profile timelines, feeding history, and hatchling care notes in one place.',
@@ -128,6 +143,10 @@ export const seoGuides: SeoGuideArticle[] = [
   },
   {
     id: 'offline-reptile-care-logs',
+    seoTitle: 'Offline Reptile Care Log App: Why Offline-First Works | CareTrack',
+    seoDescription:
+      'Understand why an offline reptile care log app improves reliability and privacy. Track feeding, reminders, and husbandry notes without connectivity.',
+    relatedSpeciesIds: ['leopard-gecko', 'corn-snake', 'whites-tree-frog'],
     title: 'Offline Reptile Care Logs: Why Offline-First Matters',
     description:
       'Understand the benefits of offline reptile care logs for daily tracking, continuity, and privacy.',

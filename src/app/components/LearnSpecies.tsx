@@ -13,11 +13,11 @@ export function LearnSpecies() {
   const { speciesId } = useParams<{ speciesId: string }>();
   const species = getSpeciesById(speciesId ?? '');
   const metaTitle = species
-    ? `${species.name} Care Guide | CareTrack Learn`
-    : 'Species Guide | CareTrack Learn';
+    ? `${species.name} Care Guide & Tracker | CareTrack`
+    : 'Species Care Guide | CareTrack';
   const metaDescription = species
-    ? `CareTrack guidance for ${species.name} (${species.scientificName}) covering setup, feeding, and when to seek help.`
-    : 'Explore CareTrack species care guides with setup, feeding, and health guidance.';
+    ? `Use the CareTrack ${species.name} (${species.scientificName}) care guide to plan setup, feeding, supplements, and health tracking with practical husbandry tips.`
+    : 'Explore CareTrack species care guides with setup, feeding, supplements, and health tracking guidance.';
 
   usePageMeta({
     title: metaTitle,
@@ -26,7 +26,7 @@ export function LearnSpecies() {
     type: 'article',
     image: species?.heroImage ?? '/og-image.jpeg',
     imageAlt: species
-      ? `${species.name} care guide hero image`
+      ? `${species.name} care guide image for setup and husbandry tracking`
       : 'CareTrack species care guide page',
     noindex: !species,
     structuredData: species
@@ -142,7 +142,7 @@ export function LearnSpecies() {
           <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
             <ImageWithFallback
               src={species.heroImage}
-              alt={`${species.name} habitat and appearance reference image`}
+              alt={`${species.name} habitat reference photo for care guide`}
               className="w-full h-auto lg:h-full object-cover block"
             />
           </div>
@@ -193,7 +193,7 @@ export function LearnSpecies() {
             <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
               <ImageWithFallback
                 src={species.setupImage}
-                alt={`Best setup reference image for ${species.name}`}
+                alt={`${species.name} enclosure setup example for husbandry planning`}
                 className="w-full h-auto lg:h-full object-cover block"
               />
             </div>

@@ -5,12 +5,13 @@ import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
 import { SITE_URL } from '../utils/seo';
 import { seoGuides } from '../data/seo-guides';
+import { getSpeciesById } from '../data/learn-data';
 
 export function Guides() {
   usePageMeta({
-    title: 'Reptile Care Guides and Feature Articles | CareTrack',
+    title: 'Reptile Care Guides, Logs, and Reminder Workflows | CareTrack',
     description:
-      'Read CareTrack guides for gecko care logging, feeding reminder setup, breeder recordkeeping, and offline reptile care logs.',
+      'Read in-depth guides for gecko care logs, reptile feeding reminders, breeder recordkeeping, and offline husbandry tracking with CareTrack.',
     path: '/guides',
     type: 'article',
     image: '/og-image.jpeg',
@@ -46,7 +47,7 @@ export function Guides() {
 
       <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">Guides</h1>
+          <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">Reptile Care Guides</h1>
           <p className="text-lg text-slate-600 max-w-3xl mb-10">
             Explore practical articles about reptile care logging, reminder workflows,
             and recordkeeping habits that improve day-to-day husbandry.
@@ -67,6 +68,28 @@ export function Guides() {
                   </Link>
                 </h2>
                 <p className="text-slate-700 mb-4">{guide.summary}</p>
+                {guide.relatedSpeciesIds.length > 0 ? (
+                  <ul className="mb-4 flex flex-wrap gap-2">
+                    {guide.relatedSpeciesIds
+                      .map((speciesId) => getSpeciesById(speciesId))
+                      .filter(
+                        (
+                          species,
+                        ): species is NonNullable<ReturnType<typeof getSpeciesById>> =>
+                          Boolean(species),
+                      )
+                      .map((species) => (
+                        <li key={species.id}>
+                          <Link
+                            to={`/learn/species/${species.id}`}
+                            className="inline-flex rounded-full border border-slate-300 px-3 py-1 text-xs text-slate-700 hover:border-emerald-600 hover:text-emerald-700 transition-colors"
+                          >
+                            {species.name}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                ) : null}
                 <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
                   <span>Updated: {guide.updated}</span>
                   <Link

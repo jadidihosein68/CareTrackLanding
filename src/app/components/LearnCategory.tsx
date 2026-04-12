@@ -12,11 +12,11 @@ export function LearnCategory() {
   const category = categories.find((item) => item.id === categoryId);
   const speciesList = getSpeciesByCategory(categoryId ?? '');
   const metaTitle = category
-    ? `${category.name} Care Guides | CareTrack Learn`
-    : 'Learn | CareTrack';
+    ? `${category.name} Reptile Care Guides | CareTrack Learn`
+    : 'Reptile Care Guides | CareTrack Learn';
   const metaDescription = category
-    ? `${category.description}. Explore CareTrack care guidance for ${category.name.toLowerCase()} keeping.`
-    : 'CareTrack Learn provides care guides for geckos, snakes, amphibians, and tarantulas.';
+    ? `${category.description}. Explore CareTrack setup, feeding, and health tracking guidance for ${category.name.toLowerCase()} care.`
+    : 'CareTrack Learn provides setup, feeding, and health tracking guides for geckos, snakes, amphibians, and tarantulas.';
 
   usePageMeta({
     title: metaTitle,
@@ -25,7 +25,7 @@ export function LearnCategory() {
     type: 'article',
     image: '/og-image.jpeg',
     imageAlt: category
-      ? `${category.name} category page on CareTrack Learn`
+      ? `${category.name} reptile care category page`
       : 'CareTrack Learn category page',
     noindex: !category,
     structuredData: category
@@ -105,7 +105,7 @@ export function LearnCategory() {
             <ArrowLeft className="w-4 h-4" />
             Back to Learn
           </Link>
-          <h1 className="text-4xl sm:text-5xl text-slate-900">{category.name}</h1>
+          <h1 className="text-4xl sm:text-5xl text-slate-900">{category.name} Care Guides</h1>
           <p className="mt-2 text-lg text-slate-600">{category.description}</p>
         </div>
       </header>
@@ -115,7 +115,7 @@ export function LearnCategory() {
         <div className="aspect-[21/9] relative overflow-hidden rounded-2xl shadow-lg">
           <ImageWithFallback
             src={category.image}
-            alt={`${category.name} hero image for CareTrack Learn`}
+            alt={`${category.name} care guide category hero image`}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
@@ -136,7 +136,7 @@ export function LearnCategory() {
                 <div className="aspect-video relative overflow-hidden shrink-0">
                   <ImageWithFallback
                     src={species.heroImage}
-                    alt={`${species.name} species guide cover image`}
+                    alt={`${species.name} species care guide thumbnail`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>

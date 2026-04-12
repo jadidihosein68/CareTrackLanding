@@ -20,7 +20,7 @@ export function Footer() {
               <span className="text-xl">CareTrack</span>
             </div>
             <p className="text-slate-400">
-              The smart way to track your gecko's care schedule
+              The smart way to track gecko and reptile care schedules
             </p>
           </div>
           <div>
@@ -86,7 +86,7 @@ export function Footer() {
           </div>
         </div>
         <div className="pt-8 border-t border-slate-800 text-center text-slate-400">
-          <p>&copy; 2025 CareTrack. All rights reserved. Made by gecko lovers for gecko lovers</p>
+          <p>&copy; 2025 CareTrack. All rights reserved. Built by reptile keepers for reptile keepers</p>
         </div>
       </div>
     </footer>

@@ -5,15 +5,38 @@ import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
 import { SITE_URL } from '../utils/seo';
 import { getSeoGuideById } from '../data/seo-guides';
+import { getSpeciesById } from '../data/learn-data';
 
 export function GuideArticle() {
   const { guideId } = useParams<{ guideId: string }>();
   const guide = getSeoGuideById(guideId ?? '');
 
-  const title = guide ? `${guide.title} | CareTrack` : 'Guide Not Found | CareTrack';
+  const title = guide ? guide.seoTitle : 'Guide Not Found | CareTrack';
   const description = guide
-    ? guide.description
+    ? guide.seoDescription
     : 'The requested CareTrack guide could not be found.';
+  const howToSteps = guide
+    ? guide.sections.map((section, index) => ({
+        '@type': 'HowToStep' as const,
+        position: index + 1,
+        name: section.heading,
+        text: [
+          section.paragraphs[0] ?? '',
+          section.bullets?.[0] ?? '',
+        ]
+          .filter(Boolean)
+          .join(' '),
+      }))
+    : [];
+  const relatedSpecies = guide
+    ? guide.relatedSpeciesIds
+        .map((speciesId) => getSpeciesById(speciesId))
+        .filter(
+          (
+            species,
+          ): species is NonNullable<ReturnType<typeof getSpeciesById>> => Boolean(species),
+        )
+    : [];
 
   usePageMeta({
     title,
@@ -29,7 +52,7 @@ export function GuideArticle() {
             '@context': 'https://schema.org',
             '@type': 'Article',
             headline: guide.title,
-            description: guide.description,
+            description: guide.seoDescription,
             dateModified: guide.updated,
             author: {
               '@type': 'Organization',
@@ -44,6 +67,15 @@ export function GuideArticle() {
               },
             },
             mainEntityOfPage: `${SITE_URL}/guides/${guide.id}`,
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'HowTo',
+            name: guide.title,
+            description: guide.seoDescription,
+            image: `${SITE_URL}/og-image.jpeg`,
+            totalTime: 'PT10M',
+            step: howToSteps,
           },
           {
             '@context': 'https://schema.org',
@@ -129,8 +161,29 @@ export function GuideArticle() {
           </div>
 
           <footer className="mt-12 pt-8 border-t border-slate-200 text-slate-700">
+            {relatedSpecies.length > 0 ? (
+              <div className="mb-6">
+                <h2 className="text-xl text-slate-900 mb-3">Related Species Guides</h2>
+                <ul className="flex flex-wrap gap-3">
+                  {relatedSpecies.map((species) => (
+                    <li key={species.id}>
+                      <Link
+                        to={`/learn/species/${species.id}`}
+                        className="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm text-slate-800 hover:border-emerald-600 hover:text-emerald-700 transition-colors"
+                      >
+                        {species.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             <p>
-              Continue with{' '}
+              Continue with the{' '}
+              <Link to="/" className="text-emerald-700 underline">
+                CareTrack app homepage
+              </Link>
+              , explore{' '}
               <Link to="/learn" className="text-emerald-700 underline">
                 Learn guides
               </Link>{' '}

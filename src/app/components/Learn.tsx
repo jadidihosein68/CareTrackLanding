@@ -15,9 +15,9 @@ export function Learn() {
     .slice(0, 5);
 
   usePageMeta({
-    title: 'Learn Exotic Pet Care Guides | CareTrack',
+    title: 'Reptile Care Guides for Geckos, Snakes, and Tarantulas | CareTrack Learn',
     description:
-      'Explore CareTrack Learn guides for geckos, snakes, amphibians, and tarantulas, including setup, feeding, and health guidance.',
+      'Explore expert reptile care guides for geckos, snakes, amphibians, and tarantulas with setup, feeding, supplements, and health tracking tips.',
     path: '/learn',
     type: 'article',
     image: '/og-image.jpeg',
@@ -49,9 +49,9 @@ export function Learn() {
       {/* Header */}
       <header className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">Learn</h1>
+          <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">Reptile Care Learn Center</h1>
           <p className="text-lg text-slate-600">
-            Professional care guidance for geckos and other exotic pets.
+            Professional care guidance for geckos, snakes, tarantulas, amphibians, and other exotic pets.
           </p>
         </div>
       </header>
@@ -77,7 +77,7 @@ export function Learn() {
                       <div className="aspect-video relative overflow-hidden shrink-0">
                         <ImageWithFallback
                           src={species.heroImage}
-                          alt={`${species.name} care guide cover image`}
+                          alt={`${species.name} care guide thumbnail with habitat context`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
@@ -107,7 +107,7 @@ export function Learn() {
                     <div className="aspect-[4/3] relative overflow-hidden">
                       <ImageWithFallback
                         src={category.image}
-                        alt={`${category.name} category cover image`}
+                        alt={`${category.name} reptile care category thumbnail`}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />

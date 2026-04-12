@@ -7,9 +7,9 @@ import { SITE_URL } from '../utils/seo';
 
 export function PrivacyPolicy() {
   usePageMeta({
-    title: 'Privacy Policy | CareTrack',
+    title: 'Privacy Policy for CareTrack Reptile Care Tracker',
     description:
-      'Read the CareTrack privacy policy for our offline-first gecko care tracking app and how we handle your data.',
+      'Read the CareTrack privacy policy to understand how our offline-first gecko and reptile care tracker handles app data and user information.',
     path: '/privacy',
     type: 'article',
     image: '/og-image.jpeg',

@@ -206,9 +206,9 @@ const SpiderIcon = (props: IconProps) => (
 
 export function LandingPage() {
   usePageMeta({
-    title: 'CareTrack | Gecko Care Tracker',
+    title: 'CareTrack: Offline Gecko & Reptile Care Tracker',
     description:
-      'CareTrack helps gecko owners track feeding, supplements, and health with smart reminders and offline-first care logs.',
+      'CareTrack is an offline-first gecko and reptile care tracker. Log feeding, shedding, supplements, and health notes with reminders for every pet profile.',
     path: '/',
     type: 'website',
     image: '/og-image.jpeg',
@@ -570,7 +570,7 @@ export function LandingPage() {
               <div className="relative">
                 <ImageWithFallback 
                   src={geico}
-                  alt="Close-up leopard gecko used in the CareTrack landing page hero section"
+                  alt="Leopard gecko hero image representing offline reptile care tracking in CareTrack"
                   className="rounded-2xl shadow-2xl w-full"
                 />
               </div>
