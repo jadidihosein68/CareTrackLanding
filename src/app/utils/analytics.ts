@@ -18,6 +18,15 @@ export const initializeAnalytics = () => {
   }
 
   if (!window.__caretrackGaInit) {
+    const existingScript = document.querySelector(
+      `script[src*="googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`,
+    );
+
+    if (existingScript && typeof window.gtag === 'function') {
+      window.__caretrackGaInit = true;
+      return;
+    }
+
     const script = document.createElement('script');
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;

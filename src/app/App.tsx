@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { LandingPage } from './components/LandingPage';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
@@ -15,8 +15,14 @@ import { initializeAnalytics, trackPageView } from './utils/analytics';
 
 function AppRoutes() {
   const location = useLocation();
+  const isFirstRouteView = useRef(true);
 
   useEffect(() => {
+    if (isFirstRouteView.current) {
+      isFirstRouteView.current = false;
+      return;
+    }
+
     const pagePath = `${location.pathname}${location.search}${location.hash}`;
     window.requestAnimationFrame(() => {
       trackPageView(pagePath);
