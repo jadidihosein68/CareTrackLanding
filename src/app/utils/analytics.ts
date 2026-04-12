@@ -28,10 +28,7 @@ export const initializeAnalytics = () => {
       window.dataLayer?.push(args);
     };
     window.gtag('js', new Date());
-    window.gtag('config', GA_MEASUREMENT_ID, {
-      send_page_view: false,
-      anonymize_ip: true,
-    });
+    window.gtag('config', GA_MEASUREMENT_ID);
     window.__caretrackGaInit = true;
   }
 };

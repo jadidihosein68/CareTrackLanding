@@ -15,9 +15,9 @@ export function Learn() {
     .slice(0, 5);
 
   usePageMeta({
-    title: 'Reptile Care Guides for Geckos, Snakes, and Tarantulas | CareTrack Learn',
+    title: 'CareTrack Learn: Gecko, Snake & Reptile Care Guides',
     description:
-      'Explore expert reptile care guides for geckos, snakes, amphibians, and tarantulas with setup, feeding, supplements, and health tracking tips.',
+      'Detailed care guides and husbandry information for leopard geckos, crested geckos, ball pythons, tarantulas, amphibians and other exotic pets.',
     path: '/learn',
     type: 'article',
     image: '/og-image.jpeg',
@@ -49,7 +49,9 @@ export function Learn() {
       {/* Header */}
       <header className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">Reptile Care Learn Center</h1>
+          <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">
+            CareTrack Learn: Gecko and Reptile Care Guides
+          </h1>
           <p className="text-lg text-slate-600">
             Professional care guidance for geckos, snakes, tarantulas, amphibians, and other exotic pets.
           </p>
