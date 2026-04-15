@@ -395,6 +395,7 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
   const canonicalUrl = absoluteUrl(route.path);
   const structuredData = buildRouteJsonLd(route, guides);
   const noscriptBody = buildNoscriptMain(route, guides, categories, speciesById);
+  const imageAlt = `${route.h1} page preview image`;
 
   return html
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(route.title)}</title>`)
@@ -435,6 +436,14 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
       `<meta name="twitter:url" content="${canonicalUrl}" />`,
     )
     .replace(
+      /<meta\s+property="og:image:alt"\s+content="[\s\S]*?"\s*\/>/,
+      `<meta property="og:image:alt" content="${escapeHtml(imageAlt)}" />`,
+    )
+    .replace(
+      /<meta\s+name="twitter:image:alt"\s+content="[\s\S]*?"\s*\/>/,
+      `<meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}" />`,
+    )
+    .replace(
       /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
       `<script type="application/ld+json">\n${JSON.stringify(structuredData, null, 2)}\n</script>`,
     )
@@ -455,10 +464,10 @@ const staticRoutes = [
   {
     kind: 'home',
     path: '/',
-    title: 'Gecko & Reptile Care Tracker App | CareTrack',
-    h1: 'Gecko & Reptile Care Tracker App',
+    title: 'Offline Gecko & Reptile Care Tracker with Reminders | CareTrack',
+    h1: 'Offline Gecko & Reptile Care Tracker with Reminders',
     description:
-      'CareTrack is an offline-first gecko and reptile care tracker app for feeding, shedding, supplements, reminders, and health observations.',
+      'CareTrack is an offline gecko and reptile care tracker with reminders for feeding, shedding, supplements, and health observations.',
     ogType: 'website',
   },
   {

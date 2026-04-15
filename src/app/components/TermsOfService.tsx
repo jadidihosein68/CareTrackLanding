@@ -7,9 +7,9 @@ import { SITE_URL } from '../utils/seo';
 
 export function TermsOfService() {
   usePageMeta({
-    title: 'Terms of Service for CareTrack Reptile Care Tracker',
+    title: 'Terms of Service | CareTrack',
     description:
-      'Review CareTrack terms of service for using our gecko and reptile care tracker app, reminder features, and educational husbandry content.',
+      'Review the CareTrack terms of service for app usage conditions, responsibilities, and legal information.',
     path: '/terms',
     type: 'article',
     image: '/og-image.jpeg',

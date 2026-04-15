@@ -13,9 +13,9 @@ export function Support() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   usePageMeta({
-    title: 'CareTrack Support for Gecko and Reptile Tracker Users',
+    title: 'Reptile Care App Support | CareTrack',
     description:
-      'Contact CareTrack support for help with gecko feeding reminders, care logs, Learn guides, and reptile husbandry tracking features.',
+      'Contact CareTrack support for help with reminders, tracking features, and reptile care workflow questions.',
     path: '/support',
     type: 'website',
     image: '/og-image.jpeg',

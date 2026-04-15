@@ -142,6 +142,22 @@ const GeckoIcon = ({ className, ...props }: IconProps) => (
 const GOOGLE_PLAY_URL =
   'https://play.google.com/store/apps/details?id=com.osacore.caretrack&hl=en-US&ah=UM3NhPrO8Bx2hZGtb5Ty2A9P-eY';
 
+const popularSpeciesLinks = [
+  { to: '/learn/species/leopard-gecko', label: 'Leopard Gecko Care Guide' },
+  { to: '/learn/species/crested-gecko', label: 'Crested Gecko Care Guide' },
+  { to: '/learn/species/ball-python', label: 'Ball Python Care Guide' },
+  { to: '/learn/species/corn-snake', label: 'Corn Snake Care Guide' },
+  { to: '/learn/species/whites-tree-frog', label: "White's Tree Frog Care Guide" },
+  { to: '/learn/species/pink-toe-tarantula', label: 'Pink Toe Tarantula Care Guide' },
+];
+
+const popularGuideLinks = [
+  { to: '/guides/leopard-gecko-feeding-schedule', label: 'Leopard Gecko Feeding Schedule Guide' },
+  { to: '/guides/crested-gecko-supplement-guide', label: 'Crested Gecko Supplement Guide' },
+  { to: '/guides/reptile-care-log-template', label: 'Reptile Care Log Template' },
+  { to: '/guides/breeder-record-keeping-gecko-pairings', label: 'Breeder Record-Keeping for Gecko Pairings' },
+];
+
 const SpiderIcon = (props: IconProps) => (
   <svg viewBox="0 0 213 169" fill="none" preserveAspectRatio="xMidYMid meet" {...props}>
     <g className="spider-animated">
@@ -206,9 +222,9 @@ const SpiderIcon = (props: IconProps) => (
 
 export function LandingPage() {
   usePageMeta({
-    title: 'Gecko & Reptile Care Tracker App | CareTrack',
+    title: 'Offline Gecko & Reptile Care Tracker with Reminders | CareTrack',
     description:
-      'CareTrack is an offline-first gecko and reptile care tracker. Log feeding, shedding, supplements, and health notes with reminders for every pet profile.',
+      'CareTrack is an offline gecko and reptile care tracker with reminders. Log feeding, shedding, supplements, and health notes for each pet profile.',
     path: '/',
     type: 'website',
     image: '/og-image.jpeg',
@@ -550,7 +566,7 @@ export function LandingPage() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl text-slate-900 mb-6">
-                  Gecko & Reptile Care Tracker App
+                  Offline Gecko & Reptile Care Tracker with Reminders
                 </h1>
                 <p className="text-xl text-slate-600 mb-8">
                   Never forget a feeding or supplement again. CareTrack helps you provide the best care for your gecko with smart reminders and a built-in knowledge base.
@@ -754,6 +770,49 @@ export function LandingPage() {
                 </p>
               </article>
             </div>
+          </div>
+        </section>
+
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50 border-y border-slate-200">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
+              Popular Species and Workflow Pages
+            </h2>
+            <p className="text-lg text-slate-600 mb-8">
+              Use these direct links to jump into species-specific care guidance and practical reptile tracking workflows.
+            </p>
+            <nav aria-label="Popular internal SEO links" className="grid gap-8 lg:grid-cols-2">
+              <div>
+                <h3 className="text-xl text-slate-900 mb-3">Species Care Pages</h3>
+                <ul className="space-y-2">
+                  {popularSpeciesLinks.map((item) => (
+                    <li key={item.to}>
+                      <Link
+                        to={item.to}
+                        className="text-emerald-700 underline hover:text-emerald-800"
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xl text-slate-900 mb-3">Care Logging Guides</h3>
+                <ul className="space-y-2">
+                  {popularGuideLinks.map((item) => (
+                    <li key={item.to}>
+                      <Link
+                        to={item.to}
+                        className="text-emerald-700 underline hover:text-emerald-800"
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </nav>
           </div>
         </section>
 
