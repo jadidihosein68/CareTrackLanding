@@ -100,39 +100,15 @@ const buildRouteJsonLd = (route, guides) => {
   if (route.kind === 'home') {
     return {
       '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'Organization',
-          name: 'CareTrack',
-          url: SITE_URL,
-          logo: `${SITE_URL}/apple-touch-icon.png`,
-          contactPoint: [
-            {
-              '@type': 'ContactPoint',
-              contactType: 'customer support',
-              email: 'info@osacore.com',
-              url: `${SITE_URL}/support`,
-            },
-          ],
-        },
-        {
-          '@type': 'WebSite',
-          name: 'CareTrack',
-          url: SITE_URL,
-          inLanguage: 'en-US',
-        },
-        {
-          '@type': 'SoftwareApplication',
-          name: 'CareTrack',
-          applicationCategory: 'LifestyleApplication',
-          operatingSystem: 'Android',
-          url: SITE_URL,
-          downloadUrl:
-            'https://play.google.com/store/apps/details?id=com.osacore.caretrack&hl=en-US&ah=UM3NhPrO8Bx2hZGtb5Ty2A9P-eY',
-          description:
-            'Offline-first gecko and reptile care tracker with feeding logs, reminders, and species care guidance.',
-        },
-      ],
+      '@type': 'WebApplication',
+      name: 'CareTrack',
+      url: `${SITE_URL}/`,
+      description: 'Offline gecko and reptile care tracker with reminders',
+      applicationCategory: 'LifestyleApplication',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+      },
     };
   }
 
@@ -396,6 +372,8 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
   const structuredData = buildRouteJsonLd(route, guides);
   const noscriptBody = buildNoscriptMain(route, guides, categories, speciesById);
   const imageAlt = `${route.h1} page preview image`;
+  const ogDescription = route.ogDescription ?? route.description;
+  const twitterDescription = route.twitterDescription ?? ogDescription;
 
   return html
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(route.title)}</title>`)
@@ -417,7 +395,7 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
     )
     .replace(
       /<meta\s+property="og:description"\s+content="[\s\S]*?"\s*\/>/,
-      `<meta property="og:description" content="${escapeHtml(route.description)}" />`,
+      `<meta property="og:description" content="${escapeHtml(ogDescription)}" />`,
     )
     .replace(
       /<meta\s+property="og:url"\s+content="[\s\S]*?"\s*\/>/,
@@ -429,7 +407,7 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
     )
     .replace(
       /<meta\s+name="twitter:description"\s+content="[\s\S]*?"\s*\/>/,
-      `<meta name="twitter:description" content="${escapeHtml(route.description)}" />`,
+      `<meta name="twitter:description" content="${escapeHtml(twitterDescription)}" />`,
     )
     .replace(
       /<meta\s+name="twitter:url"\s+content="[\s\S]*?"\s*\/>/,
@@ -464,28 +442,34 @@ const staticRoutes = [
   {
     kind: 'home',
     path: '/',
-    title: 'Offline Gecko & Reptile Care Tracker with Reminders | CareTrack',
-    h1: 'Offline Gecko & Reptile Care Tracker with Reminders',
+    title: 'CareTrack: Offline Gecko & Reptile Care Tracker with Reminders',
+    h1: 'CareTrack: Offline Gecko & Reptile Care Tracker with Reminders',
     description:
-      'CareTrack is an offline gecko and reptile care tracker with reminders for feeding, shedding, supplements, and health observations.',
+      'Free offline gecko and reptile care tracker. Log feeding, shedding, weight, humidity, temperature and get smart reminders. Works without internet. Perfect for leopard geckos, crested geckos and more.',
+    ogDescription:
+      'Free offline reptile care log with feeding reminders, weight tracking and health records.',
+    twitterDescription:
+      'Free offline reptile care log with feeding reminders, weight tracking and health records.',
     ogType: 'website',
   },
   {
     kind: 'learn',
     path: '/learn',
-    title: 'Gecko, Snake & Reptile Care Guides | CareTrack',
-    h1: 'Gecko and Reptile Care Guides',
+    title: 'Reptile Care Knowledge Base & Species Guides | CareTrack',
+    h1: 'Reptile Care Knowledge Base & Species Guides',
     description:
-      'Detailed reptile husbandry guides for geckos, snakes, amphibians, and tarantulas with setup, feeding, and health tracking context.',
+      'Learn everything about gecko and reptile care. Species guides, husbandry tips, common problems, and best practices for leopard geckos, crested geckos, and more.',
+    ogDescription: 'Learn everything about gecko and reptile care.',
     ogType: 'article',
   },
   {
     kind: 'guides',
     path: '/guides',
-    title: 'Reptile Care Guides and Templates | CareTrack',
-    h1: 'Reptile Care Guides and Templates',
+    title: 'Reptile Care Guides, Templates & Logs | CareTrack',
+    h1: 'Reptile Care Guides, Templates & Logs',
     description:
-      'Use-case guides for gecko feeding schedules, supplement routines, care log templates, and breeder record-keeping workflows.',
+      'Download free reptile care guides, templates, and printable logs for feeding, shedding, weight tracking and more. Made for gecko keepers.',
+    ogDescription: 'Free reptile care guides and printable templates.',
     ogType: 'article',
   },
   {

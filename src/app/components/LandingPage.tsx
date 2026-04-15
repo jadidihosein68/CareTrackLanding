@@ -11,6 +11,7 @@ import { GooglePlayLogo } from './shared/GooglePlayLogo';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
 import { SITE_URL, toAbsoluteUrl } from '../utils/seo';
+import { getSpeciesById } from '../data/learn-data';
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -158,6 +159,17 @@ const popularGuideLinks = [
   { to: '/guides/breeder-record-keeping-gecko-pairings', label: 'Breeder Record-Keeping for Gecko Pairings' },
 ];
 
+const homepageImageIds = [
+  'leopard-gecko',
+  'crested-gecko',
+  'ball-python',
+  'pink-toe-tarantula',
+] as const;
+
+const homepageImages = homepageImageIds
+  .map((id) => getSpeciesById(id))
+  .filter((item): item is NonNullable<ReturnType<typeof getSpeciesById>> => Boolean(item));
+
 const SpiderIcon = (props: IconProps) => (
   <svg viewBox="0 0 213 169" fill="none" preserveAspectRatio="xMidYMid meet" {...props}>
     <g className="spider-animated">
@@ -222,12 +234,14 @@ const SpiderIcon = (props: IconProps) => (
 
 export function LandingPage() {
   usePageMeta({
-    title: 'Offline Gecko & Reptile Care Tracker with Reminders | CareTrack',
+    title: 'CareTrack: Offline Gecko & Reptile Care Tracker with Reminders',
     description:
-      'CareTrack is an offline gecko and reptile care tracker with reminders. Log feeding, shedding, supplements, and health notes for each pet profile.',
+      'Free offline gecko and reptile care tracker. Log feeding, shedding, weight, humidity, temperature and get smart reminders. Works without internet. Perfect for leopard geckos, crested geckos and more.',
+    ogDescription:
+      'Free offline reptile care log with feeding reminders, weight tracking and health records.',
     path: '/',
     type: 'website',
-    image: '/og-image.jpeg',
+    image: '/og-image.jpg',
     imageAlt: 'CareTrack gecko and exotic pet care tracking app preview.',
     structuredData: [
       {
@@ -265,6 +279,19 @@ export function LandingPage() {
       },
     ],
   });
+
+  const homepageWebAppSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'CareTrack',
+    url: 'https://thecaretrack.netlify.app/',
+    description: 'Offline gecko and reptile care tracker with reminders',
+    applicationCategory: 'LifestyleApplication',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+    },
+  };
 
   const heroIcons = [
     {
@@ -507,56 +534,7 @@ export function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <TopNav
-        rightSlot={(
-          <div className="flex items-center gap-4">
-            <Link
-              to="/learn"
-              className="md:hidden text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Learn
-            </Link>
-            <div className="hidden md:flex items-center gap-4">
-            <Link
-              to="/learn"
-              className="text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Learn
-            </Link>
-            <Link
-              to="/guides"
-              className="text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Guides
-            </Link>
-            <Link
-              to="/support"
-              className="text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Support
-            </Link>
-            <Link
-              to="/faq"
-              className="text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              FAQ
-            </Link>
-            <Link
-              to="/privacy"
-              className="text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              to="/terms"
-              className="text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Terms
-            </Link>
-            </div>
-          </div>
-        )}
-      />
+      <TopNav />
 
       <main>
         {/* Hero Section */}
@@ -566,7 +544,7 @@ export function LandingPage() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl text-slate-900 mb-6">
-                  Offline Gecko & Reptile Care Tracker with Reminders
+                  CareTrack: Offline Gecko & Reptile Care Tracker with Reminders
                 </h1>
                 <p className="text-xl text-slate-600 mb-8">
                   Never forget a feeding or supplement again. CareTrack helps you provide the best care for your gecko with smart reminders and a built-in knowledge base.
@@ -773,6 +751,37 @@ export function LandingPage() {
           </div>
         </section>
 
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50/80">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">Care Tracking by Species</h2>
+            <p className="text-lg text-slate-600 mb-8">
+              Explore species workflows for feeding logs, reminder cadence, and daily husbandry notes.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {homepageImages.map((species) => (
+                <Link
+                  key={species.id}
+                  to={`/learn/species/${species.id}`}
+                  className="group block overflow-hidden rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-shadow"
+                >
+                  <ImageWithFallback
+                    src={species.heroImage}
+                    alt={`CareTrack ${species.name} care view showing feeding and reminder context`}
+                    className="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-slate-900 transition-colors group-hover:text-emerald-700">
+                      {species.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-slate-600 italic">{species.scientificName}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50 border-y border-slate-200">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
@@ -861,6 +870,10 @@ export function LandingPage() {
       </main>
 
       <Footer />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageWebAppSchema) }}
+      />
     </div>
   );
 }

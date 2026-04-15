@@ -8,6 +8,10 @@ type PageMeta = {
   type?: 'website' | 'article';
   image?: string;
   imageAlt?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
   robots?: string;
   noindex?: boolean;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
@@ -69,6 +73,10 @@ export function usePageMeta({
   type = 'website',
   image = DEFAULT_OG_IMAGE_PATH,
   imageAlt = DEFAULT_OG_IMAGE_ALT,
+  ogTitle,
+  ogDescription,
+  twitterTitle,
+  twitterDescription,
   robots,
   noindex = false,
   structuredData,
@@ -79,19 +87,23 @@ export function usePageMeta({
     const url = resolveCanonicalUrl(path);
     const imageUrl = toAbsoluteUrl(image);
     const resolvedRobots = robots ?? (noindex ? 'noindex, nofollow' : 'index, follow');
+    const resolvedOgTitle = ogTitle ?? title;
+    const resolvedOgDescription = ogDescription ?? description;
+    const resolvedTwitterTitle = twitterTitle ?? resolvedOgTitle;
+    const resolvedTwitterDescription = twitterDescription ?? resolvedOgDescription;
 
     document.title = title;
     ensureMetaTag('name', 'description').setAttribute('content', description);
     ensureMetaTag('name', 'robots').setAttribute('content', resolvedRobots);
     ensureMetaTag('name', 'twitter:card').setAttribute('content', 'summary_large_image');
-    ensureMetaTag('property', 'og:title').setAttribute('content', title);
-    ensureMetaTag('property', 'og:description').setAttribute('content', description);
+    ensureMetaTag('property', 'og:title').setAttribute('content', resolvedOgTitle);
+    ensureMetaTag('property', 'og:description').setAttribute('content', resolvedOgDescription);
     ensureMetaTag('property', 'og:url').setAttribute('content', url);
     ensureMetaTag('property', 'og:type').setAttribute('content', type);
     ensureMetaTag('property', 'og:image').setAttribute('content', imageUrl);
     ensureMetaTag('property', 'og:image:alt').setAttribute('content', imageAlt);
-    ensureMetaTag('name', 'twitter:title').setAttribute('content', title);
-    ensureMetaTag('name', 'twitter:description').setAttribute('content', description);
+    ensureMetaTag('name', 'twitter:title').setAttribute('content', resolvedTwitterTitle);
+    ensureMetaTag('name', 'twitter:description').setAttribute('content', resolvedTwitterDescription);
     ensureMetaTag('name', 'twitter:url').setAttribute('content', url);
     ensureMetaTag('name', 'twitter:image').setAttribute('content', imageUrl);
     ensureMetaTag('name', 'twitter:image:alt').setAttribute('content', imageAlt);
@@ -109,6 +121,10 @@ export function usePageMeta({
     type,
     image,
     imageAlt,
+    ogTitle,
+    ogDescription,
+    twitterTitle,
+    twitterDescription,
     robots,
     noindex,
     structuredDataKey,

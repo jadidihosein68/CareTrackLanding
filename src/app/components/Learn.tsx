@@ -15,12 +15,13 @@ export function Learn() {
     .slice(0, 5);
 
   usePageMeta({
-    title: 'Gecko, Snake & Reptile Care Guides | CareTrack',
+    title: 'Reptile Care Knowledge Base & Species Guides | CareTrack',
     description:
-      'Detailed care guides and husbandry information for leopard geckos, crested geckos, ball pythons, tarantulas, amphibians and other exotic pets.',
+      'Learn everything about gecko and reptile care. Species guides, husbandry tips, common problems, and best practices for leopard geckos, crested geckos, and more.',
+    ogDescription: 'Learn everything about gecko and reptile care.',
     path: '/learn',
     type: 'article',
-    image: '/og-image.jpeg',
+    image: '/og-image.jpg',
     imageAlt: 'CareTrack Learn page with exotic pet care categories.',
     structuredData: {
       '@context': 'https://schema.org',
@@ -50,7 +51,7 @@ export function Learn() {
       <header className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">
-            Gecko and Reptile Care Guides
+            Reptile Care Knowledge Base & Species Guides
           </h1>
           <p className="text-lg text-slate-600">
             Professional care guidance for geckos, snakes, tarantulas, amphibians, and other exotic pets.

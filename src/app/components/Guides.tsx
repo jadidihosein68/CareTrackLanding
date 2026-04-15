@@ -9,12 +9,13 @@ import { getSpeciesById } from '../data/learn-data';
 
 export function Guides() {
   usePageMeta({
-    title: 'Reptile Care Guides and Templates | CareTrack',
+    title: 'Reptile Care Guides, Templates & Logs | CareTrack',
     description:
-      'Read in-depth guides for gecko care logs, reptile feeding reminders, breeder recordkeeping, and offline husbandry tracking with CareTrack.',
+      'Download free reptile care guides, templates, and printable logs for feeding, shedding, weight tracking and more. Made for gecko keepers.',
+    ogDescription: 'Free reptile care guides and printable templates.',
     path: '/guides',
     type: 'article',
-    image: '/og-image.jpeg',
+    image: '/og-image.jpg',
     imageAlt: 'CareTrack guides and feature articles',
     structuredData: {
       '@context': 'https://schema.org',
@@ -48,7 +49,7 @@ export function Guides() {
       <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">
-            Reptile Care Guides and Templates
+            Reptile Care Guides, Templates & Logs
           </h1>
           <p className="text-lg text-slate-600 max-w-3xl mb-10">
             Explore practical articles about reptile care logging, reminder workflows,
