@@ -235,6 +235,16 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
       <li><a href="/support">CareTrack support</a></li>
     </ul>
   `;
+  const fallbackImages = `
+    <h2>Reference Images</h2>
+    <p>These images preview species-focused care content and offline logging workflows available in CareTrack.</p>
+    <div>
+      <img src="/images/leopard-gecko.webp" alt="Leopard gecko care reference image for feeding and husbandry tracking" width="800" height="500" loading="lazy" />
+      <img src="/images/crested-gecko.webp" alt="Crested gecko care reference image with habitat and care context" width="800" height="500" loading="lazy" />
+      <img src="/images/ball-python.webp" alt="Ball python care reference image for routine logging and husbandry notes" width="800" height="500" loading="lazy" />
+      <img src="/images/gecko-dashboard.webp" alt="CareTrack offline gecko care dashboard showing feeding log and reminders" width="800" height="500" loading="lazy" />
+    </div>
+  `;
 
   if (route.kind === 'home') {
     const featuredGuides = guides
@@ -247,13 +257,29 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
 
     return `
       <main>
-        <h1>${escapeHtml(route.h1)}</h1>
+        <h2>${escapeHtml(route.h1)}</h2>
         <p>${escapeHtml(route.description)}</p>
-        <p>CareTrack helps reptile keepers track feeding, shedding, supplements, and behavior in one offline-first workflow.</p>
+        <p>CareTrack helps reptile keepers track feeding, shedding, supplements, and behavior in one offline-first workflow. Logs stay available without internet so routines remain reliable during daily checks, travel, and breeding projects.</p>
+        <p>Consistent records improve decision quality over time. When appetite, shedding, supplementation, or behavior shifts, dated entries help you review patterns across weeks and quickly identify husbandry changes that may need attention.</p>
+        ${fallbackImages}
+        <h2>Core Benefits</h2>
+        <ul>
+          <li>Offline-first care logging for feeding, supplements, and behavior notes.</li>
+          <li>Reminder workflows to reduce missed routine tasks.</li>
+          <li>Species-specific guides for geckos, snakes, amphibians, and tarantulas.</li>
+          <li>Practical templates for keeper and breeder record-keeping.</li>
+        </ul>
         ${commonLinks}
         <h2>Featured Guide Topics</h2>
         <ul>
           ${featuredGuides}
+        </ul>
+        <h2>Species Pages</h2>
+        <ul>
+          <li><a href="/learn/species/leopard-gecko">Leopard Gecko Care Guide</a></li>
+          <li><a href="/learn/species/crested-gecko">Crested Gecko Care Guide</a></li>
+          <li><a href="/learn/species/ball-python">Ball Python Care Guide</a></li>
+          <li><a href="/learn/species/pink-toe-tarantula">Pink Toe Tarantula Care Guide</a></li>
         </ul>
       </main>
     `;
@@ -268,14 +294,21 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
       .join('\n');
     return `
       <main>
-        <h1>${escapeHtml(route.h1)}</h1>
+        <h2>${escapeHtml(route.h1)}</h2>
         <p>${escapeHtml(route.description)}</p>
-        <p>Browse category pages and species guides with practical setup, feeding, supplement, and husbandry tracking notes.</p>
+        <p>Browse category pages and species guides with practical setup, feeding, supplement, and husbandry tracking notes. Each profile focuses on day-to-day execution so keepers can move from generic advice to repeatable care routines.</p>
+        <p>Use Learn as your husbandry reference layer, then pair it with routine logs in CareTrack for trend review. When enclosure changes, feeding cadence updates, or supplements are adjusted, the timeline helps confirm what changed and how animals responded.</p>
+        ${fallbackImages}
         <h2>Browse by Animal Type</h2>
         <ul>
           ${categoryLinks}
         </ul>
         ${commonLinks}
+        <h2>Recommended Next Steps</h2>
+        <ul>
+          <li><a href="/guides">Read practical care workflow guides</a></li>
+          <li><a href="/faq">Review common product and care questions</a></li>
+        </ul>
       </main>
     `;
   }
@@ -290,7 +323,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
 
     return `
       <main>
-        <h1>${escapeHtml(route.h1)}</h1>
+        <h2>${escapeHtml(route.h1)}</h2>
         <p>${escapeHtml(route.description)}</p>
         <p>These pages focus on practical use-cases such as feeding schedules, supplement tracking, breeder record-keeping, and offline logging workflows.</p>
         <h2>Published Guides</h2>
@@ -314,7 +347,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
 
     return `
       <main>
-        <h1>${escapeHtml(route.h1)}</h1>
+        <h2>${escapeHtml(route.h1)}</h2>
         <p>${escapeHtml(route.description)}</p>
         <p>${escapeHtml(route.summary)}</p>
         <h2>Related Care Pages</h2>
@@ -329,7 +362,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
   if (route.kind === 'species') {
     return `
       <main>
-        <h1>${escapeHtml(route.h1)}</h1>
+        <h2>${escapeHtml(route.h1)}</h2>
         <p>${escapeHtml(route.description)}</p>
         <p>${escapeHtml(route.summary)}</p>
         <h2>Next Steps</h2>
@@ -345,7 +378,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
   if (route.kind === 'category') {
     return `
       <main>
-        <h1>${escapeHtml(route.h1)}</h1>
+        <h2>${escapeHtml(route.h1)}</h2>
         <p>${escapeHtml(route.description)}</p>
         <p>This category page links to species-specific care content so each animal profile has focused setup, feeding, and husbandry guidance.</p>
         <h2>Continue Browsing</h2>
@@ -360,7 +393,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
 
   return `
     <main>
-      <h1>${escapeHtml(route.h1)}</h1>
+      <h2>${escapeHtml(route.h1)}</h2>
       <p>${escapeHtml(route.description)}</p>
       ${commonLinks}
     </main>
@@ -458,7 +491,7 @@ const staticRoutes = [
     title: 'Reptile Care Knowledge Base & Species Guides | CareTrack',
     h1: 'Reptile Care Knowledge Base & Species Guides',
     description:
-      'Learn everything about gecko and reptile care. Species guides, husbandry tips, common problems, and best practices for leopard geckos, crested geckos, and more.',
+      'Learn best practices for gecko and reptile care. Species guides, husbandry tips, feeding schedules, shedding logs and more for leopard geckos, crested geckos, ball pythons and other reptiles.',
     ogDescription: 'Learn everything about gecko and reptile care.',
     ogType: 'article',
   },

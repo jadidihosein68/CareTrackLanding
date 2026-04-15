@@ -35,6 +35,9 @@ export function TopNav({ rightSlot }: TopNavProps) {
               <Link to="/faq" className="text-slate-600 hover:text-slate-900 transition-colors">
                 FAQ
               </Link>
+              <Link to="/support" className="text-slate-600 hover:text-slate-900 transition-colors">
+                Support
+              </Link>
             </div>
             {rightSlot ? <div className="hidden lg:flex items-center">{rightSlot}</div> : null}
           </div>

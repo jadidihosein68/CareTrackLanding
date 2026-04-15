@@ -1,7 +1,17 @@
 import { type SVGProps } from 'react';
 import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './shared/ImageWithFallback';
-import { Calendar, Bell, BookOpen, Heart, CheckCircle, Smartphone } from 'lucide-react';
+import {
+  Calendar,
+  Bell,
+  BookOpen,
+  Heart,
+  CheckCircle,
+  Smartphone,
+  WifiOff,
+  LineChart,
+  ShieldCheck,
+} from 'lucide-react';
 import geico from '../assets/geico.webp';
 import gackoRaw from '../assets/gacko.svg?raw';
 import turtiesRaw from '../assets/turties.svg?raw';
@@ -751,7 +761,71 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50/80">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
+                Why Offline Care Tracking Improves Daily Husbandry
+              </h2>
+              <p className="text-lg text-slate-600 max-w-4xl mx-auto">
+                Care routines often happen in reptile rooms, rack systems, travel enclosures, and expo settings
+                where connectivity is inconsistent. CareTrack keeps logs and reminders available so routine
+                execution stays reliable and data remains complete.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3 mb-8">
+              <article className="rounded-xl border border-slate-200 bg-white p-6 hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                  <WifiOff className="h-6 w-6 text-emerald-600" />
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Offline Continuity</h3>
+                <p className="text-slate-600">
+                  Log feeding, supplements, shedding, and observations even when internet is unavailable.
+                </p>
+              </article>
+              <article className="rounded-xl border border-slate-200 bg-white p-6 hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <LineChart className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Trend Visibility</h3>
+                <p className="text-slate-600">
+                  Review timestamped patterns across appetite, behavior, and shedding quality over time.
+                </p>
+              </article>
+              <article className="rounded-xl border border-slate-200 bg-white p-6 hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                  <ShieldCheck className="h-6 w-6 text-orange-600" />
+                </div>
+                <h3 className="text-xl text-slate-900 mb-2">Routine Control</h3>
+                <p className="text-slate-600">
+                  Reduce missed tasks with consistent reminders and clear completion history.
+                </p>
+              </article>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-white p-6 hover:shadow-lg transition-shadow">
+              <p className="text-slate-700 mb-4">
+                A single missed meal may be normal. Repeated appetite changes, shedding variance, or behavior shifts
+                become meaningful when reviewed in a structured timeline. With consistent records, keepers can compare
+                routine changes across weeks and make more confident husbandry decisions.
+              </p>
+              <p className="text-slate-700">
+                Continue with{' '}
+                <Link to="/learn" className="text-emerald-700 underline">
+                  Learn
+                </Link>{' '}
+                for species guidance and{' '}
+                <Link to="/guides" className="text-emerald-700 underline">
+                  Guides
+                </Link>{' '}
+                for practical workflows.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">Care Tracking by Species</h2>
             <p className="text-lg text-slate-600 mb-8">
@@ -782,7 +856,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50 border-y border-slate-200">
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50 border-b border-slate-200">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl sm:text-4xl text-slate-900 mb-4">
               Popular Species and Workflow Pages

@@ -17,7 +17,7 @@ export function Learn() {
   usePageMeta({
     title: 'Reptile Care Knowledge Base & Species Guides | CareTrack',
     description:
-      'Learn everything about gecko and reptile care. Species guides, husbandry tips, common problems, and best practices for leopard geckos, crested geckos, and more.',
+      'Learn best practices for gecko and reptile care. Species guides, husbandry tips, feeding schedules, shedding logs and more for leopard geckos, crested geckos, ball pythons and other reptiles.',
     ogDescription: 'Learn everything about gecko and reptile care.',
     path: '/learn',
     type: 'article',
@@ -65,6 +65,37 @@ export function Learn() {
             This content is general husbandry information and not veterinary advice. For illness
             or emergencies, contact a qualified exotic veterinarian.
           </div>
+
+          <section className="rounded-xl border border-slate-200 bg-white p-6">
+            <h2 className="text-2xl text-slate-900 mb-4">How to Use the CareTrack Learn Library</h2>
+            <p className="text-slate-700 mb-4">
+              The Learn library is designed for practical husbandry decisions, not generic summaries.
+              Start with your species page to review enclosure setup, feeding behavior, supplement notes,
+              and signs that require professional care. Then move to related workflow articles so your
+              routine includes reliable logs, reminder timing, and consistent note quality across weeks.
+            </p>
+            <p className="text-slate-700 mb-4">
+              For leopard geckos, crested geckos, ball pythons, and other commonly kept species, use the
+              pages here as a baseline reference and compare your current routine against each checklist.
+              When you update feeding cadence, humidity approach, or supplementation, document the change in
+              CareTrack so you can review the impact over time instead of relying on memory.
+            </p>
+            <p className="text-slate-700">
+              Continue with the{' '}
+              <Link to="/guides" className="text-emerald-700 underline">
+                Guides
+              </Link>{' '}
+              section for workflow templates, visit{' '}
+              <Link to="/faq" className="text-emerald-700 underline">
+                FAQ
+              </Link>{' '}
+              for product questions, or contact{' '}
+              <Link to="/support" className="text-emerald-700 underline">
+                Support
+              </Link>{' '}
+              if you need help with in-app tracking.
+            </p>
+          </section>
 
           {recentSpecies.length > 0 && (
             <section>
