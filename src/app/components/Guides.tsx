@@ -9,7 +9,7 @@ import { getSpeciesById } from '../data/learn-data';
 
 export function Guides() {
   usePageMeta({
-    title: 'Reptile Care Guides, Logs, and Reminder Workflows | CareTrack',
+    title: 'Reptile Care Guides and Templates | CareTrack',
     description:
       'Read in-depth guides for gecko care logs, reptile feeding reminders, breeder recordkeeping, and offline husbandry tracking with CareTrack.',
     path: '/guides',
@@ -47,7 +47,9 @@ export function Guides() {
 
       <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">Reptile Care Guides</h1>
+          <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">
+            Reptile Care Guides and Templates
+          </h1>
           <p className="text-lg text-slate-600 max-w-3xl mb-10">
             Explore practical articles about reptile care logging, reminder workflows,
             and recordkeeping habits that improve day-to-day husbandry.
@@ -96,7 +98,7 @@ export function Guides() {
                     to={`/guides/${guide.id}`}
                     className="text-emerald-700 hover:text-emerald-800 underline"
                   >
-                    Read article
+                    Read {guide.title}
                   </Link>
                 </div>
               </article>

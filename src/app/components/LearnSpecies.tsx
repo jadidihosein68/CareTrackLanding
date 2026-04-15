@@ -139,12 +139,18 @@ export function LearnSpecies() {
         </div>
 
         <section className="grid gap-8 lg:grid-cols-2 items-start">
-          <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
-            <ImageWithFallback
-              src={species.heroImage}
-              alt={`${species.name} habitat reference photo for care guide`}
-              className="w-full h-auto lg:h-full object-cover block"
-            />
+          <div className="space-y-3">
+            <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
+              <ImageWithFallback
+                src={species.heroImage}
+                alt={`${species.name} habitat reference photo for care guide`}
+                className="w-full h-auto lg:h-full object-cover block"
+              />
+            </div>
+            <p className="text-sm text-slate-600">
+              Habitat reference image for {species.name} ({species.scientificName}) with enclosure
+              and behavior context.
+            </p>
           </div>
           <div className="space-y-6">
             <div>
@@ -190,12 +196,18 @@ export function LearnSpecies() {
         <section className="pt-10 border-t border-slate-200">
           <h2 className="text-2xl text-slate-900">Best Setup</h2>
           <div className="grid gap-6 md:grid-cols-2 items-stretch mt-6">
-            <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
-              <ImageWithFallback
-                src={species.setupImage}
-                alt={`${species.name} enclosure setup example for husbandry planning`}
-                className="w-full h-auto lg:h-full object-cover block"
-              />
+            <div className="space-y-3">
+              <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
+                <ImageWithFallback
+                  src={species.setupImage}
+                  alt={`${species.name} enclosure setup example for husbandry planning`}
+                  className="w-full h-auto lg:h-full object-cover block"
+                />
+              </div>
+              <p className="text-sm text-slate-600">
+                Setup reference image for {species.name}, used alongside lighting, humidity, and
+                feeding notes in this care guide.
+              </p>
             </div>
             <ul className="space-y-3">
               {species.bestSetup.map((item, index) => (

@@ -206,7 +206,7 @@ const SpiderIcon = (props: IconProps) => (
 
 export function LandingPage() {
   usePageMeta({
-    title: 'CareTrack: Offline Gecko & Reptile Care Tracker with Reminders',
+    title: 'Gecko & Reptile Care Tracker App | CareTrack',
     description:
       'CareTrack is an offline-first gecko and reptile care tracker. Log feeding, shedding, supplements, and health notes with reminders for every pet profile.',
     path: '/',
@@ -550,7 +550,7 @@ export function LandingPage() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl text-slate-900 mb-6">
-                  CareTrack: Offline Gecko & Reptile Care Tracker
+                  Gecko & Reptile Care Tracker App
                 </h1>
                 <p className="text-xl text-slate-600 mb-8">
                   Never forget a feeding or supplement again. CareTrack helps you provide the best care for your gecko with smart reminders and a built-in knowledge base.

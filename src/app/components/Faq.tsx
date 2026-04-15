@@ -30,7 +30,7 @@ const faqItems = [
 
 export function Faq() {
   usePageMeta({
-    title: 'Reptile Care Tracker FAQ and Support Answers | CareTrack',
+    title: 'Reptile Care App FAQ | CareTrack',
     description:
       'Get FAQ answers about gecko feeding reminders, offline reptile care logs, breeder recordkeeping workflows, and support in CareTrack.',
     path: '/faq',
@@ -69,7 +69,7 @@ export function Faq() {
       <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl text-slate-900 mb-4">
-            Frequently Asked Questions
+            Reptile Care App FAQ
           </h1>
           <p className="text-lg text-slate-600 mb-10">
             Common questions about CareTrack reminders, offline logging, and support.

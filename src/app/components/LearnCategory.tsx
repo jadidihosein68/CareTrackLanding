@@ -12,8 +12,8 @@ export function LearnCategory() {
   const category = categories.find((item) => item.id === categoryId);
   const speciesList = getSpeciesByCategory(categoryId ?? '');
   const metaTitle = category
-    ? `${category.name} Reptile Care Guides | CareTrack Learn`
-    : 'Reptile Care Guides | CareTrack Learn';
+    ? `${category.name} Reptile Care Guides | CareTrack`
+    : 'Reptile Care Guides | CareTrack';
   const metaDescription = category
     ? `${category.description}. Explore CareTrack setup, feeding, and health tracking guidance for ${category.name.toLowerCase()} care.`
     : 'CareTrack Learn provides setup, feeding, and health tracking guides for geckos, snakes, amphibians, and tarantulas.';
