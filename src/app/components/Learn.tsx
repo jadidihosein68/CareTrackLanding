@@ -111,7 +111,7 @@ export function Learn() {
                       <div className="aspect-video relative overflow-hidden shrink-0">
                         <ImageWithFallback
                           src={species.heroImage}
-                          alt={`${species.name} care guide thumbnail with habitat context`}
+                          alt={`${species.name} care guide thumbnail in CareTrack with feeding and habitat context`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
@@ -141,7 +141,7 @@ export function Learn() {
                     <div className="aspect-[4/3] relative overflow-hidden">
                       <ImageWithFallback
                         src={category.image}
-                        alt={`${category.name} reptile care category thumbnail`}
+                        alt={`${category.name} reptile care category image with species husbandry references in CareTrack`}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />

@@ -143,7 +143,7 @@ export function LearnSpecies() {
             <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
               <ImageWithFallback
                 src={species.heroImage}
-                alt={`${species.name} habitat reference photo for care guide`}
+                alt={`${species.name} habitat reference image for CareTrack feeding and care guide`}
                 className="w-full h-auto lg:h-full object-cover block"
               />
             </div>
@@ -200,7 +200,7 @@ export function LearnSpecies() {
               <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
                 <ImageWithFallback
                   src={species.setupImage}
-                  alt={`${species.name} enclosure setup example for husbandry planning`}
+                  alt={`${species.name} enclosure setup image for reptile husbandry planning in CareTrack`}
                   className="w-full h-auto lg:h-full object-cover block"
                 />
               </div>

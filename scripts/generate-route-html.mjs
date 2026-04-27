@@ -100,14 +100,18 @@ const buildRouteJsonLd = (route, guides) => {
   if (route.kind === 'home') {
     return {
       '@context': 'https://schema.org',
-      '@type': 'WebApplication',
+      '@type': 'SoftwareApplication',
       name: 'CareTrack',
       url: `${SITE_URL}/`,
       description: 'Offline gecko and reptile care tracker with reminders',
       applicationCategory: 'LifestyleApplication',
+      operatingSystem: 'Android',
+      downloadUrl:
+        'https://play.google.com/store/apps/details?id=com.osacore.caretrack&hl=en-US&ah=UM3NhPrO8Bx2hZGtb5Ty2A9P-eY',
       offers: {
         '@type': 'Offer',
         price: '0',
+        priceCurrency: 'USD',
       },
     };
   }
@@ -239,9 +243,9 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
     <h2>Reference Images</h2>
     <p>These images preview species-focused care content and offline logging workflows available in CareTrack.</p>
     <div>
-      <img src="/images/leopard-gecko.webp" alt="Leopard gecko care reference image for feeding and husbandry tracking" width="800" height="500" loading="lazy" />
-      <img src="/images/crested-gecko.webp" alt="Crested gecko care reference image with habitat and care context" width="800" height="500" loading="lazy" />
-      <img src="/images/ball-python.webp" alt="Ball python care reference image for routine logging and husbandry notes" width="800" height="500" loading="lazy" />
+      <img src="/images/leopard-gecko.webp" alt="Leopard Gecko feeding log on CareTrack app with husbandry tracking context" width="800" height="500" loading="lazy" />
+      <img src="/images/crested-gecko.webp" alt="Crested Gecko care planning image from CareTrack app species guide" width="800" height="500" loading="lazy" />
+      <img src="/images/ball-python.webp" alt="Ball Python husbandry record example in CareTrack app timeline" width="800" height="500" loading="lazy" />
       <img src="/images/gecko-dashboard.webp" alt="CareTrack offline gecko care dashboard showing feeding log and reminders" width="800" height="500" loading="lazy" />
     </div>
   `;
@@ -261,6 +265,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
         <p>${escapeHtml(route.description)}</p>
         <p>CareTrack helps reptile keepers track feeding, shedding, supplements, and behavior in one offline-first workflow. Logs stay available without internet so routines remain reliable during daily checks, travel, and breeding projects.</p>
         <p>Consistent records improve decision quality over time. When appetite, shedding, supplementation, or behavior shifts, dated entries help you review patterns across weeks and quickly identify husbandry changes that may need attention.</p>
+        <p>Trusted by 500+ keepers.</p>
         ${fallbackImages}
         <h2>Core Benefits</h2>
         <ul>

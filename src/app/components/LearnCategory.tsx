@@ -115,7 +115,7 @@ export function LearnCategory() {
         <div className="aspect-[21/9] relative overflow-hidden rounded-2xl shadow-lg">
           <ImageWithFallback
             src={category.image}
-            alt={`${category.name} care guide category hero image`}
+            alt={`${category.name} reptile care hero image with CareTrack husbandry guidance`}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
@@ -136,7 +136,7 @@ export function LearnCategory() {
                 <div className="aspect-video relative overflow-hidden shrink-0">
                   <ImageWithFallback
                     src={species.heroImage}
-                    alt={`${species.name} species care guide thumbnail`}
+                    alt={`${species.name} species care guide thumbnail with feeding log context in CareTrack`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>

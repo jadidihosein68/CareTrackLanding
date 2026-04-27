@@ -286,20 +286,28 @@ export function LandingPage() {
         downloadUrl: GOOGLE_PLAY_URL,
         description:
           'Offline-first pet care tracker for geckos and other exotic pets with feeding logs, reminders, and care guides.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
       },
     ],
   });
 
   const homepageWebAppSchema = {
     '@context': 'https://schema.org',
-    '@type': 'WebApplication',
+    '@type': 'SoftwareApplication',
     name: 'CareTrack',
     url: 'https://thecaretrack.netlify.app/',
     description: 'Offline gecko and reptile care tracker with reminders',
     applicationCategory: 'LifestyleApplication',
+    operatingSystem: 'Android',
+    downloadUrl: GOOGLE_PLAY_URL,
     offers: {
       '@type': 'Offer',
       price: '0',
+      priceCurrency: 'USD',
     },
   };
 
@@ -570,11 +578,14 @@ export function LandingPage() {
                     Get it on Google Play
                   </a>
                 </div>
+                <p className="mt-4 text-sm text-slate-600">
+                  Trusted by 500+ keepers.
+                </p>
               </div>
               <div className="relative">
                 <ImageWithFallback 
                   src={geico}
-                  alt="Leopard gecko hero image representing offline reptile care tracking in CareTrack"
+                  alt="Leopard Gecko feeding log on CareTrack app with offline reptile care tracking"
                   className="rounded-2xl shadow-2xl w-full"
                 />
               </div>
@@ -840,7 +851,7 @@ export function LandingPage() {
                 >
                   <ImageWithFallback
                     src={species.heroImage}
-                    alt={`CareTrack ${species.name} care view showing feeding and reminder context`}
+                    alt={`${species.name} feeding and husbandry tracking interface in CareTrack app`}
                     className="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     loading="lazy"
                   />
