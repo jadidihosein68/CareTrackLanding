@@ -21,21 +21,30 @@ export function TopNav({ rightSlot }: TopNavProps) {
             />
             <span className="hidden sm:inline text-xl font-semibold text-slate-900">CareTrack</span>
           </Link>
-          <div className="flex items-center gap-4 sm:gap-6">
-            <div className="flex items-center gap-3 sm:gap-4 text-sm">
+          <div className="flex items-center gap-2 sm:gap-6">
+            <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
               <Link to="/" className="text-slate-600 hover:text-slate-900 transition-colors">
                 Home
               </Link>
               <Link to="/learn" className="text-slate-600 hover:text-slate-900 transition-colors">
                 Learn
               </Link>
-              <Link to="/guides" className="text-slate-600 hover:text-slate-900 transition-colors">
+              <Link
+                to="/guides"
+                className="hidden sm:inline text-slate-600 hover:text-slate-900 transition-colors"
+              >
                 Guides
               </Link>
-              <Link to="/faq" className="text-slate-600 hover:text-slate-900 transition-colors">
+              <Link
+                to="/faq"
+                className="hidden sm:inline text-slate-600 hover:text-slate-900 transition-colors"
+              >
                 FAQ
               </Link>
-              <Link to="/support" className="text-slate-600 hover:text-slate-900 transition-colors">
+              <Link
+                to="/support"
+                className="hidden md:inline text-slate-600 hover:text-slate-900 transition-colors"
+              >
                 Support
               </Link>
             </div>

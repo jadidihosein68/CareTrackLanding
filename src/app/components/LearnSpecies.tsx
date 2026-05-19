@@ -117,7 +117,7 @@ export function LearnSpecies() {
       />
 
       {/* Header */}
-      <header className="pt-24  px-4 sm:px-6 lg:px-8">
+      <header className="pt-28 pb-4 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <Link
             to="/learn"
@@ -126,8 +126,10 @@ export function LearnSpecies() {
             <ArrowLeft className="w-4 h-4" />
             Back to Learn
           </Link>
-          <h1 className="text-4xl sm:text-5xl text-slate-900">{species.name}</h1>
-          <p className="mt-2 text-lg text-slate-600 italic">{species.scientificName}</p>
+          <h1 className="text-3xl sm:text-5xl leading-tight text-slate-900">{species.name}</h1>
+          <p className="mt-2 text-base sm:text-lg leading-relaxed text-slate-600 italic">
+            {species.scientificName}
+          </p>
         </div>
       </header>
 
@@ -139,7 +141,7 @@ export function LearnSpecies() {
         </div>
 
         <section className="grid gap-8 lg:grid-cols-2 items-start">
-          <div className="space-y-3">
+          <div>
             <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
               <ImageWithFallback
                 src={species.heroImage}
@@ -147,45 +149,41 @@ export function LearnSpecies() {
                 className="w-full h-auto lg:h-full object-cover block"
               />
             </div>
-            <p className="text-sm text-slate-600">
-              Habitat reference image for {species.name} ({species.scientificName}) with enclosure
-              and behavior context.
-            </p>
           </div>
           <div className="space-y-6">
             <div>
               <h2 className="text-2xl text-slate-900 mb-3">Overview</h2>
-              <p className="text-slate-700">{species.overview}</p>
+              <p className="text-slate-700 leading-relaxed">{species.overview}</p>
             </div>
             <div>
               <h3 className="text-lg text-slate-900 mb-3">Feeding Behavior</h3>
-              <ul className="space-y-3">
+              <ul className="list-none p-0 m-0 space-y-3">
                 {species.feedingBehavior.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-900 flex-shrink-0" />
-                    <span className="text-slate-700">{item}</span>
+                  <li key={index} className="flex items-start gap-3 leading-relaxed">
+                    <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-slate-900 flex-shrink-0" />
+                    <span className="text-slate-700 leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
               <h3 className="text-lg text-slate-900 mb-3">Important Considerations</h3>
-              <ul className="space-y-3">
+              <ul className="list-none p-0 m-0 space-y-3">
                 {species.importantConsiderations.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-900 flex-shrink-0" />
-                    <span className="text-slate-700">{item}</span>
+                  <li key={index} className="flex items-start gap-3 leading-relaxed">
+                    <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-slate-900 flex-shrink-0" />
+                    <span className="text-slate-700 leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
               <h3 className="text-lg text-slate-900 mb-3">Supplements & Habitat Notes</h3>
-              <ul className="space-y-3">
+              <ul className="list-none p-0 m-0 space-y-3">
                 {species.supplementsAndHabitat.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-900 flex-shrink-0" />
-                    <span className="text-slate-700">{item}</span>
+                  <li key={index} className="flex items-start gap-3 leading-relaxed">
+                    <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-slate-900 flex-shrink-0" />
+                    <span className="text-slate-700 leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -195,8 +193,8 @@ export function LearnSpecies() {
 
         <section className="pt-10 border-t border-slate-200">
           <h2 className="text-2xl text-slate-900">Best Setup</h2>
-          <div className="grid gap-6 md:grid-cols-2 items-stretch mt-6">
-            <div className="space-y-3">
+          <div className="grid gap-8 md:grid-cols-2 items-stretch mt-6">
+            <div>
               <div className="relative overflow-hidden rounded-2xl bg-slate-100 shadow-sm h-full">
                 <ImageWithFallback
                   src={species.setupImage}
@@ -204,16 +202,12 @@ export function LearnSpecies() {
                   className="w-full h-auto lg:h-full object-cover block"
                 />
               </div>
-              <p className="text-sm text-slate-600">
-                Setup reference image for {species.name}, used alongside lighting, humidity, and
-                feeding notes in this care guide.
-              </p>
             </div>
-            <ul className="space-y-3">
+            <ul className="list-none p-0 m-0 space-y-3">
               {species.bestSetup.map((item, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-900 flex-shrink-0" />
-                  <span className="text-slate-700">{item}</span>
+                <li key={index} className="flex items-start gap-3 leading-relaxed">
+                  <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-slate-900 flex-shrink-0" />
+                  <span className="text-slate-700 leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
