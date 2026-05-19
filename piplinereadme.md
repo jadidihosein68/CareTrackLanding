@@ -238,7 +238,7 @@ Or push to `main`.
 
 Check CareTrack container:
 
-```bash
+```bash 
 cd /opt/caretrack-landing
 docker compose --env-file .env -f deploy/docker-compose.vps.yml ps
 docker compose --env-file .env -f deploy/docker-compose.vps.yml logs --tail=150
