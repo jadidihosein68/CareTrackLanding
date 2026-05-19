@@ -237,7 +237,7 @@ Or push to `main`.
 ## 11) Post-Deploy Verification (CareTrack + Existing Solutions)
 
 Check CareTrack container:
-
+ 
 ```bash 
 cd /opt/caretrack-landing
 docker compose --env-file .env -f deploy/docker-compose.vps.yml ps
