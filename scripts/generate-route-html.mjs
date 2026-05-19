@@ -165,6 +165,39 @@ const buildRouteJsonLd = (route, guides) => {
     };
   }
 
+  if (route.kind === 'playground') {
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          name: route.h1,
+          description: route.description,
+          url: absoluteUrl(route.path),
+          isPartOf: {
+            '@type': 'WebSite',
+            name: 'CareTrack',
+            url: SITE_URL,
+          },
+        },
+        {
+          '@type': 'SoftwareApplication',
+          name: 'CareTrack',
+          applicationCategory: 'LifestyleApplication',
+          operatingSystem: 'Android',
+          url: `${SITE_URL}/`,
+          description:
+            'Offline-first gecko and reptile care tracker for morph records, feeding logs, reminders, and husbandry notes.',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+        },
+      ],
+    };
+  }
+
   if (route.kind === 'guide') {
     return {
       '@context': 'https://schema.org',
@@ -234,6 +267,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
     <h2>Key Pages</h2>
     <ul>
       <li><a href="/learn">Gecko and reptile care guides</a></li>
+      <li><a href="/playground">Gecko Morph &amp; Trait Playground</a></li>
       <li><a href="/guides">Reptile care log templates and workflows</a></li>
       <li><a href="/faq">Reptile care app FAQ</a></li>
       <li><a href="/support">CareTrack support</a></li>
@@ -314,6 +348,24 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
           <li><a href="/guides">Read practical care workflow guides</a></li>
           <li><a href="/faq">Review common product and care questions</a></li>
         </ul>
+      </main>
+    `;
+  }
+
+  if (route.kind === 'playground') {
+    return `
+      <main>
+        <h2>${escapeHtml(route.h1)}</h2>
+        <p>${escapeHtml(route.description)}</p>
+        <p>Try the CareTrack gecko morph playground to combine leopard gecko morph labels and stacked traits in a visual demo. This page is designed for education and recordkeeping context, not guaranteed breeding prediction.</p>
+        <h2>How This Demo Works</h2>
+        <ul>
+          <li>Select one morph as the base profile.</li>
+          <li>Apply multiple traits to update the cartoon gecko visual state.</li>
+          <li>Review trait notes and continue to app workflows for real record-keeping.</li>
+        </ul>
+        <p>CareTrack helps reptile keepers maintain offline care logs, reminders, and husbandry notes with species-specific guidance.</p>
+        ${commonLinks}
       </main>
     `;
   }
@@ -509,6 +561,15 @@ const staticRoutes = [
       'Download free reptile care guides, templates, and printable logs for feeding, shedding, weight tracking and more. Made for gecko keepers.',
     ogDescription: 'Free reptile care guides and printable templates.',
     ogType: 'article',
+  },
+  {
+    kind: 'playground',
+    path: '/playground',
+    title: 'Gecko Morph & Trait Playground | CareTrack',
+    h1: 'Build Your Gecko Look',
+    description:
+      "Try CareTrack's interactive gecko morph and trait playground. Select leopard gecko morphs and traits to preview a fun cartoon gecko visualization and learn how CareTrack supports reptile care and breeder records.",
+    ogType: 'website',
   },
   {
     kind: 'faq',

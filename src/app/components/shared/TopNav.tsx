@@ -30,6 +30,12 @@ export function TopNav({ rightSlot }: TopNavProps) {
                 Learn
               </Link>
               <Link
+                to="/playground"
+                className="hidden sm:inline text-slate-600 hover:text-slate-900 transition-colors"
+              >
+                Gecko Playground
+              </Link>
+              <Link
                 to="/guides"
                 className="hidden sm:inline text-slate-600 hover:text-slate-900 transition-colors"
               >

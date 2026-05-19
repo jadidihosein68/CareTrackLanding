@@ -32,6 +32,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/playground" className="hover:text-white transition-colors">
+                  Gecko Playground
+                </Link>
+              </li>
+              <li>
                 <Link to="/guides" className="hover:text-white transition-colors">
                   Guides
                 </Link>

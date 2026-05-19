@@ -10,6 +10,7 @@ import { LearnSpecies } from './components/LearnSpecies';
 import { Guides } from './components/Guides';
 import { GuideArticle } from './components/GuideArticle';
 import { Faq } from './components/Faq';
+import { Playground } from './components/Playground';
 import { NotFound } from './components/NotFound';
 import { initializeAnalytics, trackPageView } from './utils/analytics';
 
@@ -35,6 +36,7 @@ function AppRoutes() {
       <Route path="/learn" element={<Learn />} />
       <Route path="/guides" element={<Guides />} />
       <Route path="/guides/:guideId" element={<GuideArticle />} />
+      <Route path="/playground" element={<Playground />} />
       <Route path="/faq" element={<Faq />} />
       <Route path="/learn/category/:categoryId" element={<LearnCategory />} />
       <Route path="/learn/species/:speciesId" element={<LearnSpecies />} />
