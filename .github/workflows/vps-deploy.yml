@@ -1,0 +1,53 @@
+name: Deploy CareTrack Landing
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-caretrack-landing
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          port: ${{ secrets.VPS_PORT }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          command_timeout: 20m
+          script: |
+            set -euo pipefail
+
+            APP_DIR="/opt/caretrack-landing"
+            BRANCH="${{ github.ref_name }}"
+
+            cd "${APP_DIR}"
+            git fetch --all --prune
+            git checkout "${BRANCH}"
+            git pull --ff-only origin "${BRANCH}"
+
+            test -f Dockerfile
+            test -f deploy/docker-compose.vps.yml
+            test -f deploy.sh
+            test -f healthcheck.sh
+
+            if [ ! -f .env ]; then
+              printf 'CARETRACK_LOCAL_BIND_PORT=18084\n' > .env
+            fi
+
+            chmod +x deploy.sh healthcheck.sh
+            ./deploy.sh
+            ./healthcheck.sh
+
+            docker image prune -af --filter "until=168h" || true
