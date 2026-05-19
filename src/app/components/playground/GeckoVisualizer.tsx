@@ -5,19 +5,19 @@ type GeckoVisualizerProps = {
   selectedMorph: GeckoMorphOption;
 };
 
-const fallbackImage = '/images/morphs/ghost.png';
+const fallbackImage = '/images/morphs/ghost.jpg';
 
 const morphImageById: Record<string, string> = {
-  normal: '/images/morphs/ghost.png',
-  'tremper-albino': '/images/morphs/Tremper-Albino.png',
-  'bell-albino': '/images/morphs/Bell-Albino.png',
-  eclipse: '/images/morphs/Eclipse.png',
-  'mack-snow': '/images/morphs/Mack-Snow.png',
-  blizzard: '/images/morphs/Blizzard.png',
-  patternless: '/images/morphs/Patternless.png',
-  tangerine: '/images/morphs/Tangerine.png',
-  'white-yellow': '/images/morphs/White&yellow.png',
-  raptor: '/images/morphs/Raptor.png',
+  normal: '/images/morphs/ghost.jpg',
+  'tremper-albino': '/images/morphs/Tremper-Albino.jpg',
+  'bell-albino': '/images/morphs/Bell-Albino.jpg',
+  eclipse: '/images/morphs/Eclipse.jpg',
+  'mack-snow': '/images/morphs/Mack-Snow.jpg',
+  blizzard: '/images/morphs/Blizzard.jpg',
+  patternless: '/images/morphs/Patternless.jpg',
+  tangerine: '/images/morphs/Tangerine.jpg',
+  'white-yellow': '/images/morphs/White&yellow.jpg',
+  raptor: '/images/morphs/Raptor.jpg',
 };
 
 export function GeckoVisualizer({ selectedMorph }: GeckoVisualizerProps) {
