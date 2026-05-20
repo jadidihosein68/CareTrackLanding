@@ -1,7 +1,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
-const SITE_URL = 'https://thecaretrack.netlify.app';
+const SITE_URL = 'https://thecaretracks.com';
 const DIST_INDEX_PATH = resolve('dist/index.html');
 const LEARN_DATA_PATH = resolve('src/app/data/learn-data.ts');
 const SEO_GUIDES_PATH = resolve('src/app/data/seo-guides.ts');

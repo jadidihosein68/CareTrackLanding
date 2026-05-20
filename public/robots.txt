@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Host: thecaretrack.netlify.app
-Sitemap: https://thecaretrack.netlify.app/sitemap.xml
+Host: thecaretracks.com
+Sitemap: https://thecaretracks.com/sitemap.xml

@@ -300,7 +300,7 @@ export function LandingPage() {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'CareTrack',
-    url: 'https://thecaretrack.netlify.app/',
+    url: `${SITE_URL}/`,
     description: 'Offline gecko and reptile care tracker with reminders',
     applicationCategory: 'LifestyleApplication',
     operatingSystem: 'Android',

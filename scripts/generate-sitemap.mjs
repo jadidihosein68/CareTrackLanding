@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const SITE_URL = 'https://thecaretrack.netlify.app';
+const SITE_URL = 'https://thecaretracks.com';
 const TODAY = new Date().toISOString().slice(0, 10);
 
 const learnDataPath = resolve('src/app/data/learn-data.ts');
