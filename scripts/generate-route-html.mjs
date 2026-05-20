@@ -1,8 +1,13 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const SITE_URL = 'https://thecaretracks.com';
 const DIST_INDEX_PATH = resolve('dist/index.html');
+const DIST_SSR_ENTRY_CANDIDATES = [
+  resolve('dist-ssr/entry-server.js'),
+  resolve('dist-ssr/entry-server.mjs'),
+];
 const LEARN_DATA_PATH = resolve('src/app/data/learn-data.ts');
 const SEO_GUIDES_PATH = resolve('src/app/data/seo-guides.ts');
 
@@ -518,6 +523,29 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
     .replace(/<noscript>[\s\S]*?<\/noscript>/, `<noscript>\n${noscriptBody}\n      </noscript>`);
 };
 
+const injectPrerenderedApp = (html, routePath, renderRoute) => {
+  const appHtml = renderRoute(routePath);
+  return html.replace(/<div id="root">\s*<\/div>/, `<div id="root">${appHtml}</div>`);
+};
+
+const loadRouteRenderer = async () => {
+  const entryPath = DIST_SSR_ENTRY_CANDIDATES.find((candidate) => existsSync(candidate));
+  if (!entryPath) {
+    throw new Error(
+      `SSR entry not found. Expected one of: ${DIST_SSR_ENTRY_CANDIDATES.join(', ')}`,
+    );
+  }
+
+  const imported = await import(pathToFileURL(entryPath).href);
+  if (typeof imported.renderRoute !== 'function') {
+    throw new Error(`renderRoute() export missing from ${entryPath}`);
+  }
+
+  return imported.renderRoute;
+};
+
+const renderRoute = await loadRouteRenderer();
+
 const learnSource = readFileSync(LEARN_DATA_PATH, 'utf8');
 const guidesSource = readFileSync(SEO_GUIDES_PATH, 'utf8');
 const templateHtml = readFileSync(DIST_INDEX_PATH, 'utf8');
@@ -646,7 +674,8 @@ const routes = [...staticRoutes, ...categoryRoutes, ...speciesRoutes, ...guideRo
 const uniqueRoutes = new Map(routes.map((route) => [route.path, route]));
 
 for (const route of uniqueRoutes.values()) {
-  const html = replaceHeadMeta(templateHtml, route, guides, categories, speciesById);
+  const routeHtml = replaceHeadMeta(templateHtml, route, guides, categories, speciesById);
+  const html = injectPrerenderedApp(routeHtml, route.path, renderRoute);
   const outputPath =
     route.path === '/'
       ? resolve('dist/index.html')
@@ -656,4 +685,4 @@ for (const route of uniqueRoutes.values()) {
   writeFileSync(outputPath, html, 'utf8');
 }
 
-console.log(`Generated prerendered HTML shells for ${uniqueRoutes.size} routes.`);
+console.log(`Generated prerendered HTML pages for ${uniqueRoutes.size} routes.`);
