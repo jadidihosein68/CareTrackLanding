@@ -14,7 +14,7 @@ export function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <img
                 src={icon}
-                alt="CareTrack logo"
+                alt="CareTrack reptile care tracker logo"
                 className="w-8 h-8 rounded-md object-contain"
               />
               <span className="text-xl">CareTrack</span>

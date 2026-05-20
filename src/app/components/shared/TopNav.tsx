@@ -16,7 +16,7 @@ export function TopNav({ rightSlot }: TopNavProps) {
           <Link to="/" className="flex items-center gap-2">
             <img
               src={icon}
-              alt="CareTrack logo"
+              alt="CareTrack reptile care tracker logo"
               className="w-8 h-8 rounded-md object-contain"
             />
             <span className="hidden sm:inline text-xl font-semibold text-slate-900">CareTrack</span>
