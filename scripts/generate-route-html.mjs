@@ -272,7 +272,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
     <h2>Key Pages</h2>
     <ul>
       <li><a href="/learn">Gecko and reptile care guides</a></li>
-      <li><a href="/playground">Gecko Morph &amp; Trait Playground</a></li>
+      <li><a href="/playground/gecko">Gecko Morph &amp; Trait Playground</a></li>
       <li><a href="/guides">Reptile care log templates and workflows</a></li>
       <li><a href="/faq">Reptile care app FAQ</a></li>
       <li><a href="/support">CareTrack support</a></li>
@@ -592,7 +592,7 @@ const staticRoutes = [
   },
   {
     kind: 'playground',
-    path: '/playground',
+    path: '/playground/gecko',
     title: 'Gecko Morph & Trait Playground | CareTrack',
     h1: 'Build Your Gecko Look',
     description:

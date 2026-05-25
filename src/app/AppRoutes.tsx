@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Faq } from './components/Faq';
 import { GuideArticle } from './components/GuideArticle';
 import { Guides } from './components/Guides';
@@ -36,7 +36,8 @@ export function AppRoutes() {
       <Route path="/learn" element={<Learn />} />
       <Route path="/guides" element={<Guides />} />
       <Route path="/guides/:guideId" element={<GuideArticle />} />
-      <Route path="/playground" element={<Playground />} />
+      <Route path="/playground/gecko" element={<Playground />} />
+      <Route path="/playground" element={<Navigate to="/playground/gecko" replace />} />
       <Route path="/faq" element={<Faq />} />
       <Route path="/learn/category/:categoryId" element={<LearnCategory />} />
       <Route path="/learn/species/:speciesId" element={<LearnSpecies />} />

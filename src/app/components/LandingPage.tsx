@@ -167,7 +167,7 @@ const popularGuideLinks = [
   { to: '/guides/crested-gecko-supplement-guide', label: 'Crested Gecko Supplement Guide' },
   { to: '/guides/reptile-care-log-template', label: 'Reptile Care Log Template' },
   { to: '/guides/breeder-record-keeping-gecko-pairings', label: 'Breeder Record-Keeping for Gecko Pairings' },
-  { to: '/playground', label: 'Gecko Morph & Trait Playground' },
+  { to: '/playground/gecko', label: 'Gecko Morph & Trait Playground' },
 ];
 
 const homepageImageIds = [

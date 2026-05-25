@@ -30,7 +30,7 @@ export function Playground() {
   usePageMeta({
     title: SEO_TITLE,
     description: SEO_DESCRIPTION,
-    path: '/playground',
+    path: '/playground/gecko',
     type: 'article',
     image: '/og-image.jpg',
     imageAlt: 'CareTrack gecko morph and trait playground visual preview.',
@@ -41,7 +41,7 @@ export function Playground() {
           '@type': 'WebPage',
           name: SEO_TITLE,
           description: SEO_DESCRIPTION,
-          url: `${SITE_URL}/playground`,
+          url: `${SITE_URL}/playground/gecko`,
           isPartOf: {
             '@type': 'WebSite',
             name: 'CareTrack',

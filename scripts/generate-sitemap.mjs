@@ -39,7 +39,7 @@ while (guideMatch) {
 const entries = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/learn', changefreq: 'weekly', priority: '0.9' },
-  { path: '/playground', changefreq: 'weekly', priority: '0.8' },
+  { path: '/playground/gecko', changefreq: 'weekly', priority: '0.8' },
   { path: '/guides', changefreq: 'weekly', priority: '0.8' },
   { path: '/faq', changefreq: 'monthly', priority: '0.7' },
   ...categoryIds.map((id) => ({

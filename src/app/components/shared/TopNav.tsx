@@ -1,11 +1,20 @@
 import { Link } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
 import icon from '../../assets/icon.webp';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
 
 type TopNavProps = {
   rightSlot?: React.ReactNode;
 };
 
 export function TopNav({ rightSlot }: TopNavProps) {
+  const navItemClass = 'text-sm font-normal text-slate-600 hover:text-slate-900 transition-colors';
+
   return (
     <nav
       aria-label="Primary"
@@ -22,39 +31,46 @@ export function TopNav({ rightSlot }: TopNavProps) {
             <span className="hidden sm:inline text-xl font-semibold text-slate-900">CareTrack</span>
           </Link>
           <div className="flex items-center gap-2 sm:gap-6">
-            <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
-              <Link to="/" className="text-slate-600 hover:text-slate-900 transition-colors">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link to="/" className={navItemClass}>
                 Home
               </Link>
-              <Link to="/learn" className="text-slate-600 hover:text-slate-900 transition-colors">
+              <Link to="/learn" className={navItemClass}>
                 Learn
               </Link>
-              <Link
-                to="/playground"
-                className="hidden sm:inline text-slate-600 hover:text-slate-900 transition-colors"
-              >
-                Gecko Playground
-              </Link>
+              <DropdownMenu modal={false}>
+                <DropdownMenuTrigger className={`inline-flex items-center gap-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 ${navItemClass}`}>
+                  Playground
+                  <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-40">
+                  <DropdownMenuItem asChild>
+                    <Link to="/playground/gecko" className="cursor-pointer text-sm font-normal">
+                      Gecko
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Link
                 to="/guides"
-                className="hidden sm:inline text-slate-600 hover:text-slate-900 transition-colors"
+                className={`hidden sm:inline ${navItemClass}`}
               >
                 Guides
               </Link>
               <Link
                 to="/faq"
-                className="hidden sm:inline text-slate-600 hover:text-slate-900 transition-colors"
+                className={`hidden sm:inline ${navItemClass}`}
               >
                 FAQ
               </Link>
               <Link
                 to="/support"
-                className="hidden md:inline text-slate-600 hover:text-slate-900 transition-colors"
+                className={`hidden md:inline ${navItemClass}`}
               >
                 Support
               </Link>
             </div>
-            {rightSlot ? <div className="hidden lg:flex items-center">{rightSlot}</div> : null}
+            {rightSlot ? <div className="hidden lg:flex items-center text-sm font-normal">{rightSlot}</div> : null}
           </div>
         </div>
       </div>
