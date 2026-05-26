@@ -805,7 +805,7 @@ const staticRoutes = [
     kind: 'playground',
     path: '/playground/gecko',
     title: 'Gecko Morph & Trait Playground | CareTrack',
-    h1: 'Build Your Gecko Look',
+    h1: 'Gecko Morph & Trait Playground',
     playgroundType: 'Gecko',
     description:
       "Try CareTrack's interactive gecko morph and trait playground. Select leopard gecko morphs and traits to preview a fun cartoon gecko visualization and learn how CareTrack supports reptile care and breeder records.",
