@@ -1,8 +1,8 @@
-# PRD — CareTrack Snake Playground Page
+# PRD — Snake Morph Visual Playground Page
 
 ## 1. Feature Name
 
-Snake Care Playground
+Snake Morph Visual Playground
 
 ## 2. Route
 
@@ -10,46 +10,66 @@ Create a new page:
 
 /playground/snake
 
-This page is part of the CareTrack Playground experience.
+This page will be part of the CareTrack website playground experience.
 
-The existing /playground page may remain the main playground landing page. Later, /playground can contain an animal dropdown that routes users to:
-
-- /playground/gecko
-- /playground/snake
-- /playground/turtle
-- /playground/spider
-- /playground/amphibian
-- /playground/custom
-
-For now, implement only:
-
-/playground/snake
+The existing Gecko Playground must remain unchanged.
 
 ## 3. Objective
 
-Create a snake-focused interactive playground page that demonstrates how CareTrack helps snake keepers track feeding, refused meals, shed cycles, weight, behavior notes, reminders, and offline care history.
+Create a simple interactive snake morph visual playground where users can select one snake morph and preview a dedicated snake image for that morph.
 
-This page is for website visitors who want to understand how CareTrack works before downloading the app.
+The goal is to show that CareTrack can help snake keepers organize:
 
-## 4. Important Product Rule
+- Snake morph labels
+- Feeding logs
+- Shed history
+- Reminders
+- Husbandry notes
+- Offline care records
 
-Snake Playground is NOT a genetics simulator.
+This page is a marketing and educational visual demo only.
+
+## 4. Product Context
+
+CareTrack is an offline-first care tracking app for reptile, turtle, gecko, snake, and spider/tarantula keepers.
+
+The current Gecko Playground focuses on gecko morph and trait visualization.
+
+The new Snake Playground should follow the same style:
+
+- Select a morph
+- Show selected morph profile
+- Show morph preview image
+- Explain that it is a visual demo only
+- Promote CareTrack for real care tracking
+
+## 5. Important Scope Rule
+
+This page is NOT a genetics calculator.
 
 Do not include:
 
 - Snake genetics prediction
-- Snake morph calculator
 - Snake breeding calculator
-- COI calculation
-- Pairing simulation
+- Snake pairing simulator
+- Parent A / Parent B selector
 - Offspring probability
-- Trait inheritance calculator
+- COI calculation
+- DNA testing claims
+- Guaranteed breeding prediction
+- Trait inheritance calculation
+- Punnett square logic
+- Medical or veterinary diagnosis
 
-Those advanced genetics playground features are gecko-only.
+The page must only allow the user to select one snake morph/look and see a dedicated visual preview.
 
-Snake Playground must focus on practical care tracking.
+## 6. User Story
 
-## 5. Target Users
+As a snake keeper, I want to select a snake morph on the website and preview how CareTrack can organize morph labels, so I understand that the app can help me keep snake identity and care records in one place.
+
+As a website visitor, I want to see a playful snake morph visual demo, so I become interested in downloading CareTrack.
+
+## 7. Target Users
 
 Primary users:
 
@@ -58,45 +78,58 @@ Primary users:
 - Boa keepers
 - Hognose snake keepers
 - Kingsnake keepers
-- Multi-snake reptile keepers
+- Reptile keepers who track morph labels
+- Reptile keepers who manage multiple snakes
 
 Secondary users:
 
 - Beginner snake keepers
-- Reptile keepers replacing notebooks or spreadsheets
 - Users comparing CareTrack before downloading
-- Keepers who want reminder-based care tracking
+- Reptile hobbyists replacing notebooks or spreadsheets
 
-## 6. SEO Goal
+## 8. SEO Objective
 
-The page should help CareTrack rank for snake-related care tracking keywords.
+The page should help CareTrack rank for snake visual/morph and care tracking keywords.
 
 Primary keyword:
 
-snake care tracker
+snake morph playground
 
 Secondary keywords:
 
+- snake morph tracker
+- snake care tracker
 - snake feeding tracker
 - snake shed tracker
-- ball python care tracker
-- ball python feeding tracker
-- corn snake care tracker
-- snake weight tracker
-- reptile feeding reminder
+- ball python morph tracker
+- corn snake morph tracker
+- reptile care tracker
+- offline reptile care app
 - snake care app
-- offline reptile care tracker
-- reptile care log app
+- reptile feeding reminder
 
-## 7. Page Metadata
+Do not keyword stuff.
 
-Title:
+Use the keywords naturally inside:
 
-Snake Care Tracker Playground | Feeding, Sheds, Weight & Reminders
+- Page title
+- Meta description
+- H1
+- H2 headings
+- Intro copy
+- Educational content
+- FAQ
+- Image alt text
+
+## 9. Page Metadata
+
+Page title:
+
+Snake Morph Playground | Build Your Snake Look with CareTrack
 
 Meta description:
 
-Try the CareTrack Snake Playground. Preview feeding logs, refused meals, shed tracking, weight, behavior notes, reminders, and offline snake care history.
+Explore snake morph looks in the CareTrack Snake Playground. Preview morph labels and learn how CareTrack helps track feeding, sheds, reminders, and care notes offline.
 
 Canonical URL:
 
@@ -104,837 +137,844 @@ https://thecaretracks.com/playground/snake
 
 Open Graph title:
 
-Snake Care Tracker Playground | CareTrack
+Snake Morph Playground | CareTrack
 
 Open Graph description:
 
-Preview how CareTrack helps snake keepers track feeding, sheds, weight, behavior, reminders, and offline care logs.
+Build your snake look with a visual morph demo. CareTrack helps snake keepers organize morph labels, feeding logs, shed history, reminders, and care notes.
 
 Twitter title:
 
-Snake Care Tracker Playground | CareTrack
+Snake Morph Playground | CareTrack
 
 Twitter description:
 
-Try a snake care tracker playground for feeding logs, shed history, weight tracking, behavior notes, and reminders.
+Preview snake morph looks and see how CareTrack helps organize snake care records offline.
 
-## 8. Page H1
+Open Graph image:
 
-Snake Care Tracker Playground
+Use the default selected morph image:
 
-## 9. Hero Section
+https://thecaretracks.com/images/playground/snake/snake-normal.webp
 
-### H1
+If the project uses a different asset URL strategy, follow the project convention.
 
-Snake Care Tracker Playground
+## 10. Page H1
 
-### Subtitle
+Build Your Snake Look
 
-Preview how CareTrack helps snake keepers organize feeding history, refused meals, shed cycles, weight, behavior notes, reminders, and offline care records.
+## 11. Main Hero / Intro Copy
 
-### Primary CTA
+Use this exact content:
+
+Build Your Snake Look
+
+Select a morph to preview a playful snake visualization. CareTrack helps snake keepers organize snake care, morph labels, feeding logs, shed history, reminders, and husbandry notes in one offline-first app.
+
+## 12. Page Layout
+
+The page should follow the current Gecko Playground style.
+
+Required sections:
+
+1. Hero / intro
+2. Morph selector
+3. Selected profile
+4. Snake image preview
+5. Visual demo disclaimer
+6. CTA section
+7. Educational SEO content section
+8. FAQ section
+
+Recommended desktop layout:
+
+- Left column: morph selector cards
+- Right column: selected profile and image preview
+
+Recommended mobile layout:
+
+- Hero
+- Morph selector
+- Selected profile
+- Image preview
+- CTA
+- SEO content
+- FAQ
+
+## 13. Morph Selector Section
+
+Section title:
+
+Select a Morph
+
+Section description:
+
+Choose one base morph to preview. Future versions may support stacked traits or species-specific morph groups.
+
+Behavior:
+
+- User can select only one morph at a time.
+- Default selected morph is Normal / Wild Type.
+- Selected morph card must show “Selected morph”.
+- Unselected morph cards must show “Not selected”.
+- Clicking a morph updates:
+  - selected profile
+  - snake preview image
+  - preview label
+  - image alt text
+  - preview caption
+  - morph description
+
+## 14. Initial Morph List
+
+Create these morph options.
+
+Important:
+These are visual demo labels only. Do not claim scientific certainty.
+
+### 14.1 Normal / Wild Type
+
+Name:
+
+Normal / Wild Type
+
+Description:
+
+Classic natural snake look with balanced earthy colors and clear pattern contrast.
+
+Image:
+
+/images/playground/snake/snake-normal.webp
+
+Alt text:
+
+Normal wild type snake morph preview in CareTrack playground
+
+### 14.2 Albino
+
+Name:
+
+Albino
+
+Description:
+
+Bright yellow, white, and orange tones with reduced dark pigment expression.
+
+Image:
+
+/images/playground/snake/snake-albino.webp
+
+Alt text:
+
+Albino snake morph preview in CareTrack playground
+
+### 14.3 Axanthic
+
+Name:
+
+Axanthic
+
+Description:
+
+Cool grayscale look with reduced yellow and red color expression.
+
+Image:
+
+/images/playground/snake/snake-axanthic.webp
+
+Alt text:
+
+Axanthic snake morph preview in CareTrack playground
+
+### 14.4 Piebald
+
+Name:
+
+Piebald
+
+Description:
+
+High-contrast patches with clean white areas mixed with normal patterned sections.
+
+Image:
+
+/images/playground/snake/snake-piebald.webp
+
+Alt text:
+
+Piebald snake morph preview in CareTrack playground
+
+### 14.5 Banana
+
+Name:
+
+Banana
+
+Description:
+
+Soft yellow and lavender-inspired look with bright warm body tones.
+
+Image:
+
+/images/playground/snake/snake-banana.webp
+
+Alt text:
+
+Banana snake morph preview in CareTrack playground
+
+### 14.6 Pastel
+
+Name:
+
+Pastel
+
+Description:
+
+Lighter and brighter body tones with cleaner contrast and softer dark markings.
+
+Image:
+
+/images/playground/snake/snake-pastel.webp
+
+Alt text:
+
+Pastel snake morph preview in CareTrack playground
+
+### 14.7 Clown
+
+Name:
+
+Clown
+
+Description:
+
+Distinctive pattern flow with bold striping and reduced side patterning.
+
+Image:
+
+/images/playground/snake/snake-clown.webp
+
+Alt text:
+
+Clown snake morph preview in CareTrack playground
+
+### 14.8 Snow
+
+Name:
+
+Snow
+
+Description:
+
+Pale white and soft pink look with very low dark pigment presentation.
+
+Image:
+
+/images/playground/snake/snake-snow.webp
+
+Alt text:
+
+Snow snake morph preview in CareTrack playground
+
+### 14.9 Anery
+
+Name:
+
+Anery
+
+Description:
+
+Muted gray and black look with reduced red and orange color expression.
+
+Image:
+
+/images/playground/snake/snake-anery.webp
+
+Alt text:
+
+Anery snake morph preview in CareTrack playground
+
+### 14.10 Motley
+
+Name:
+
+Motley
+
+Description:
+
+Pattern-focused look with connected or reduced side markings and a cleaner belly-style impression.
+
+Image:
+
+/images/playground/snake/snake-motley.webp
+
+Alt text:
+
+Motley snake morph preview in CareTrack playground
+
+### 14.11 Stripe
+
+Name:
+
+Stripe
+
+Description:
+
+Long stripe-style pattern running along the body instead of classic saddle patterns.
+
+Image:
+
+/images/playground/snake/snake-stripe.webp
+
+Alt text:
+
+Stripe snake morph preview in CareTrack playground
+
+### 14.12 Lavender
+
+Name:
+
+Lavender
+
+Description:
+
+Soft lavender-gray body tone with gentle contrast and muted patterning.
+
+Image:
+
+/images/playground/snake/snake-lavender.webp
+
+Alt text:
+
+Lavender snake morph preview in CareTrack playground
+
+## 15. Morph Data Structure
+
+Create a config-driven morph list.
+
+Do not hardcode morph cards directly in JSX.
+
+Suggested type:
+
+type SnakeMorph = {
+  id: string;
+  name: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  selectedLabel: string;
+  unselectedLabel: string;
+};
+
+Suggested data file:
+
+src/data/snakeMorphs.ts
+
+Suggested data:
+
+export const SNAKE_MORPHS: SnakeMorph[] = [
+  {
+    id: "normal",
+    name: "Normal / Wild Type",
+    description: "Classic natural snake look with balanced earthy colors and clear pattern contrast.",
+    imageSrc: "/images/playground/snake/snake-normal.webp",
+    imageAlt: "Normal wild type snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "albino",
+    name: "Albino",
+    description: "Bright yellow, white, and orange tones with reduced dark pigment expression.",
+    imageSrc: "/images/playground/snake/snake-albino.webp",
+    imageAlt: "Albino snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "axanthic",
+    name: "Axanthic",
+    description: "Cool grayscale look with reduced yellow and red color expression.",
+    imageSrc: "/images/playground/snake/snake-axanthic.webp",
+    imageAlt: "Axanthic snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "piebald",
+    name: "Piebald",
+    description: "High-contrast patches with clean white areas mixed with normal patterned sections.",
+    imageSrc: "/images/playground/snake/snake-piebald.webp",
+    imageAlt: "Piebald snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "banana",
+    name: "Banana",
+    description: "Soft yellow and lavender-inspired look with bright warm body tones.",
+    imageSrc: "/images/playground/snake/snake-banana.webp",
+    imageAlt: "Banana snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "pastel",
+    name: "Pastel",
+    description: "Lighter and brighter body tones with cleaner contrast and softer dark markings.",
+    imageSrc: "/images/playground/snake/snake-pastel.webp",
+    imageAlt: "Pastel snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "clown",
+    name: "Clown",
+    description: "Distinctive pattern flow with bold striping and reduced side patterning.",
+    imageSrc: "/images/playground/snake/snake-clown.webp",
+    imageAlt: "Clown snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "snow",
+    name: "Snow",
+    description: "Pale white and soft pink look with very low dark pigment presentation.",
+    imageSrc: "/images/playground/snake/snake-snow.webp",
+    imageAlt: "Snow snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "anery",
+    name: "Anery",
+    description: "Muted gray and black look with reduced red and orange color expression.",
+    imageSrc: "/images/playground/snake/snake-anery.webp",
+    imageAlt: "Anery snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "motley",
+    name: "Motley",
+    description: "Pattern-focused look with connected or reduced side markings and a cleaner belly-style impression.",
+    imageSrc: "/images/playground/snake/snake-motley.webp",
+    imageAlt: "Motley snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "stripe",
+    name: "Stripe",
+    description: "Long stripe-style pattern running along the body instead of classic saddle patterns.",
+    imageSrc: "/images/playground/snake/snake-stripe.webp",
+    imageAlt: "Stripe snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  },
+  {
+    id: "lavender",
+    name: "Lavender",
+    description: "Soft lavender-gray body tone with gentle contrast and muted patterning.",
+    imageSrc: "/images/playground/snake/snake-lavender.webp",
+    imageAlt: "Lavender snake morph preview in CareTrack playground",
+    selectedLabel: "Selected morph",
+    unselectedLabel: "Not selected"
+  }
+];
+
+## 16. Image Asset Requirements
+
+Create this folder:
+
+/public/images/playground/snake/
+
+Required files:
+
+- snake-normal.webp
+- snake-albino.webp
+- snake-axanthic.webp
+- snake-piebald.webp
+- snake-banana.webp
+- snake-pastel.webp
+- snake-clown.webp
+- snake-snow.webp
+- snake-anery.webp
+- snake-motley.webp
+- snake-stripe.webp
+- snake-lavender.webp
+- snake-placeholder.webp
+
+Preferred image format:
+
+- WebP
+
+Fallback format if needed:
+
+- PNG
+
+Recommended dimensions:
+
+- 1200 x 900 preferred
+- 800 x 600 acceptable for first version
+
+All images must use the same:
+
+- aspect ratio
+- snake pose
+- framing
+- background style
+- lighting style
+- visual style
+
+Only the morph appearance should change.
+
+## 17. No SVG Requirement
+
+Do not use SVG for snake preview rendering.
+
+Forbidden:
+
+- Inline SVG snake
+- External SVG snake
+- CSS-generated snake body
+- Canvas snake rendering
+- Color overlay on one SVG
+- Pattern overlay on one SVG
+
+Allowed:
+
+- Dedicated WebP image per morph
+- Optional PNG fallback
+- Standard HTML img element
+- picture element with WebP source and PNG fallback
+
+## 18. Image Component Behavior
+
+Create a component:
+
+SnakeMorphImagePreview
+
+Inputs:
+
+- selectedMorph
+
+Behavior:
+
+- Display selectedMorph.imageSrc
+- Use selectedMorph.imageAlt
+- Show selected morph name above or below image
+- Show visual demo caption
+- Show fallback image if selected image fails to load
+
+Preview label format:
+
+Morph: Normal / Wild Type
+
+Caption format:
+
+Visual demo only. Selected morph: Normal / Wild Type
+
+Fallback image:
+
+/images/playground/snake/snake-placeholder.webp
+
+Fallback text:
+
+Preview image coming soon.
+
+## 19. Image HTML Requirement
+
+Use standard HTML image handling.
+
+Example:
+
+<picture>
+  <source srcSet={selectedMorph.imageSrc} type="image/webp" />
+  <img
+    src={selectedMorph.imageSrc}
+    alt={selectedMorph.imageAlt}
+    width="1200"
+    height="900"
+    loading="eager"
+  />
+</picture>
+
+For non-default images or below-the-fold images:
+
+loading="lazy"
+
+Do not use CSS background-image as the main morph image.
+
+Google image discovery works better with standard image elements than CSS background images.
+
+## 20. Image Performance Requirements
+
+- Use optimized WebP files.
+- Use width and height attributes to reduce layout shift.
+- Use lazy loading where suitable.
+- Use eager loading only for the default visible selected image.
+- Avoid huge uncompressed images.
+- Keep image dimensions consistent.
+- Ensure image does not stretch.
+- Use object-fit: contain or object-fit: cover depending on the design.
+- Use rounded corners.
+- Use soft shadow or card frame consistent with CareTrack design.
+
+## 21. Morph Card UI
+
+Each morph card must show:
+
+- Morph name
+- Description
+- Selection status
+- Selected visual state
+
+Example selected card:
+
+Normal / Wild Type
+
+Classic natural snake look with balanced earthy colors and clear pattern contrast.
+
+Selected morph
+
+Example unselected card:
+
+Albino
+
+Bright yellow, white, and orange tones with reduced dark pigment expression.
+
+Not selected
+
+Interaction:
+
+- Morph card should be clickable.
+- Use button semantics if possible.
+- Use aria-pressed or aria-selected.
+- Selected state must be obvious.
+- Selected state must not rely only on color.
+
+## 22. Selected Profile Section
+
+Section title:
+
+Selected Profile
+
+Fields:
+
+Morph
+
+Selected morph name
+
+Description
+
+Selected morph description
+
+Default content:
+
+Selected Profile
+
+Morph
+
+Normal / Wild Type
+
+Classic natural snake look with balanced earthy colors and clear pattern contrast.
+
+## 23. Snake Image Preview Section
+
+Preview label:
+
+Morph: Normal / Wild Type
+
+Image:
+
+Selected morph image
+
+Caption:
+
+Visual demo only. Selected morph: Normal / Wild Type
+
+Alt text:
+
+Use selectedMorph.imageAlt.
+
+## 24. Disclaimer Section
+
+Show this disclaimer near the selected profile and preview:
+
+This playground is a visual demo only. Snake appearance and morph expression may vary. CareTrack does not provide DNA testing, veterinary advice, or guaranteed breeding predictions.
+
+## 25. CTA Section
+
+Section title:
+
+Ready to Track Real Snake Care Data?
+
+Copy:
+
+CareTrack helps snake keepers organize morph labels, feeding logs, shed history, reminders, and husbandry notes in one offline-first app.
+
+Primary button:
 
 Download CareTrack
 
-### Secondary CTA
+Secondary button:
 
-Try the Demo
+Explore Snake Care Features
 
-### Hero bullets
+Secondary route:
 
-- Track feeding dates, prey notes, and refused meals
-- Record sheds, weight, behavior, and care observations
-- Preview reminders and offline snake care history
+/features/snake-care-tracker
 
-### Hero visual
+If /features/snake-care-tracker does not exist yet, use:
 
-Use a snake-focused product visual.
+/features/reptile-care-tracker
 
-For now, use a placeholder card if final images are not ready.
+## 26. Educational SEO Content Section
 
-Placeholder label:
+Section H2:
 
-TODO: Add snake playground hero image
-
-Hero image direction for later generation:
-
-A calm ball python beside a modern smartphone UI showing a snake profile, last feeding, next feeding reminder, last shed, weight, and care notes. Clean green and cream CareTrack style. Friendly pet-care feeling. Not scary, not aggressive.
-
-Alt text:
-
-CareTrack snake playground showing feeding, shed, weight, and reminder tracking for a snake profile
-
-## 10. Page Layout
-
-The page should contain these sections:
-
-1. Hero
-2. Animal Playground Switcher
-3. Snake Playground Demo
-4. Live Care Preview
-5. Care Timeline Preview
-6. What Snake Keepers Can Track
-7. Built for Popular Pet Snakes
-8. Offline Snake Care Records
-9. Image Placeholder Section
-10. FAQ
-11. Final CTA
-
-## 11. Animal Playground Switcher
-
-Add a small switcher near the top so users understand this is part of a multi-animal playground system.
-
-### Section title
-
-Choose Playground
-
-### Options
-
-- Gecko Genetics
-- Snake Care
-- Turtle Care — Coming soon
-- Spider / Tarantula Care — Coming soon
-- Amphibian Care — Coming soon
-- Custom Species — Coming soon
-
-### Behavior
-
-Current active option:
-
-Snake Care
-
-Clicking Gecko Genetics should route to:
-
-/playground
-
-or /playground/gecko if that route exists.
-
-Clicking Snake Care keeps user on:
-
-/playground/snake
-
-Coming soon options should not break the page.
-
-If a user clicks a coming soon option, show a small message:
-
-This playground mode is coming soon. CareTrack is being expanded to show more animal-specific care workflows.
-
-## 12. Snake Playground Demo Section
-
-### H2
-
-Try a Snake Care Workflow
-
-### Intro copy
-
-Use the controls below to preview how CareTrack organizes snake care records. This demo does not diagnose health issues or provide veterinary advice. It simply shows how feeding, shed, weight, behavior, and reminder records can be organized.
-
-### Layout
-
-Desktop:
-
-Two-column layout.
-
-Left column:
-Interactive controls.
-
-Right column:
-Live preview card and timeline.
-
-Mobile:
-
-Stacked layout.
-
-Controls first.
-Preview second.
-Timeline third.
-
-## 13. Snake Playground Controls
-
-Create interactive controls.
-
-### Control 1 — Snake Species
-
-Label:
-
-Snake type
-
-Options:
-
-- Ball Python
-- Corn Snake
-- Boa
-- Hognose Snake
-- Kingsnake
-- Custom Snake
-
-Default:
-
-Ball Python
-
-### Control 2 — Life Stage
-
-Label:
-
-Life stage
-
-Options:
-
-- Hatchling / Juvenile
-- Sub-adult
-- Adult
-
-Default:
-
-Adult
-
-### Control 3 — Last Feeding
-
-Label:
-
-Last feeding
-
-Options:
-
-- Today
-- 3 days ago
-- 7 days ago
-- 10 days ago
-- 14 days ago
-- 21 days ago
-- Custom
-
-Default:
-
-10 days ago
-
-### Control 4 — Feeding Result
-
-Label:
-
-Feeding result
-
-Options:
-
-- Accepted
-- Refused
-- Skipped
-- Not offered yet
-
-Default:
-
-Accepted
-
-### Control 5 — Food / Prey Note
-
-Label:
-
-Food / prey note
-
-Options:
-
-- Pinky mouse
-- Fuzzy mouse
-- Hopper mouse
-- Adult mouse
-- Rat pup
-- Small rat
-- Custom / not specified
-
-Default:
-
-Custom / not specified
-
-Important:
-
-Do not give strict feeding advice. This is only a care-log demo.
-
-### Control 6 — Last Shed
-
-Label:
-
-Last shed
-
-Options:
-
-- This week
-- 2 weeks ago
-- 1 month ago
-- 2 months ago
-- Unknown
-
-Default:
-
-1 month ago
-
-### Control 7 — Shed Status
-
-Label:
-
-Shed status
-
-Options:
-
-- Complete
-- Incomplete
-- In shed
-- Unknown
-
-Default:
-
-Complete
-
-### Control 8 — Weight
-
-Label:
-
-Weight
-
-Input type:
-
-Number
-
-Unit selector:
-
-- g
-- kg
-
-Default:
-
-Leave empty or use a sample placeholder.
-
-Placeholder:
-
-Example: 850
-
-### Control 9 — Behavior Note
-
-Label:
-
-Behavior
-
-Options:
-
-- Normal
-- Hiding more
-- Active
-- Defensive
-- Refused food
-- Pre-shed signs
-- Custom note
-
-Default:
-
-Normal
-
-### Control 10 — Reminder Interval
-
-Label:
-
-Next feeding reminder
-
-Options:
-
-- 7 days
-- 10 days
-- 14 days
-- 21 days
-- 30 days
-- Custom
-
-Default:
-
-10 days
-
-## 14. Live Care Preview
-
-The preview card should update when the user changes controls.
-
-### Card title
-
-Snake Care Preview
-
-### Example preview
-
-Milo — Ball Python
-
-Life stage:
-Adult
-
-Last feeding:
-10 days ago
-
-Feeding result:
-Accepted
-
-Food note:
-Adult mouse
-
-Last shed:
-1 month ago
-
-Shed status:
-Complete
-
-Weight:
-850 g
-
-Behavior:
-Normal
-
-Next reminder:
-In 10 days
-
-Care status:
-On track
-
-## 15. Care Status Logic
-
-This logic is demo-only and must not sound medical.
-
-### Status labels
-
-- On track
-- Due soon
-- Feeding overdue
-- Watch pattern
-- In shed
-- Missing data
-
-### Logic rules
-
-If feeding result is Refused:
-
-Status:
-Watch pattern
-
-Message:
-This feeding was refused. CareTrack helps you keep refusal notes so you can review patterns over time.
-
-If shed status is In shed:
-
-Status:
-In shed
-
-Message:
-Shed-related notes help you connect feeding, behavior, and shed timing.
-
-If last shed is Unknown:
-
-Status:
-Missing data
-
-Message:
-Start logging sheds to build a clearer care history.
-
-If last feeding is beyond selected reminder interval:
-
-Status:
-Feeding overdue
-
-Message:
-This snake may be due for a feeding check based on the reminder interval you selected.
-
-If feeding result is Accepted and reminder is not overdue:
-
-Status:
-On track
-
-Message:
-Care history is organized and the next reminder is ready.
-
-### Forbidden wording
-
-Do not say:
-
-- Healthy
-- Sick
-- Safe
-- Unsafe
-- Diagnosis
-- Treatment
-- Medical problem
-- Guaranteed
-- Emergency
-
-Use recordkeeping language only.
-
-## 16. Timeline Preview
-
-Add a care timeline below the live preview.
-
-### H3
-
-Care Timeline
-
-### Example entries
-
-- 12 May — Feeding accepted
-- 20 May — Shed recorded
-- 22 May — Weight updated
-- 26 May — Behavior note added
-- 30 May — Next feeding reminder
-
-Timeline should update lightly based on selected values where possible.
-
-If full dynamic timeline is too much for first version, use a static sample timeline.
-
-## 17. What Snake Keepers Can Track Section
-
-### H2
-
-What Snake Keepers Can Track
-
-Create six feature cards.
-
-### Card 1
-
-Title:
-Feeding History
+What is the Snake Morph Playground?
 
 Copy:
-Record when food was offered, what was offered, whether it was accepted, and any feeding notes.
 
-### Card 2
+The CareTrack Snake Morph Playground is a visual demo that helps reptile keepers explore how snake morph labels can be organized. It is designed for education, visual exploration, and recordkeeping context — not guaranteed breeding prediction.
 
-Title:
-Refused Meal Notes
+Use this page to quickly compare snake morph looks, understand how morph labels can be tracked, and see how a snake morph tracker can support keeper routines. CareTrack pairs this context with offline reptile care logs, feeding reminders, shed history, and species-specific husbandry notes.
 
-Copy:
-Log refused meals so you can review feeding patterns instead of relying on memory.
+Additional paragraph:
 
-### Card 3
+Snake morph names often describe visible color or pattern differences. In CareTrack, morph labels are treated as recordkeeping information that can sit beside practical care data such as feeding history, shed notes, reminders, and husbandry observations.
 
-Title:
-Shed Tracking
+## 27. FAQ Section
 
-Copy:
-Track shed dates and shed notes to understand your snake’s normal rhythm over time.
+Section H2:
 
-### Card 4
+Snake Morph Playground FAQ
 
-Title:
-Weight Tracking
-
-Copy:
-Connect weight records with feeding, shedding, and behavior history.
-
-### Card 5
-
-Title:
-Behavior Notes
-
-Copy:
-Record hiding, activity level, defensive behavior, appetite changes, and other observations.
-
-### Card 6
-
-Title:
-Care Reminders
-
-Copy:
-Set reminder intervals based on your snake’s routine and check what is due next.
-
-## 18. Built for Popular Pet Snakes Section
-
-### H2
-
-Built for Popular Pet Snakes
-
-Create species cards.
-
-### Card 1 — Ball Python
-
-Title:
-Ball Python Care Tracking
-
-Copy:
-Track feeding intervals, refused meals, shed cycles, weight, and behavior notes for ball pythons.
-
-Bullets:
-
-- Feeding history
-- Refused meal notes
-- Shed tracking
-- Weight records
-- Reminder intervals
-
-### Card 2 — Corn Snake
-
-Title:
-Corn Snake Feeding & Shed Logs
-
-Copy:
-Keep feeding, shed, weight, and care observations organized for corn snakes.
-
-Bullets:
-
-- Feeding dates
-- Shed history
-- Weight logs
-- Behavior notes
-- Care reminders
-
-### Card 3 — Boa
-
-Title:
-Boa Care History
-
-Copy:
-Track longer feeding intervals, weight changes, sheds, and long-term care observations for boas.
-
-Bullets:
-
-- Feeding schedule
-- Shed records
-- Weight trends
-- Behavior notes
-- Long-term history
-
-### Card 4 — Hognose Snake
-
-Title:
-Hognose Snake Care Notes
-
-Copy:
-Record feeding attempts, refused meals, shed cycles, weight, and behavior patterns for hognose snakes.
-
-Bullets:
-
-- Feeding attempt notes
-- Refusal history
-- Shed tracking
-- Weight logs
-- Behavior notes
-
-### Card 5 — Custom Snake
-
-Title:
-Custom Snake Profile
-
-Copy:
-If your snake is not listed, create a custom snake profile and define your own reminder routine.
-
-Bullets:
-
-- Custom species name
-- Custom feeding interval
-- Reminder time
-- Notes
-- Offline history
-
-## 19. Offline Snake Care Records Section
-
-### H2
-
-Offline Snake Care Records
-
-### Copy
-
-CareTrack is designed for keepers who want fast, reliable care records without depending on a constant internet connection. Your snake profiles and care history remain available on your device, even when you are offline.
-
-### Bullets
-
-- Works without internet
-- Fast care logging
-- Local care history
-- Useful for reptile rooms and routine checks
-- No complicated setup
-
-## 20. Image Placeholder Section
-
-### H2
-
-Snake Playground Images Coming Next
-
-This section should prepare the page for future generated snake images.
-
-Create placeholder cards.
-
-### Placeholder 1
-
-Title:
-Snake Playground Hero
-
-Copy:
-TODO: Add hero image showing a calm snake and a CareTrack mobile preview.
-
-Alt text:
-CareTrack snake playground hero with mobile snake care tracker preview
-
-### Placeholder 2
-
-Title:
-Feeding Tracker Preview
-
-Copy:
-TODO: Add image showing feeding history, accepted/refused result, and next feeding reminder.
-
-Alt text:
-Snake feeding tracker preview showing last feeding and next reminder
-
-### Placeholder 3
-
-Title:
-Shed Tracker Preview
-
-Copy:
-TODO: Add image showing last shed, shed status, and behavior notes.
-
-Alt text:
-Snake shed tracker preview showing shed history and care notes
-
-### Placeholder 4
-
-Title:
-Weight and Behavior Preview
-
-Copy:
-TODO: Add image showing snake weight log, behavior notes, and care timeline.
-
-Alt text:
-Snake weight and behavior tracker preview in CareTrack
-
-## 21. Future Image Generation Prompts
-
-Add these prompts into a comment or documentation block for later use.
-
-### Prompt 1 — Hero Image
-
-Professional product marketing image for a snake care tracker app. A calm ball python beside a modern smartphone UI showing snake profile, last feeding, next feeding reminder, last shed, weight, and behavior notes. Clean green and cream color palette, friendly exotic pet care style, not scary, not aggressive, high-quality SaaS landing page aesthetic.
-
-### Prompt 2 — Feeding Tracker
-
-Modern mobile UI mockup for a snake feeding tracker. Show snake profile, last feeding date, feeding result accepted or refused, food/prey note, and next feeding reminder. Clean card-based interface, green accent color, CareTrack-style design.
-
-### Prompt 3 — Shed Tracker
-
-Modern mobile UI mockup showing snake shed tracking. Include last shed date, shed status, behavior note, and care timeline. Calm corn snake visual, clean reptile care app style.
-
-### Prompt 4 — Species Cards
-
-Friendly illustration set of popular pet snakes: ball python, corn snake, boa, hognose snake, and kingsnake. Clean vector style, natural colors, calm educational design, no aggressive posture.
-
-## 22. FAQ Section
-
-### H2
-
-Snake Playground FAQ
-
-### FAQ 1
+FAQ 1:
 
 Question:
-What is the Snake Playground?
+
+What is the Snake Morph Playground?
 
 Answer:
-The Snake Playground is an interactive preview that shows how CareTrack can organize snake feeding, shed, weight, behavior, reminder, and care-history records.
 
-### FAQ 2
+It is a visual demo that lets you select a snake morph label and preview a playful snake look. It helps show how CareTrack can organize morph labels beside care records.
+
+FAQ 2:
 
 Question:
-Can I use CareTrack for ball pythons?
+
+Does this playground predict snake genetics?
 
 Answer:
-Yes. CareTrack can help ball python keepers track feeding history, refused meals, shed cycles, weight, behavior notes, and feeding reminders.
 
-### FAQ 3
+No. This page is a visual demo only. It does not calculate breeding outcomes, offspring probabilities, or genetic inheritance.
+
+FAQ 3:
 
 Question:
-Can I track refused meals?
+
+Can I stack multiple snake morphs?
 
 Answer:
-Yes. Use feeding result and notes to record refused meals and review feeding patterns over time.
 
-### FAQ 4
+Not in this first version. The first version supports one selected base morph at a time. Future versions may support stacked visual traits.
+
+FAQ 4:
 
 Question:
-Can I track snake sheds?
+
+Can I track real snake morph labels in CareTrack?
 
 Answer:
-Yes. CareTrack helps you log shed dates and shed-related notes so you can follow your snake’s shed history.
 
-### FAQ 5
+CareTrack is designed to help keepers organize animal records, including morph labels where supported, alongside feeding logs, shed history, reminders, and husbandry notes.
+
+FAQ 5:
 
 Question:
-Does Snake Playground predict snake genetics?
+
+Does CareTrack provide DNA testing?
 
 Answer:
-No. Snake Playground is focused on care tracking. Genetics prediction is currently only for gecko-related playground features.
 
-### FAQ 6
+No. CareTrack does not provide DNA testing. Morph labels are user-entered recordkeeping information.
+
+FAQ 6:
 
 Question:
-Does CareTrack work offline?
+
+Does CareTrack replace animal care advice?
 
 Answer:
-Yes. CareTrack is designed around offline-first care records, so your snake care history can remain available on your device.
 
-### FAQ 7
+No. CareTrack helps organize care records and educational information. It does not replace professional animal care advice.
+
+FAQ 7:
 
 Question:
-Does CareTrack replace veterinary advice?
+
+Why does each morph use a dedicated image?
 
 Answer:
-No. CareTrack helps organize care records and educational information. It does not replace advice from an experienced reptile veterinarian.
 
-## 23. Final CTA Section
+Each morph uses a dedicated image so the preview feels clearer, more polished, and easier to understand than a generic generated shape or CSS-based visual.
 
-### H2
-
-Track Real Snake Care in CareTrack
-
-### Copy
-
-The playground shows how CareTrack can organize snake care. Download the app to create real profiles, set reminders, and keep feeding, shed, weight, behavior, and care history organized.
-
-### Primary CTA
-
-Download on Google Play
-
-### Secondary CTA
-
-Explore All Features
-
-## 24. Internal Links
+## 28. Internal Links
 
 Add links to:
 
 - /
 - /playground
 - /playground/snake
+- /features/snake-care-tracker
 - /features/reptile-care-tracker
 - /features/feeding-reminders
 - /features/offline-care-logs
-- /features/snake-care-tracker
 - /support
 
-If /playground/gecko exists, link to it.
+If /features/snake-care-tracker does not exist yet, use /features/reptile-care-tracker temporarily.
 
-If not, link Gecko Genetics option to /playground.
+## 29. Navigation Updates
 
-## 25. Navigation Update
+Add a link from the existing Gecko Playground page to the Snake Playground page.
 
-Add Snake Playground link where relevant.
+Suggested label:
 
-Possible places:
+Try Snake Morph Playground
 
-- Playground dropdown
-- Homepage feature section
-- Snake care tracker page
-- Footer
-- SEO sitemap
+Add a link from /playground/snake back to the Gecko Playground.
 
-Anchor text:
+Suggested label:
 
-Snake Care Playground
+Try Gecko Morph Playground
 
-Do not use generic anchor text like “click here”.
+If the site has a playground dropdown, include:
 
-## 26. Structured Data
+- Gecko
+- Snake
+- Turtle — Coming soon
+- Spider / Tarantula — Coming soon
+- Amphibian — Coming soon
 
-Add SoftwareApplication JSON-LD.
+## 30. Structured Data
 
-Use this template:
+Add WebPage JSON-LD.
+
+Use:
+
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Snake Morph Playground",
+  "url": "https://thecaretracks.com/playground/snake",
+  "description": "Explore snake morph looks in the CareTrack Snake Playground. Preview morph labels and learn how CareTrack helps track feeding, sheds, reminders, and care notes offline.",
+  "primaryImageOfPage": "https://thecaretracks.com/images/playground/snake/snake-normal.webp"
+}
+
+Add SoftwareApplication JSON-LD if the project already uses app structured data:
 
 {
   "@context": "https://schema.org",
@@ -942,221 +982,336 @@ Use this template:
   "name": "CareTrack",
   "applicationCategory": "LifestyleApplication",
   "operatingSystem": "Android",
-  "description": "Offline snake care tracker for feeding history, shed tracking, weight records, behavior notes, reminders, and reptile care logs.",
-  "url": "https://thecaretracks.com/playground/snake",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
+  "description": "Offline reptile care tracker for snake keepers to organize morph labels, feeding logs, shed history, reminders, and husbandry notes."
 }
 
-If the project supports FAQPage JSON-LD, add FAQPage structured data for the FAQ section.
+Add FAQPage JSON-LD if the project already supports FAQ structured data.
 
-## 27. Technical Requirements
+## 31. Image Generation Plan
 
-- Create /playground/snake route.
-- Add responsive page layout.
-- Add snake playground controls.
-- Add live preview state.
-- Add demo care status helper.
-- Add static or dynamic care timeline.
-- Add SEO metadata.
-- Add Open Graph metadata.
-- Add canonical URL.
-- Add structured data.
-- Add internal links.
-- Add page to sitemap.
-- Add image placeholders with alt text.
-- Keep UI consistent with existing CareTrack styling.
-- Do not break existing /playground page.
-- Do not modify gecko genetics logic unless needed for navigation.
-- Build must pass.
+The developer should prepare placeholders first.
 
-## 28. Suggested Component Structure
+Actual image generation will happen later.
 
-Use the existing project structure if different. Otherwise use:
+Add TODO comments for:
+
+- Generate snake-normal.webp
+- Generate snake-albino.webp
+- Generate snake-axanthic.webp
+- Generate snake-piebald.webp
+- Generate snake-banana.webp
+- Generate snake-pastel.webp
+- Generate snake-clown.webp
+- Generate snake-snow.webp
+- Generate snake-anery.webp
+- Generate snake-motley.webp
+- Generate snake-stripe.webp
+- Generate snake-lavender.webp
+- Generate snake-placeholder.webp
+
+## 32. Image Style Direction for Later
+
+All morph images must be consistent.
+
+Global image style:
+
+Friendly product illustration of a calm pet snake for a CareTrack morph playground. Full body snake, clean landing-page style, soft natural lighting, cream and green background, playful but professional, not scary, not aggressive, not venomous-looking, consistent camera angle and composition, high-quality app marketing asset.
+
+Keep consistent:
+
+- pose
+- framing
+- background
+- lighting
+- aspect ratio
+- image quality
+- visual style
+
+Only change:
+
+- body color
+- pattern style
+- morph-specific visual detail
+
+## 33. Morph-Specific Image Prompts for Later
+
+Normal / Wild Type:
+
+Friendly product illustration of a calm pet snake with natural brown, tan, black, and cream patterning. Full body snake, consistent CareTrack style, cream and green background, not scary, not aggressive.
+
+Albino:
+
+Friendly product illustration of a calm albino snake with bright yellow, white, and orange tones and reduced dark pigment. Full body snake, consistent CareTrack style, cream and green background.
+
+Axanthic:
+
+Friendly product illustration of a calm axanthic snake with cool silver, charcoal, white, and black grayscale tones. Full body snake, consistent CareTrack style, cream and green background.
+
+Piebald:
+
+Friendly product illustration of a calm piebald snake with clean white patches mixed with normal patterned brown and black sections. Full body snake, consistent CareTrack style, cream and green background.
+
+Banana:
+
+Friendly product illustration of a calm banana snake morph with soft yellow body tones, pale lavender accents, and reduced dark contrast. Full body snake, consistent CareTrack style, cream and green background.
+
+Pastel:
+
+Friendly product illustration of a calm pastel snake morph with warm gold, soft brown, and lighter pattern contrast. Full body snake, consistent CareTrack style, cream and green background.
+
+Clown:
+
+Friendly product illustration of a calm clown snake morph with bold dorsal pattern flow and reduced side patterning. Full body snake, consistent CareTrack style, cream and green background.
+
+Snow:
+
+Friendly product illustration of a calm snow snake morph with pale white, cream, and soft pink tones, very low dark pigment. Full body snake, consistent CareTrack style, cream and green background.
+
+Anery:
+
+Friendly product illustration of a calm anery snake morph with muted gray, charcoal, black, and white body palette. Full body snake, consistent CareTrack style, cream and green background.
+
+Motley:
+
+Friendly product illustration of a calm motley snake morph with connected dorsal markings and reduced side patterning. Full body snake, consistent CareTrack style, cream and green background.
+
+Stripe:
+
+Friendly product illustration of a calm stripe snake morph with a long continuous stripe running along the body instead of classic saddle patterns. Full body snake, consistent CareTrack style, cream and green background.
+
+Lavender:
+
+Friendly product illustration of a calm lavender snake morph with soft lavender-gray body tone, cream highlights, and gentle contrast. Full body snake, consistent CareTrack style, cream and green background.
+
+Placeholder:
+
+Friendly product illustration placeholder of a calm pet snake silhouette for CareTrack. Neutral cream and green background, clean product style, text-safe composition, not scary, not aggressive.
+
+## 34. Suggested Component Structure
+
+Use the existing project structure if different.
+
+Suggested structure:
 
 src/pages/SnakePlaygroundPage.tsx
-src/components/playground/SnakePlaygroundControls.tsx
-src/components/playground/SnakeCarePreview.tsx
-src/components/playground/SnakeCareTimeline.tsx
-src/components/playground/PlaygroundSwitcher.tsx
-src/data/snakePlaygroundOptions.ts
-src/utils/snakeCareDemoStatus.ts
+src/components/playground/SnakeMorphPlayground.tsx
+src/components/playground/SnakeMorphCard.tsx
+src/components/playground/SnakeMorphImagePreview.tsx
+src/data/snakeMorphs.ts
 
-## 29. Suggested State Model
+Do not create:
 
-type SnakePlaygroundState = {
-  species: "ball_python" | "corn_snake" | "boa" | "hognose" | "kingsnake" | "custom";
-  lifeStage: "juvenile" | "sub_adult" | "adult";
-  lastFeeding: "today" | "3_days" | "7_days" | "10_days" | "14_days" | "21_days" | "custom";
-  feedingResult: "accepted" | "refused" | "skipped" | "not_offered";
-  preyNote: "pinky_mouse" | "fuzzy_mouse" | "hopper_mouse" | "adult_mouse" | "rat_pup" | "small_rat" | "custom";
-  lastShed: "this_week" | "2_weeks" | "1_month" | "2_months" | "unknown";
-  shedStatus: "complete" | "incomplete" | "in_shed" | "unknown";
-  weightValue?: number;
-  weightUnit: "g" | "kg";
-  behavior: "normal" | "hiding_more" | "active" | "defensive" | "refused_food" | "pre_shed" | "custom";
-  reminderIntervalDays: 7 | 10 | 14 | 21 | 30 | number;
-};
+- SnakeSvgPreview
+- SnakeCssPreview
+- SnakeCanvasPreview
+- SnakeMorphSvg
+- SnakeIllustrationSvg
 
-## 30. Suggested Demo Status Helper
+## 35. Technical Requirements
 
-Implement helper logic similar to this:
+- Create route /playground/snake.
+- Use React state for selected morph.
+- Default selected morph is Normal / Wild Type.
+- Use config-driven morph data.
+- Use dedicated image per morph.
+- Use fallback image on load error.
+- Add SEO metadata.
+- Add canonical URL.
+- Add Open Graph metadata.
+- Add Twitter metadata if supported.
+- Add WebPage structured data.
+- Add FAQ content.
+- Add FAQPage structured data if supported.
+- Add page to sitemap.
+- Add internal links.
+- Keep existing Gecko Playground unchanged.
+- Do not introduce genetics logic.
+- Do not introduce care workflow controls.
+- Do not use SVG.
+- Do not use canvas.
+- Do not use CSS-only snake rendering.
+- Build must pass.
 
-function getSnakeCareDemoStatus(state: SnakePlaygroundState) {
-  if (state.feedingResult === "refused") {
-    return {
-      label: "Watch pattern",
-      tone: "warning",
-      message: "This feeding was refused. CareTrack helps you keep refusal notes so you can review patterns over time."
-    };
-  }
+## 36. Accessibility Requirements
 
-  if (state.shedStatus === "in_shed") {
-    return {
-      label: "In shed",
-      tone: "info",
-      message: "Shed-related notes help you connect feeding, behavior, and shed timing."
-    };
-  }
+- Morph cards must be keyboard accessible.
+- Use button semantics for selectable morph cards.
+- Use aria-pressed or aria-selected where suitable.
+- Selected state must not rely only on color.
+- Images must have meaningful alt text.
+- Buttons must have clear accessible names.
+- Text contrast must be readable.
+- Page must be usable on mobile.
+- Preview caption must be visible text.
+- If image fails, fallback text must be visible.
 
-  if (state.lastShed === "unknown") {
-    return {
-      label: "Missing data",
-      tone: "neutral",
-      message: "Start logging sheds to build a clearer care history."
-    };
-  }
-
-  if (isFeedingOverdue(state)) {
-    return {
-      label: "Feeding overdue",
-      tone: "warning",
-      message: "This snake may be due for a feeding check based on the reminder interval you selected."
-    };
-  }
-
-  return {
-    label: "On track",
-    tone: "success",
-    message: "Care history is organized and the next reminder is ready."
-  };
-}
-
-Do not use medical or diagnostic wording.
-
-## 31. Accessibility Requirements
-
-- All form controls must have visible labels.
-- Dropdowns must be keyboard accessible.
-- Buttons must have accessible names.
-- Cards must have readable contrast.
-- Status labels must not rely only on color.
-- Images must include alt text.
-- Coming soon links must be clear and non-confusing.
-- Page should work well on mobile.
-
-## 32. Analytics Events
+## 37. Analytics Events
 
 If analytics exists, add these events:
 
 snake_playground_view
-snake_playground_control_changed
+snake_morph_selected
 snake_playground_download_clicked
-snake_playground_switcher_clicked
-snake_playground_faq_opened
+snake_playground_feature_clicked
+snake_playground_gecko_link_clicked
 
 Event properties:
 
-- species
-- lifeStage
-- feedingResult
-- shedStatus
+- selectedMorph
 - sourceSection
+- route
 
-## 33. Content Rules
+## 38. Content Rules
 
 Do:
 
-- Focus on snake care tracking.
-- Mention feeding, refused meals, sheds, weight, behavior, reminders, and offline history.
-- Use beginner-friendly language.
-- Include ball python, corn snake, boa, hognose, kingsnake, and custom snake examples.
-- Add clear CTA to download CareTrack.
-- Keep all wording aligned with app functionality.
+- Use simple keeper-friendly language.
+- Focus on morph labels as visual recordkeeping.
+- Mention feeding logs, shed history, reminders, and husbandry notes.
+- Use dedicated images.
+- Keep the page playful and professional.
+- Use clear disclaimers.
+- Keep all claims aligned with app functionality.
 
 Do not:
 
-- Mention snake genetics.
-- Mention snake breeding prediction.
+- Mention snake genetics prediction.
+- Mention snake breeding simulation.
 - Mention COI.
-- Give veterinary diagnosis.
-- Give treatment instructions.
-- Use scary or aggressive snake imagery.
-- Claim guaranteed health outcomes.
-- Overclaim features that do not exist.
+- Mention offspring probability.
+- Mention DNA testing as a feature.
+- Provide veterinary diagnosis.
+- Use scary/aggressive snake visuals.
+- Overclaim morph accuracy.
+- Use SVG or CSS-only preview rendering.
 
-## 34. Acceptance Criteria
+## 39. Acceptance Criteria
 
 AC1:
 A new page exists at /playground/snake.
 
 AC2:
-The page has the H1:
-Snake Care Tracker Playground
+The page H1 is:
+Build Your Snake Look
 
 AC3:
-The page has SEO metadata and canonical URL.
+The page intro says:
+Select a morph to preview a playful snake visualization. CareTrack helps snake keepers organize snake care, morph labels, feeding logs, shed history, reminders, and husbandry notes in one offline-first app.
 
 AC4:
-The page includes a Playground Switcher with Gecko, Snake, and future animal modes.
+The page includes a Select a Morph section.
 
 AC5:
-Snake is the active selected mode.
+The page supports one selected morph at a time.
 
 AC6:
-The page includes interactive controls for species, life stage, last feeding, feeding result, prey note, last shed, shed status, weight, behavior, and reminder interval.
+Default selected morph is Normal / Wild Type.
 
 AC7:
-The page includes a live preview card that updates based on selected controls.
+Each morph card shows:
+- morph name
+- morph description
+- selected/not selected status
 
 AC8:
-The page includes a care status label using non-medical wording.
+Selecting a morph updates the Selected Profile section.
 
 AC9:
-The page includes a care timeline preview.
+Selecting a morph updates the dedicated preview image.
 
 AC10:
-The page includes cards explaining feeding history, refused meal notes, shed tracking, weight tracking, behavior notes, and care reminders.
+The preview uses a dedicated image file, not SVG.
 
 AC11:
-The page includes popular snake species cards.
+No SVG, canvas, or CSS-only snake rendering is used.
 
 AC12:
-The page includes image placeholders for future generated snake visuals.
+Each morph has a dedicated image path.
 
 AC13:
-The page includes FAQ content.
+Each image has descriptive alt text.
 
 AC14:
-The page includes Google Play CTA above the fold and at the bottom.
+If an image fails to load, the placeholder image is shown.
 
 AC15:
-The page does not mention snake genetics, breeding prediction, offspring probability, or COI.
+Preview label follows:
+Morph: [selected morph]
 
 AC16:
-The page includes SoftwareApplication structured data.
+Preview caption follows:
+Visual demo only. Selected morph: [selected morph]
 
 AC17:
-The page is added to sitemap.
+The disclaimer is shown:
+This playground is a visual demo only. Snake appearance and morph expression may vary. CareTrack does not provide DNA testing, veterinary advice, or guaranteed breeding predictions.
 
 AC18:
-The page is linked from /playground or another relevant page.
+The CTA section title is:
+Ready to Track Real Snake Care Data?
 
 AC19:
-The page is responsive and accessible.
+The CTA copy mentions:
+morph labels, feeding logs, shed history, reminders, and husbandry notes.
 
 AC20:
+The page includes educational SEO content titled:
+What is the Snake Morph Playground?
+
+AC21:
+The page includes Snake Morph Playground FAQ.
+
+AC22:
+The page does not include:
+- breeding simulation
+- offspring probability
+- COI
+- DNA testing claims
+- genetics calculator logic
+
+AC23:
+The page has SEO metadata and canonical URL.
+
+AC24:
+The page includes WebPage structured data.
+
+AC25:
+The page is added to sitemap.
+
+AC26:
+The page links to the existing Gecko Playground.
+
+AC27:
+The existing Gecko Playground links to /playground/snake.
+
+AC28:
+The page is responsive and accessible.
+
+AC29:
 The project builds successfully.
+
+## 40. Final Codex Instruction
+
+Implement /playground/snake as a simple snake morph image selector page.
+
+The feature must work like this:
+
+User selects a morph card.
+
+The selected profile updates.
+
+A dedicated morph image updates.
+
+The preview caption updates.
+
+The CTA promotes CareTrack for real snake care tracking.
+
+Do not implement SVG.
+
+Do not implement CSS-generated snake visuals.
+
+Do not implement canvas.
+
+Do not implement snake genetics or breeding prediction.
+
+Use dedicated image assets only.

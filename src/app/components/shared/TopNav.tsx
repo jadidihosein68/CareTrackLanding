@@ -5,6 +5,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 
@@ -43,11 +44,26 @@ export function TopNav({ rightSlot }: TopNavProps) {
                   Playground
                   <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-40">
+                <DropdownMenuContent align="start" className="w-64">
                   <DropdownMenuItem asChild>
                     <Link to="/playground/gecko" className="cursor-pointer text-sm font-normal">
                       Gecko
                     </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/playground/snake" className="cursor-pointer text-sm font-normal">
+                      Snake
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem disabled className="text-sm font-normal">
+                    Turtle - Coming soon
+                  </DropdownMenuItem>
+                  <DropdownMenuItem disabled className="text-sm font-normal">
+                    Spider / Tarantula - Coming soon
+                  </DropdownMenuItem>
+                  <DropdownMenuItem disabled className="text-sm font-normal">
+                    Amphibian - Coming soon
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

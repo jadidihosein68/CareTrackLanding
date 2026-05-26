@@ -45,6 +45,7 @@ Static routes:
 - `/learn`
 - `/guides`
 - `/playground/gecko`
+- `/playground/snake`
 - `/faq`
 - `/support`
 - `/privacy`

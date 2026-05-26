@@ -89,6 +89,16 @@ export function Playground() {
               breeders organize gecko care, morph records, feeding logs, and reminders in one
               offline-first app.
             </p>
+            <p className="mt-3 text-sm text-slate-600">
+              Want to explore snakes?{' '}
+              <Link
+                to="/playground/snake"
+                className="text-emerald-700 underline hover:text-emerald-800"
+              >
+                Try Snake Morph Playground
+              </Link>
+              .
+            </p>
           </header>
 
           <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">

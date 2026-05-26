@@ -10,6 +10,7 @@ import { LearnSpecies } from './components/LearnSpecies';
 import { NotFound } from './components/NotFound';
 import { Playground } from './components/Playground';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { SnakePlayground } from './components/SnakePlayground';
 import { Support } from './components/Support';
 import { TermsOfService } from './components/TermsOfService';
 import { trackPageView } from './utils/analytics';
@@ -37,6 +38,7 @@ export function AppRoutes() {
       <Route path="/guides" element={<Guides />} />
       <Route path="/guides/:guideId" element={<GuideArticle />} />
       <Route path="/playground/gecko" element={<Playground />} />
+      <Route path="/playground/snake" element={<SnakePlayground />} />
       <Route path="/playground" element={<Navigate to="/playground/gecko" replace />} />
       <Route path="/faq" element={<Faq />} />
       <Route path="/learn/category/:categoryId" element={<LearnCategory />} />

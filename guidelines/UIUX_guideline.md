@@ -44,7 +44,7 @@ Common styling patterns:
 Top navigation links:
 - Home
 - Learn
-- Playground dropdown with `Gecko` option
+- Playground dropdown with `Gecko`, `Snake`, and disabled `Coming soon` options for additional species
 - Guides (hidden below `sm`)
 - FAQ (hidden below `sm`)
 - Support (hidden below `md`)
@@ -163,6 +163,9 @@ Sections:
 
 Responsive behavior:
 - On mobile, visualizer appears in left flow and sticky panel is hidden.
+
+Additional playground route:
+- `/playground/snake` mirrors this layout with placeholder snake morph options and placeholder image mapping.
 
 ## 7.8 FAQ (`/faq`)
 

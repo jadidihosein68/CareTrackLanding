@@ -171,35 +171,90 @@ const buildRouteJsonLd = (route, guides) => {
   }
 
   if (route.kind === 'playground') {
+    const isSnakePlayground = route.playgroundType === 'Snake';
+    const snakeFaq = [
+      {
+        '@type': 'Question',
+        name: 'What is the Snake Morph Playground?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'It is a Ball Python-focused visual demo where keepers select a morph label and preview a snake morph visualizer state.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Does this playground calculate Ball Python genetics?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No. This page is a visual demo only and does not calculate breeding outcomes, inheritance percentages, or guaranteed genetic results.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can I stack multiple snake morph traits?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Not in this first version. The first version supports one selected base morph at a time.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can I track snake feeding and shed history in CareTrack?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. CareTrack is built for offline reptile care records including feeding logs, shed history, reminders, and husbandry notes.',
+        },
+      },
+    ];
+
+    const webPageNode = {
+      '@type': 'WebPage',
+      name: route.h1,
+      description: route.description,
+      url: absoluteUrl(route.path),
+      ...(isSnakePlayground
+        ? {
+            primaryImageOfPage:
+              `${SITE_URL}/images/playground/snake/ball-python-normal-wild-type-morph.webp`,
+          }
+        : {}),
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'CareTrack',
+        url: SITE_URL,
+      },
+    };
+
+    const graph = [
+      webPageNode,
+      {
+        '@type': 'SoftwareApplication',
+        name: 'CareTrack',
+        applicationCategory: 'LifestyleApplication',
+        operatingSystem: 'Android',
+        url: `${SITE_URL}/`,
+        description:
+          'Offline-first gecko and reptile care tracker for morph records, feeding logs, reminders, and husbandry notes.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
+      },
+      ...(isSnakePlayground
+        ? [
+            {
+              '@type': 'FAQPage',
+              url: absoluteUrl(route.path),
+              mainEntity: snakeFaq,
+            },
+          ]
+        : []),
+    ];
+
     return {
       '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'WebPage',
-          name: route.h1,
-          description: route.description,
-          url: absoluteUrl(route.path),
-          isPartOf: {
-            '@type': 'WebSite',
-            name: 'CareTrack',
-            url: SITE_URL,
-          },
-        },
-        {
-          '@type': 'SoftwareApplication',
-          name: 'CareTrack',
-          applicationCategory: 'LifestyleApplication',
-          operatingSystem: 'Android',
-          url: `${SITE_URL}/`,
-          description:
-            'Offline-first gecko and reptile care tracker for morph records, feeding logs, reminders, and husbandry notes.',
-          offers: {
-            '@type': 'Offer',
-            price: '0',
-            priceCurrency: 'USD',
-          },
-        },
-      ],
+      '@graph': graph,
     };
   }
 
@@ -273,6 +328,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
     <ul>
       <li><a href="/learn">Gecko and reptile care guides</a></li>
       <li><a href="/playground/gecko">Gecko Morph &amp; Trait Playground</a></li>
+      <li><a href="/playground/snake">Ball Python Snake Morph Playground</a></li>
       <li><a href="/guides">Reptile care log templates and workflows</a></li>
       <li><a href="/faq">Reptile care app FAQ</a></li>
       <li><a href="/support">CareTrack support</a></li>
@@ -358,17 +414,31 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
   }
 
   if (route.kind === 'playground') {
+    const subject = route.playgroundType ?? 'Gecko';
+    const morphLine =
+      subject === 'Snake'
+        ? 'Swap Ball Python morph options to preview the current visualizer state.'
+        : 'Apply multiple traits to update the gecko visual state.';
+    const introLine =
+      subject === 'Snake'
+        ? 'Try the CareTrack Ball Python snake morph playground to compare morph labels in a visual demo. This page is designed for education and recordkeeping context, not guaranteed breeding prediction.'
+        : 'Try the CareTrack gecko morph playground to compare gecko morph labels in a visual demo. This page is designed for education and recordkeeping context, not guaranteed breeding prediction.';
+    const seoLine =
+      subject === 'Snake'
+        ? 'Use this page as a visual starting point for ball python morph tracker workflows, snake feeding tracker routines, snake shed tracker notes, and offline reptile care app planning.'
+        : 'Use this page as a visual starting point before moving into daily care logging and reminder workflows in CareTrack.';
     return `
       <main>
         <h2>${escapeHtml(route.h1)}</h2>
         <p>${escapeHtml(route.description)}</p>
-        <p>Try the CareTrack gecko morph playground to combine leopard gecko morph labels and stacked traits in a visual demo. This page is designed for education and recordkeeping context, not guaranteed breeding prediction.</p>
+        <p>${escapeHtml(introLine)}</p>
         <h2>How This Demo Works</h2>
         <ul>
           <li>Select one morph as the base profile.</li>
-          <li>Apply multiple traits to update the cartoon gecko visual state.</li>
-          <li>Review trait notes and continue to app workflows for real record-keeping.</li>
+          <li>${escapeHtml(morphLine)}</li>
+          <li>Review profile notes and continue to app workflows for real record-keeping.</li>
         </ul>
+        <p>${escapeHtml(seoLine)}</p>
         <p>CareTrack helps reptile keepers maintain offline care logs, reminders, and husbandry notes with species-specific guidance.</p>
         ${commonLinks}
       </main>
@@ -466,7 +536,11 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
   const canonicalUrl = absoluteUrl(route.path);
   const structuredData = buildRouteJsonLd(route, guides);
   const noscriptBody = buildNoscriptMain(route, guides, categories, speciesById);
-  const imageAlt = `${route.h1} page preview image`;
+  const ogTitle = route.ogTitle ?? route.title;
+  const twitterTitle = route.twitterTitle ?? ogTitle;
+  const imagePath = route.image ?? '/og-image.jpg';
+  const imageUrl = imagePath.startsWith('http') ? imagePath : `${SITE_URL}${imagePath}`;
+  const imageAlt = route.imageAlt ?? `${route.h1} page preview image`;
   const ogDescription = route.ogDescription ?? route.description;
   const twitterDescription = route.twitterDescription ?? ogDescription;
 
@@ -486,7 +560,7 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
     )
     .replace(
       /<meta\s+property="og:title"\s+content="[\s\S]*?"\s*\/>/,
-      `<meta property="og:title" content="${escapeHtml(route.title)}" />`,
+      `<meta property="og:title" content="${escapeHtml(ogTitle)}" />`,
     )
     .replace(
       /<meta\s+property="og:description"\s+content="[\s\S]*?"\s*\/>/,
@@ -498,7 +572,7 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
     )
     .replace(
       /<meta\s+name="twitter:title"\s+content="[\s\S]*?"\s*\/>/,
-      `<meta name="twitter:title" content="${escapeHtml(route.title)}" />`,
+      `<meta name="twitter:title" content="${escapeHtml(twitterTitle)}" />`,
     )
     .replace(
       /<meta\s+name="twitter:description"\s+content="[\s\S]*?"\s*\/>/,
@@ -511,6 +585,18 @@ const replaceHeadMeta = (html, route, guides, categories, speciesById) => {
     .replace(
       /<meta\s+property="og:image:alt"\s+content="[\s\S]*?"\s*\/>/,
       `<meta property="og:image:alt" content="${escapeHtml(imageAlt)}" />`,
+    )
+    .replace(
+      /<meta\s+property="og:image"\s+content="[\s\S]*?"\s*\/>/,
+      `<meta property="og:image" content="${imageUrl}" />`,
+    )
+    .replace(
+      /<meta\s+property="og:image:secure_url"\s+content="[\s\S]*?"\s*\/>/,
+      `<meta property="og:image:secure_url" content="${imageUrl}" />`,
+    )
+    .replace(
+      /<meta\s+name="twitter:image"\s+content="[\s\S]*?"\s*\/>/,
+      `<meta name="twitter:image" content="${imageUrl}" />`,
     )
     .replace(
       /<meta\s+name="twitter:image:alt"\s+content="[\s\S]*?"\s*\/>/,
@@ -595,8 +681,27 @@ const staticRoutes = [
     path: '/playground/gecko',
     title: 'Gecko Morph & Trait Playground | CareTrack',
     h1: 'Build Your Gecko Look',
+    playgroundType: 'Gecko',
     description:
       "Try CareTrack's interactive gecko morph and trait playground. Select leopard gecko morphs and traits to preview a fun cartoon gecko visualization and learn how CareTrack supports reptile care and breeder records.",
+    ogType: 'website',
+  },
+  {
+    kind: 'playground',
+    path: '/playground/snake',
+    title: 'Ball Python Snake Morph Playground & Visualizer | CareTrack',
+    ogTitle: 'Ball Python Snake Morph Playground | CareTrack',
+    twitterTitle: 'Ball Python Snake Morph Playground | CareTrack',
+    h1: 'Snake Morph Playground & Visualizer',
+    playgroundType: 'Snake',
+    description:
+      'Use CareTrack Snake Morph Playground to preview Ball Python morph visuals, compare traits, and track reptile feeding, shed history, and care notes offline.',
+    ogDescription:
+      'Preview Ball Python morph visuals and compare trait notes in the CareTrack Snake Morph Playground before tracking real reptile care records.',
+    twitterDescription:
+      'Compare Ball Python morph visuals and organize snake care records offline with CareTrack.',
+    image: '/images/playground/snake/ball-python-normal-wild-type-morph.webp',
+    imageAlt: 'Normal wild type Ball Python morph visualizer preview in CareTrack playground',
     ogType: 'website',
   },
   {
