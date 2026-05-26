@@ -22,10 +22,15 @@ export type GeckoVisualState = {
   contrastBoost: number;
 };
 
+export type GeckoRarity = 'common' | 'uncommon' | 'rare' | 'legendary';
+
 export type GeckoMorphOption = {
   id: string;
   name: string;
   type: 'morph';
+  species: string;
+  traitGenetics: string;
+  rarity: GeckoRarity;
   description: string;
   visual: Partial<GeckoVisualState> & {
     bodyColor: string;
@@ -64,26 +69,12 @@ const defaultVisual: GeckoVisualState = {
 
 export const geckoMorphOptions: GeckoMorphOption[] = [
   {
-    id: 'ghost',
-    name: 'Ghost',
-    type: 'morph',
-    description: 'Soft neutral tone profile with reduced contrast and muted pattern presentation.',
-    visual: {
-      bodyColor: '#ccb28a',
-      bellyColor: '#f2e7cf',
-      spotColor: '#5c4a35',
-      eyeColor: '#1e293b',
-      tailColor: '#c4ab84',
-      accentColor: '#38bdf8',
-      pattern: 'normal',
-      patternOpacity: 0.5,
-      tailBands: true,
-    },
-  },
-  {
     id: 'tremper-albino',
     name: 'Tremper Albino',
     type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics: 'Recessive: Light body tones, silver/red eyes, lacking black pigment.',
+    rarity: 'common',
     description: 'Warm, light body tones with softer pattern contrast and bright eyes.',
     visual: {
       bodyColor: '#e8c79f',
@@ -101,6 +92,9 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     id: 'bell-albino',
     name: 'Bell Albino',
     type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics: 'Recessive: Soft pink/peach tones, distinct pink eyes.',
+    rarity: 'common',
     description: 'Soft pink and peach tones with reduced dark pigment expression.',
     visual: {
       bodyColor: '#efceb2',
@@ -118,6 +112,9 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     id: 'amelanistic-albino',
     name: 'Amelanistic (Albino)',
     type: 'morph',
+    species: 'AFT Gecko',
+    traitGenetics: 'Recessive: AFT version of albinism lacking dark melanin pigment.',
+    rarity: 'common',
     description: 'Low-melanin style palette with light peach tones and softer dark pigment expression.',
     visual: {
       bodyColor: '#ebc8a8',
@@ -135,6 +132,9 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     id: 'eclipse',
     name: 'Eclipse',
     type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics: 'Recessive: Solid black or red eyes, often with a white nose and tail tip.',
+    rarity: 'common',
     description: 'Known for darker eye influence with strong body contrast.',
     visual: {
       bodyColor: '#c0a16a',
@@ -153,6 +153,9 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     id: 'mack-snow',
     name: 'Mack Snow',
     type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics: 'Incomplete Dominant: Hatches black and white, fading to pale yellow/gray.',
+    rarity: 'common',
     description: 'Cooler grayscale body base with sharper dark pattern definition.',
     visual: {
       bodyColor: '#d6d7db',
@@ -168,27 +171,13 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     },
   },
   {
-    id: 'blizzard',
-    name: 'Blizzard',
-    type: 'morph',
-    description: 'Minimal pattern presentation with a clean, pale body color.',
-    visual: {
-      bodyColor: '#f1e8d5',
-      bellyColor: '#f9f2e7',
-      spotColor: '#dfd5c5',
-      eyeColor: '#334155',
-      tailColor: '#eee0c9',
-      accentColor: '#cbd5e1',
-      pattern: 'blizzard',
-      patternOpacity: 0.14,
-      tailBands: false,
-      spotScale: 0.75,
-    },
-  },
-  {
     id: 'tangerine',
     name: 'Tangerine',
     type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics:
+      'Polygenic (Line-bred): Selectively bred for bright orange body and tail coloration.',
+    rarity: 'common',
     description: 'Bright orange body wash with warm tail coloration.',
     visual: {
       bodyColor: '#f4a55d',
@@ -204,9 +193,78 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     },
   },
   {
+    id: 'het-oreo-pos-jungle',
+    name: 'Het Oreo Pos Jungle',
+    type: 'morph',
+    species: 'AFT Gecko',
+    traitGenetics:
+      'Recessive (Het) & Polygenic: Visually normal but carries the Oreo gene and might have irregular "Jungle" banding.',
+    rarity: 'common',
+    description: 'Jungle-style irregular banding profile with mixed dark and cream pattern sections.',
+    visual: {
+      bodyColor: '#cdb68b',
+      bellyColor: '#efe2c2',
+      spotColor: '#4b3824',
+      eyeColor: '#1f2937',
+      tailColor: '#c7aa76',
+      accentColor: '#2dd4bf',
+      pattern: 'normal',
+      patternOpacity: 0.76,
+      tailBands: true,
+      spotScale: 1.08,
+      contrastBoost: 1.14,
+    },
+  },
+  {
+    id: 'ghost',
+    name: 'Ghost',
+    type: 'morph',
+    species: 'Leopard Gecko / AFT',
+    traitGenetics:
+      'Dominant (Leopard) / Recessive (AFT): Hypomelanistic look with muted, sometimes greenish/faded presentation.',
+    rarity: 'uncommon',
+    description: 'Soft neutral tone profile with reduced contrast and muted pattern presentation.',
+    visual: {
+      bodyColor: '#ccb28a',
+      bellyColor: '#f2e7cf',
+      spotColor: '#5c4a35',
+      eyeColor: '#1e293b',
+      tailColor: '#c4ab84',
+      accentColor: '#38bdf8',
+      pattern: 'normal',
+      patternOpacity: 0.5,
+      tailBands: true,
+    },
+  },
+  {
+    id: 'blizzard',
+    name: 'Blizzard',
+    type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics: 'Recessive: Completely patternless body, usually solid gray, pale, or purplish.',
+    rarity: 'uncommon',
+    description: 'Minimal pattern presentation with a clean, pale body color.',
+    visual: {
+      bodyColor: '#f1e8d5',
+      bellyColor: '#f9f2e7',
+      spotColor: '#dfd5c5',
+      eyeColor: '#334155',
+      tailColor: '#eee0c9',
+      accentColor: '#cbd5e1',
+      pattern: 'blizzard',
+      patternOpacity: 0.14,
+      tailBands: false,
+      spotScale: 0.75,
+    },
+  },
+  {
     id: 'white-yellow',
     name: 'White & Yellow',
     type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics:
+      'Incomplete Dominant: High-contrast white sides with clean yellow body bases.',
+    rarity: 'uncommon',
     description: 'Clean yellow-white base with high visual contrast accents.',
     visual: {
       bodyColor: '#f4e6a4',
@@ -222,9 +280,36 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     },
   },
   {
+    id: 'oreo-striped',
+    name: 'Oreo Striped',
+    type: 'morph',
+    species: 'AFT Gecko',
+    traitGenetics:
+      'Recessive (Oreo) + Polygenic (Stripe): High contrast black/brown and white, resembling the cookie.',
+    rarity: 'uncommon',
+    description: 'High-contrast black and white style profile with strong stripe emphasis.',
+    visual: {
+      bodyColor: '#d6d7da',
+      bellyColor: '#f2f3f5',
+      spotColor: '#2b2f3a',
+      eyeColor: '#0f172a',
+      tailColor: '#cdd1d7',
+      accentColor: '#94a3b8',
+      pattern: 'snow',
+      patternOpacity: 0.86,
+      tailBands: true,
+      stripeTail: true,
+      contrastBoost: 1.24,
+    },
+  },
+  {
     id: 'raptor',
     name: 'RAPTOR',
     type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics:
+      'Combo (4 Genes): Red-eye Albino Patternless Tremper ORange. Solid red eyes and orange body.',
+    rarity: 'rare',
     description: 'Albino and eclipse style blend with reduced body spotting influence.',
     visual: {
       bodyColor: '#f3bc7a',
@@ -244,6 +329,10 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     id: 'zero',
     name: 'Zero',
     type: 'morph',
+    species: 'AFT Gecko',
+    traitGenetics:
+      'Recessive / Polygenic Marker: Connected back bands, often linked to the Patternless trait.',
+    rarity: 'rare',
     description: 'Very clean low-pattern look with bright pale body zones and reduced spotting.',
     visual: {
       bodyColor: '#f0e7cf',
@@ -259,46 +348,12 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     },
   },
   {
-    id: 'black-night-melanistic',
-    name: 'Black Night (Melanistic)',
+    id: 'diablo-blanco',
+    name: 'Diablo Blanco',
     type: 'morph',
-    description: 'Deep melanistic-style profile with very dark pigment concentration and high contrast.',
-    visual: {
-      bodyColor: '#2c2f36',
-      bellyColor: '#4a4f58',
-      spotColor: '#0f1115',
-      eyeColor: '#05060a',
-      tailColor: '#343840',
-      accentColor: '#64748b',
-      pattern: 'eclipse',
-      patternOpacity: 0.88,
-      tailBands: true,
-      contrastBoost: 1.32,
-    },
-  },
-  {
-    id: 'black-night-recessive-combos',
-    name: 'Black Night Recessive Combos',
-    type: 'morph',
-    description: 'Dark combo profile blending melanistic depth with recessive-style contrast zones.',
-    visual: {
-      bodyColor: '#3a3d45',
-      bellyColor: '#575d66',
-      spotColor: '#14171d',
-      eyeColor: '#080a0f',
-      tailColor: '#40454e',
-      accentColor: '#94a3b8',
-      pattern: 'snow',
-      patternOpacity: 0.86,
-      tailBands: true,
-      stripeTail: true,
-      contrastBoost: 1.28,
-    },
-  },
-  {
-    id: 'diablo-blanco-morph',
-    name: 'Diablo Blanco Morph',
-    type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics: 'Combo (4 Genes): Blizzard + RAPTOR. Clean solid white body with solid red eyes.',
+    rarity: 'rare',
     description: 'Clean white-centric profile with minimal pattern visibility and soft accent tones.',
     visual: {
       bodyColor: '#f4f5f7',
@@ -314,41 +369,48 @@ export const geckoMorphOptions: GeckoMorphOption[] = [
     },
   },
   {
-    id: 'oreo-striped-morph',
-    name: 'Oreo Striped Morph',
+    id: 'black-night-melanistic',
+    name: 'Black Night (Melanistic)',
     type: 'morph',
-    description: 'High-contrast black and white style profile with strong stripe emphasis.',
+    species: 'Leopard Gecko',
+    traitGenetics:
+      'Polygenic (Line-bred): Hypermelanistic trait causing a completely solid black or extremely dark body.',
+    rarity: 'legendary',
+    description: 'Deep melanistic-style profile with very dark pigment concentration and high contrast.',
     visual: {
-      bodyColor: '#d6d7da',
-      bellyColor: '#f2f3f5',
-      spotColor: '#2b2f3a',
-      eyeColor: '#0f172a',
-      tailColor: '#cdd1d7',
+      bodyColor: '#2c2f36',
+      bellyColor: '#4a4f58',
+      spotColor: '#0f1115',
+      eyeColor: '#05060a',
+      tailColor: '#343840',
+      accentColor: '#64748b',
+      pattern: 'eclipse',
+      patternOpacity: 0.88,
+      tailBands: true,
+      contrastBoost: 1.32,
+    },
+  },
+  {
+    id: 'black-night-combos',
+    name: 'Black Night Combos',
+    type: 'morph',
+    species: 'Leopard Gecko',
+    traitGenetics:
+      'Combo: Blending the deep melanistic Black Night line with other recessive traits.',
+    rarity: 'legendary',
+    description: 'Dark combo profile blending melanistic depth with recessive-style contrast zones.',
+    visual: {
+      bodyColor: '#3a3d45',
+      bellyColor: '#575d66',
+      spotColor: '#14171d',
+      eyeColor: '#080a0f',
+      tailColor: '#40454e',
       accentColor: '#94a3b8',
       pattern: 'snow',
       patternOpacity: 0.86,
       tailBands: true,
       stripeTail: true,
-      contrastBoost: 1.24,
-    },
-  },
-  {
-    id: 'het-oreo-pos-jungle',
-    name: 'Het Oreo Pos Jungle',
-    type: 'morph',
-    description: 'Jungle-style irregular banding profile with mixed dark and cream pattern sections.',
-    visual: {
-      bodyColor: '#cdb68b',
-      bellyColor: '#efe2c2',
-      spotColor: '#4b3824',
-      eyeColor: '#1f2937',
-      tailColor: '#c7aa76',
-      accentColor: '#2dd4bf',
-      pattern: 'normal',
-      patternOpacity: 0.76,
-      tailBands: true,
-      spotScale: 1.08,
-      contrastBoost: 1.14,
+      contrastBoost: 1.28,
     },
   },
 ];

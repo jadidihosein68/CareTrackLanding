@@ -20,9 +20,9 @@ const morphImageById: Record<string, string> = {
   raptor: '/images/playground/gecko/Raptor.webp',
   zero: '/images/playground/gecko/Zero.webp',
   'black-night-melanistic': '/images/playground/gecko/Black Night (melanistic).webp',
-  'black-night-recessive-combos': '/images/playground/gecko/Black Night Recessive Combos.webp',
-  'diablo-blanco-morph': '/images/playground/gecko/Diablo Blanco morph.webp',
-  'oreo-striped-morph': '/images/playground/gecko/OreoStripedMorph.webp',
+  'black-night-combos': '/images/playground/gecko/Black Night Recessive Combos.webp',
+  'diablo-blanco': '/images/playground/gecko/Diablo Blanco morph.webp',
+  'oreo-striped': '/images/playground/gecko/OreoStripedMorph.webp',
   'het-oreo-pos-jungle': '/images/playground/gecko/Het Oreo Pos Jungle.webp',
 };
 
