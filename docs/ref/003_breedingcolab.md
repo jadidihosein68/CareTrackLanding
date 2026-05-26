@@ -891,7 +891,7 @@ Full backend partner management system
 Implement only the Partner page and lightweight discoverability changes.
 
 Do not redesign the whole homepage.
-
+ 
 Do not turn this into a standalone marketing landing page.
 
 The goal is to create a professional, permanent CareTrack Partner page that can be shared with breeders, shops, creators, and reptile event organizers.
