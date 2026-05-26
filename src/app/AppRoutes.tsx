@@ -8,6 +8,14 @@ import { Learn } from './components/Learn';
 import { LearnCategory } from './components/LearnCategory';
 import { LearnSpecies } from './components/LearnSpecies';
 import { NotFound } from './components/NotFound';
+import { PartnerBreeders2Page } from './components/PartnerBreeders2Page';
+import { Partners } from './components/Partners';
+import {
+  PartnerBreedersPage,
+  PartnerCreatorsPage,
+  PartnerEventsPage,
+  PartnerReptileShopsPage,
+} from './components/PartnerTypePages';
 import { Playground } from './components/Playground';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { SnakePlayground } from './components/SnakePlayground';
@@ -40,6 +48,12 @@ export function AppRoutes() {
       <Route path="/playground/gecko" element={<Playground />} />
       <Route path="/playground/snake" element={<SnakePlayground />} />
       <Route path="/playground" element={<Navigate to="/playground/gecko" replace />} />
+      <Route path="/partners" element={<Partners />} />
+      <Route path="/partners/breeders" element={<PartnerBreedersPage />} />
+      <Route path="/partners/breeders2" element={<PartnerBreeders2Page />} />
+      <Route path="/partners/reptile-shops" element={<PartnerReptileShopsPage />} />
+      <Route path="/partners/creators" element={<PartnerCreatorsPage />} />
+      <Route path="/partners/events" element={<PartnerEventsPage />} />
       <Route path="/faq" element={<Faq />} />
       <Route path="/learn/category/:categoryId" element={<LearnCategory />} />
       <Route path="/learn/species/:speciesId" element={<LearnSpecies />} />

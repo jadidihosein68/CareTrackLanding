@@ -54,3 +54,19 @@ export const trackPageView = (pagePath: string) => {
     send_to: GA_MEASUREMENT_ID,
   });
 };
+
+type AnalyticsEventParams = Record<string, string | number | boolean>;
+
+export const trackEvent = (
+  eventName: string,
+  params: AnalyticsEventParams = {},
+) => {
+  if (!isAnalyticsEnabled || typeof window === 'undefined' || !gtagLoaded()) {
+    return;
+  }
+
+  window.gtag?.('event', eventName, {
+    ...params,
+    send_to: GA_MEASUREMENT_ID,
+  });
+};

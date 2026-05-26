@@ -158,6 +158,45 @@ function SnakeMorphImagePreview({ selectedMorph }: { selectedMorph: SnakeMorph }
   );
 }
 
+function SnakeSelectedProfilePanel({ selectedMorph }: { selectedMorph: SnakeMorph }) {
+  return (
+    <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" aria-live="polite">
+      <h2 className="text-lg text-slate-900">Selected Profile</h2>
+      <div className="mt-3 space-y-4 text-sm text-slate-700">
+        <div>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Morph</p>
+          <p className="mt-1 text-base text-slate-900">{selectedMorph.name}</p>
+        </div>
+
+        <div>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Description</p>
+          <p className="mt-1">{selectedMorph.description}</p>
+        </div>
+
+        <div>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Genetics Notes</p>
+          <p className="mt-1">{selectedMorph.geneticsNote}</p>
+        </div>
+
+        <div>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Common Combo Examples</p>
+          <ul className="mt-1 list-disc space-y-1 pl-5">
+            {selectedMorph.comboExamples.map((combo) => (
+              <li key={combo}>{combo}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-amber-900">
+          This playground is a visual demo only. Snake appearance and morph expression may vary.
+          CareTrack does not provide DNA testing, veterinary advice, or guaranteed breeding
+          predictions.
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SnakePlaygroundCTA() {
   return (
     <section className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
@@ -332,46 +371,17 @@ export function SnakePlayground() {
                 onSelect={setSelectedMorphId}
               />
 
-              <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" aria-live="polite">
-                <h2 className="text-lg text-slate-900">Selected Profile</h2>
-                <div className="mt-3 space-y-4 text-sm text-slate-700">
-                  <div>
-                    <p className="text-xs uppercase tracking-wide text-slate-500">Morph</p>
-                    <p className="mt-1 text-base text-slate-900">{selectedMorph.name}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs uppercase tracking-wide text-slate-500">Description</p>
-                    <p className="mt-1">{selectedMorph.description}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs uppercase tracking-wide text-slate-500">Genetics Notes</p>
-                    <p className="mt-1">{selectedMorph.geneticsNote}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs uppercase tracking-wide text-slate-500">Common Combo Examples</p>
-                    <ul className="mt-1 list-disc space-y-1 pl-5">
-                      {selectedMorph.comboExamples.map((combo) => (
-                        <li key={combo}>{combo}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-amber-900">
-                    This playground is a visual demo only. Snake appearance and morph expression may
-                    vary. CareTrack does not provide DNA testing, veterinary advice, or guaranteed
-                    breeding predictions.
-                  </div>
-                </div>
-              </section>
+              <div className="space-y-4 sm:hidden">
+                <SnakeMorphImagePreview selectedMorph={selectedMorph} />
+                <SnakeSelectedProfilePanel selectedMorph={selectedMorph} />
+              </div>
 
               <SnakePlaygroundCTA />
             </div>
 
-            <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+            <div className="hidden space-y-4 sm:block lg:sticky lg:top-24 lg:self-start">
               <SnakeMorphImagePreview selectedMorph={selectedMorph} />
+              <SnakeSelectedProfilePanel selectedMorph={selectedMorph} />
             </div>
           </section>
 

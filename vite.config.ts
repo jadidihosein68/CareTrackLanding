@@ -12,6 +12,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      // Allow react-native libraries to render in web builds.
+      'react-native': 'react-native-web',
       // Alias @ to the src directory
       '@': path.resolve(__dirname, './src'),
     },

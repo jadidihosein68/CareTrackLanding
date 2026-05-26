@@ -41,6 +41,12 @@ const entries = [
   { path: '/learn', changefreq: 'weekly', priority: '0.9' },
   { path: '/playground/gecko', changefreq: 'weekly', priority: '0.8' },
   { path: '/playground/snake', changefreq: 'weekly', priority: '0.8' },
+  { path: '/partners', changefreq: 'weekly', priority: '0.8' },
+  { path: '/partners/breeders', changefreq: 'weekly', priority: '0.7' },
+  { path: '/partners/breeders2', changefreq: 'weekly', priority: '0.7' },
+  { path: '/partners/reptile-shops', changefreq: 'weekly', priority: '0.7' },
+  { path: '/partners/creators', changefreq: 'weekly', priority: '0.7' },
+  { path: '/partners/events', changefreq: 'weekly', priority: '0.7' },
   { path: '/guides', changefreq: 'weekly', priority: '0.8' },
   { path: '/faq', changefreq: 'monthly', priority: '0.7' },
   ...categoryIds.map((id) => ({

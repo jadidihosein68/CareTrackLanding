@@ -15,6 +15,7 @@ type TopNavProps = {
 
 export function TopNav({ rightSlot }: TopNavProps) {
   const navItemClass = 'text-sm font-normal text-slate-600 hover:text-slate-900 transition-colors';
+  const dropdownTriggerClass = `inline-flex items-center gap-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 ${navItemClass}`;
 
   return (
     <nav
@@ -32,7 +33,7 @@ export function TopNav({ rightSlot }: TopNavProps) {
             <span className="hidden sm:inline text-xl font-semibold text-slate-900">CareTrack</span>
           </Link>
           <div className="flex items-center gap-2 sm:gap-6">
-            <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
               <Link to="/" className={navItemClass}>
                 Home
               </Link>
@@ -40,7 +41,7 @@ export function TopNav({ rightSlot }: TopNavProps) {
                 Learn
               </Link>
               <DropdownMenu modal={false}>
-                <DropdownMenuTrigger className={`inline-flex items-center gap-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 ${navItemClass}`}>
+                <DropdownMenuTrigger className={dropdownTriggerClass}>
                   Playground
                   <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
                 </DropdownMenuTrigger>
@@ -67,26 +68,75 @@ export function TopNav({ rightSlot }: TopNavProps) {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+
+              {/* Intentionally hidden for now; kept in code for quick re-enable later. */}
+              <div className="hidden">
+                <DropdownMenu modal={false}>
+                  <DropdownMenuTrigger className={dropdownTriggerClass}>
+                    Partners
+                    <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-60">
+                    <DropdownMenuItem asChild>
+                      <Link to="/partners" className="cursor-pointer text-sm font-normal">
+                        All Partners
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/partners/breeders" className="cursor-pointer text-sm font-normal">
+                        Breeders
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/partners/breeders2" className="cursor-pointer text-sm font-normal">
+                        Breeders 2 (Handover)
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/partners/reptile-shops" className="cursor-pointer text-sm font-normal">
+                        Reptile Shops
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/partners/creators" className="cursor-pointer text-sm font-normal">
+                        Creators / Educators
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/partners/events" className="cursor-pointer text-sm font-normal">
+                        Expos / Events
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+              <Link
+                to="/partners"
+                className={`hidden ${navItemClass}`}
+              >
+                Partners
+              </Link>
+
               <Link
                 to="/guides"
-                className={`hidden sm:inline ${navItemClass}`}
+                className={`hidden md:inline ${navItemClass}`}
               >
                 Guides
               </Link>
               <Link
                 to="/faq"
-                className={`hidden sm:inline ${navItemClass}`}
+                className={`hidden md:inline ${navItemClass}`}
               >
                 FAQ
               </Link>
               <Link
                 to="/support"
-                className={`hidden md:inline ${navItemClass}`}
+                className={`hidden lg:inline ${navItemClass}`}
               >
                 Support
               </Link>
             </div>
-            {rightSlot ? <div className="hidden lg:flex items-center text-sm font-normal">{rightSlot}</div> : null}
           </div>
         </div>
       </div>

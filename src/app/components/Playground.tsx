@@ -109,12 +109,9 @@ export function Playground() {
                 onSelect={handleMorphSelect}
               />
 
-              <div className="hidden sm:block">
-                <TraitInfoPanel selectedMorph={selectedMorph} />
-              </div>
-
-              <div className="sm:hidden">
+              <div className="space-y-4 sm:hidden">
                 <GeckoVisualizer selectedMorph={selectedMorph} />
+                <TraitInfoPanel selectedMorph={selectedMorph} />
               </div>
 
               <PlaygroundCTA />
@@ -122,6 +119,7 @@ export function Playground() {
 
             <div className="hidden sm:block space-y-4 lg:sticky lg:top-24 lg:self-start">
               <GeckoVisualizer selectedMorph={selectedMorph} />
+              <TraitInfoPanel selectedMorph={selectedMorph} />
             </div>
           </section>
 

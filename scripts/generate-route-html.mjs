@@ -155,6 +155,130 @@ const buildRouteJsonLd = (route, guides) => {
     };
   }
 
+  if (route.kind === 'partners') {
+    const partnerFaq = [
+      {
+        '@type': 'Question',
+        name: 'Is CareTrack only for geckos?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No. CareTrack supports reptile care tracking for geckos, snakes, bearded dragons, skinks, tortoises, and other reptiles where records and reminders are useful.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can breeders use CareTrack for breeding records?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. CareTrack supports breeding workflows such as pairings, clutch records, hatchling notes, morph tracking, and buyer handover context.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can reptile creators collaborate with CareTrack?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Creators and educators can collaborate through practical care content, demonstrations, referral campaigns, and responsible husbandry education.',
+        },
+      },
+    ];
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          name: route.h1,
+          description: route.description,
+          url: absoluteUrl(route.path),
+          isPartOf: {
+            '@type': 'WebSite',
+            name: 'CareTrack',
+            url: SITE_URL,
+          },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: SITE_URL,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Partners',
+              item: absoluteUrl(route.path),
+            },
+          ],
+        },
+        {
+          '@type': 'SoftwareApplication',
+          name: 'CareTrack',
+          applicationCategory: 'LifestyleApplication',
+          operatingSystem: 'Android',
+          url: `${SITE_URL}/`,
+          description:
+            'Offline-first reptile care tracker for feeding logs, reminders, breeding records, morph tracking, and handover workflows.',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+        },
+        {
+          '@type': 'FAQPage',
+          url: absoluteUrl(route.path),
+          mainEntity: partnerFaq,
+        },
+      ],
+    };
+  }
+
+  if (route.kind === 'partner-child') {
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          name: route.h1,
+          description: route.description,
+          url: absoluteUrl(route.path),
+          isPartOf: {
+            '@type': 'WebSite',
+            name: 'CareTrack',
+            url: SITE_URL,
+          },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: SITE_URL,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Partners',
+              item: `${SITE_URL}/partners`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: route.breadcrumbLabel ?? route.h1,
+              item: absoluteUrl(route.path),
+            },
+          ],
+        },
+      ],
+    };
+  }
+
   if (route.kind === 'guides') {
     return {
       '@context': 'https://schema.org',
@@ -329,6 +453,7 @@ const buildNoscriptMain = (route, guides, categories, speciesById) => {
       <li><a href="/learn">Gecko and reptile care guides</a></li>
       <li><a href="/playground/gecko">Gecko Morph &amp; Trait Playground</a></li>
       <li><a href="/playground/snake">Ball Python Snake Morph Playground</a></li>
+      <li><a href="/partners">CareTrack partner collaboration page</a></li>
       <li><a href="/guides">Reptile care log templates and workflows</a></li>
       <li><a href="/faq">Reptile care app FAQ</a></li>
       <li><a href="/support">CareTrack support</a></li>
@@ -702,6 +827,65 @@ const staticRoutes = [
       'Compare Ball Python morph visuals and organize snake care records offline with CareTrack.',
     image: '/images/playground/snake/ball-python-normal-wild-type-morph.webp',
     imageAlt: 'Normal wild type Ball Python morph visualizer preview in CareTrack playground',
+    ogType: 'website',
+  },
+  {
+    kind: 'partners',
+    path: '/partners',
+    title: 'CareTrack Partners | Reptile Breeders, Shops, Creators and Events',
+    h1: 'Partner With CareTrack to Support Better Reptile Care',
+    description:
+      'Partner with CareTrack to help reptile buyers continue better care with feeding reminders, shed and weight logs, breeding records, morph tracking, and breeder handover reports.',
+    ogType: 'website',
+  },
+  {
+    kind: 'partner-child',
+    path: '/partners/breeders',
+    title: 'CareTrack for Reptile Breeders | Partner Workflows',
+    h1: 'CareTrack Partnership for Reptile Breeders',
+    breadcrumbLabel: 'Breeders',
+    description:
+      'Partner with CareTrack as a reptile breeder to manage pairings, clutch logs, hatchling care records, morph tracking, and buyer handover history.',
+    ogType: 'website',
+  },
+  {
+    kind: 'partner-child',
+    path: '/partners/breeders2',
+    title: 'Breeder Collaboration Model: Reptile History Handover | CareTrack',
+    h1: 'Breeder Collaboration Built Around Reptile History',
+    breadcrumbLabel: 'Breeders 2',
+    description:
+      'CareTrack helps reptile breeders hand over structured reptile history so buyers continue care with profile details, feeding logs, breeding context, clutch records, and after-sale guidance.',
+    ogType: 'website',
+  },
+  {
+    kind: 'partner-child',
+    path: '/partners/reptile-shops',
+    title: 'CareTrack for Reptile Shops | Customer Care Partnership',
+    h1: 'CareTrack Partnership for Reptile Shops',
+    breadcrumbLabel: 'Reptile Shops',
+    description:
+      'Partner with CareTrack as a reptile shop to improve post-sale support using QR handover, care reminders, and practical reptile care records.',
+    ogType: 'website',
+  },
+  {
+    kind: 'partner-child',
+    path: '/partners/creators',
+    title: 'CareTrack for Reptile Creators and Educators | Partner Program',
+    h1: 'CareTrack Partnership for Reptile Creators and Educators',
+    breadcrumbLabel: 'Creators',
+    description:
+      'Partner with CareTrack as a reptile creator or educator to demonstrate practical husbandry routines, breeding context, and responsible ownership workflows.',
+    ogType: 'website',
+  },
+  {
+    kind: 'partner-child',
+    path: '/partners/events',
+    title: 'CareTrack for Reptile Expos and Events | Collaboration Program',
+    h1: 'CareTrack Partnership for Reptile Expos and Events',
+    breadcrumbLabel: 'Events',
+    description:
+      'Partner with CareTrack for reptile expos and events through QR campaigns, booth demos, breeder handover education, and practical care continuity workflows.',
     ogType: 'website',
   },
   {
