@@ -51,10 +51,6 @@ export function GeckoVisualizer({
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.25, ease: 'easeOut' }}
       >
-        <div className="pointer-events-none absolute left-5 top-5 z-10 rounded-full bg-black/75 px-3 py-1 text-xs text-white backdrop-blur-sm">
-          Morph: {selectedMorph.name}
-        </div>
-
         <motion.img
           src={imagePath}
           alt={`${selectedMorph.name} leopard gecko morph preview in CareTrack playground`}
