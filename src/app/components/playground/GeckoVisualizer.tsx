@@ -5,19 +5,25 @@ type GeckoVisualizerProps = {
   selectedMorph: GeckoMorphOption;
 };
 
-const fallbackImage = '/images/morphs/ghost.jpg';
+const fallbackImage = '/images/playground/gecko/ghost.webp';
 
 const morphImageById: Record<string, string> = {
-  normal: '/images/morphs/ghost.jpg',
-  'tremper-albino': '/images/morphs/Tremper-Albino.jpg',
-  'bell-albino': '/images/morphs/Bell-Albino.jpg',
-  eclipse: '/images/morphs/Eclipse.jpg',
-  'mack-snow': '/images/morphs/Mack-Snow.jpg',
-  blizzard: '/images/morphs/Blizzard.jpg',
-  patternless: '/images/morphs/Patternless.jpg',
-  tangerine: '/images/morphs/Tangerine.jpg',
-  'white-yellow': '/images/morphs/White&yellow.jpg',
-  raptor: '/images/morphs/Raptor.jpg',
+  ghost: '/images/playground/gecko/ghost.webp',
+  'tremper-albino': '/images/playground/gecko/Tremper-Albino.webp',
+  'bell-albino': '/images/playground/gecko/Bell-Albino.webp',
+  'amelanistic-albino': '/images/playground/gecko/Amelanistic(Albino).webp',
+  eclipse: '/images/playground/gecko/Eclipse.webp',
+  'mack-snow': '/images/playground/gecko/Mack-Snow.webp',
+  blizzard: '/images/playground/gecko/Blizzard.webp',
+  tangerine: '/images/playground/gecko/Tangerine.webp',
+  'white-yellow': '/images/playground/gecko/White&yellow.webp',
+  raptor: '/images/playground/gecko/Raptor.webp',
+  zero: '/images/playground/gecko/Zero.webp',
+  'black-night-melanistic': '/images/playground/gecko/Black Night (melanistic).webp',
+  'black-night-recessive-combos': '/images/playground/gecko/Black Night Recessive Combos.webp',
+  'diablo-blanco-morph': '/images/playground/gecko/Diablo Blanco morph.webp',
+  'oreo-striped-morph': '/images/playground/gecko/OreoStripedMorph.webp',
+  'het-oreo-pos-jungle': '/images/playground/gecko/Het Oreo Pos Jungle.webp',
 };
 
 export function GeckoVisualizer({ selectedMorph }: GeckoVisualizerProps) {
