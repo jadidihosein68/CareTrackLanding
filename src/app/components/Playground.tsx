@@ -83,7 +83,8 @@ export function Playground() {
       <main className="px-4 pb-20 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl space-y-10">
           <header className="max-w-3xl">
-            <h1 className="text-4xl text-slate-900 sm:text-5xl">Build Your Gecko Look</h1>
+            <h1 className="text-4xl text-slate-900 sm:text-5xl">Gecko Morph & Trait Playground</h1>
+            <p className="mt-3 text-base font-medium text-emerald-700">Build your gecko look</p>
             <p className="mt-4 text-lg text-slate-600">
               Select a morph to preview a playful gecko visualization. CareTrack helps keepers and
               breeders organize gecko care, morph records, feeding logs, and reminders in one
@@ -103,6 +104,10 @@ export function Playground() {
 
           <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
             <div className="space-y-6">
+              <div className="sm:hidden sticky top-20 z-20 rounded-2xl bg-slate-50/95 p-1 backdrop-blur supports-[backdrop-filter]:bg-slate-50/85">
+                <GeckoVisualizer selectedMorph={selectedMorph} compact showCaption={false} />
+              </div>
+
               <MorphSelector
                 options={geckoMorphOptions}
                 selectedMorphId={selectedMorph.id}
@@ -110,7 +115,6 @@ export function Playground() {
               />
 
               <div className="space-y-4 sm:hidden">
-                <GeckoVisualizer selectedMorph={selectedMorph} />
                 <TraitInfoPanel selectedMorph={selectedMorph} />
               </div>
 
@@ -135,6 +139,15 @@ export function Playground() {
               leopard gecko morphs and trait labels can be tracked, and see how a gecko trait
               tracker supports breeder routines. CareTrack pairs this context with offline reptile
               care logs, reminders, and species-specific husbandry guidance.
+            </p>
+            <p className="mt-3 text-slate-700">
+              For breeders, learning how labels such as Recessive, Incomplete Dominant, and
+              Polygenic are documented helps improve pairing notes and handover quality. This page
+              supports faster comparison of leopard gecko genetics and AFT gecko morphs in one
+              organized view, then connects those records to your reptile breeding tracker workflow
+              in CareTrack. Use it to review trait language, align naming standards, and keep
+              cleaner lineage context before moving data into feeding logs, shed history, and
+              long-term husbandry tracking.
             </p>
           </section>
         </div>

@@ -1,8 +1,11 @@
+import clsx from 'clsx';
 import { motion } from 'motion/react';
 import { type GeckoMorphOption } from '../../data/gecko-playground-catalog';
 
 type GeckoVisualizerProps = {
   selectedMorph: GeckoMorphOption;
+  compact?: boolean;
+  showCaption?: boolean;
 };
 
 const fallbackImage = '/images/playground/gecko/ghost.webp';
@@ -26,12 +29,21 @@ const morphImageById: Record<string, string> = {
   'het-oreo-pos-jungle': '/images/playground/gecko/Het Oreo Pos Jungle.webp',
 };
 
-export function GeckoVisualizer({ selectedMorph }: GeckoVisualizerProps) {
+export function GeckoVisualizer({
+  selectedMorph,
+  compact = false,
+  showCaption = true,
+}: GeckoVisualizerProps) {
   const visualKey = selectedMorph.id;
   const imagePath = morphImageById[selectedMorph.id] ?? fallbackImage;
 
   return (
-    <figure className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xl sm:p-6">
+    <figure
+      className={clsx(
+        'rounded-2xl border border-slate-200 bg-white shadow-xl',
+        compact ? 'p-3 sm:p-4' : 'p-4 sm:p-6',
+      )}
+    >
       <motion.div
         key={visualKey}
         className="relative overflow-hidden rounded-xl bg-slate-50 p-3"
@@ -46,7 +58,10 @@ export function GeckoVisualizer({ selectedMorph }: GeckoVisualizerProps) {
         <motion.img
           src={imagePath}
           alt={`${selectedMorph.name} leopard gecko morph preview in CareTrack playground`}
-          className="mx-auto h-auto max-h-[460px] w-full rounded-lg object-contain"
+          className={clsx(
+            'mx-auto h-auto w-full rounded-lg object-contain',
+            compact ? 'max-h-[220px]' : 'max-h-[460px]',
+          )}
           loading="lazy"
           onError={(event) => {
             if (event.currentTarget.src.endsWith(fallbackImage)) return;
@@ -55,9 +70,11 @@ export function GeckoVisualizer({ selectedMorph }: GeckoVisualizerProps) {
         />
       </motion.div>
 
-      <figcaption className="mt-3 text-sm text-slate-600">
-        Visual demo only. Selected morph: {selectedMorph.name}
-      </figcaption>
+      {showCaption ? (
+        <figcaption className="mt-3 text-sm text-slate-600">
+          Visual demo only. Selected morph: {selectedMorph.name}
+        </figcaption>
+      ) : null}
     </figure>
   );
 }
