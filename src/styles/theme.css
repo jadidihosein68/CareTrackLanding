@@ -135,6 +135,13 @@
 
   html {
     font-size: var(--font-size);
+    scrollbar-gutter: stable;
+  }
+
+  @supports not (scrollbar-gutter: stable) {
+    html {
+      overflow-y: scroll;
+    }
   }
 
   h1 {
