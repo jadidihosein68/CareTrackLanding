@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Footer } from './shared/Footer';
@@ -7,11 +6,6 @@ import { usePageMeta } from '../utils/usePageMeta';
 import { SITE_URL } from '../utils/seo';
 
 export function Support() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [context, setContext] = useState('');
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-
   usePageMeta({
     title: 'Reptile Care App Support | CareTrack',
     description:
@@ -34,36 +28,6 @@ export function Support() {
       },
     },
   });
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setStatus('sending');
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const encoded = new URLSearchParams();
-    formData.forEach((value, key) => {
-      encoded.append(key, String(value));
-    });
-
-    try {
-      const response = await fetch(form.getAttribute('action') ?? '/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encoded.toString(),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to send support request');
-      }
-
-      setStatus('sent');
-      setName('');
-      setEmail('');
-      setContext('');
-    } catch (error) {
-      setStatus('error');
-    }
-  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -89,94 +53,18 @@ export function Support() {
             Tell us what you need help with and we will send it to our support team.
           </p>
 
-          <form
-            className="space-y-6"
-            onSubmit={handleSubmit}
-            name="support"
-            method="POST"
-            action="/?submitted=support"
-            encType="application/x-www-form-urlencoded"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
-          >
-            <input type="hidden" name="form-name" value="support" />
-            <input type="hidden" name="subject" value="CareTrack Support" />
-            <input type="hidden" name="bot-field" />
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2" htmlFor="name">
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-                required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                placeholder="Your name"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2" htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                placeholder="you@example.com"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2" htmlFor="context">
-                Context
-              </label>
-              <textarea
-                id="context"
-                name="context"
-                value={context}
-                onChange={(event) => setContext(event.target.value)}
-                required
-                rows={6}
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                placeholder="Share details about the issue or question"
-              />
-            </div>
-
-            <div className="flex flex-col gap-3">
-              <button
-                type="submit"
-                className="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-                disabled={status === 'sending'}
+          <section className="rounded-xl border border-slate-200 bg-slate-50 px-6 py-5">
+            <p className="text-slate-700">
+              To contact our support, please send email to{' '}
+              <a
+                className="font-medium text-emerald-700 underline hover:text-emerald-800"
+                href="mailto:info@osacore.com?subject=CareTrack%20Support"
               >
-                {status === 'sending' ? 'Sending...' : 'Send Email'}
-              </button>
-              {status === 'sent' && (
-                <p className="text-emerald-600">Thanks! Your support request was sent.</p>
-              )}
-              {status === 'error' && (
-                <p className="text-rose-600">
-                  We could not send your request. Please email
-                  {' '}
-                  <a
-                    className="underline text-rose-600 hover:text-rose-700"
-                    href="mailto:info@osacore.com?subject=CareTrack%20Support"
-                  >
-                    info@osacore.com
-                  </a>
-                  {' '}
-                  instead.
-                </p>
-              )}
-            </div>
-          </form>
+                info@osacore.com
+              </a>
+              .
+            </p>
+          </section>
           <div className="mt-8 text-sm text-slate-600">
             <p>
               Before contacting support, you can check our{' '}
