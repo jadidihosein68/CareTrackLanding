@@ -1,24 +1,125 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { GeckoVisualizer } from './playground/GeckoVisualizer';
 import { MorphSelector } from './playground/MorphSelector';
 import { TraitInfoPanel } from './playground/TraitInfoPanel';
 import { PlaygroundCTA } from './playground/PlaygroundCTA';
-import { geckoMorphOptions } from '../data/gecko-playground-catalog';
+import { type GeckoRarity, geckoMorphOptions } from '../data/gecko-playground-catalog';
 import { Footer } from './shared/Footer';
 import { TopNav } from './shared/TopNav';
 import { usePageMeta } from '../utils/usePageMeta';
 import { SITE_URL } from '../utils/seo';
+import { splitTraitGenetics, splitTraitHeadlineIntoChips } from './playground/geckoRarity';
 
 const SEO_TITLE = 'Gecko Morph & Trait Playground | CareTrack';
 const SEO_DESCRIPTION =
   'Try CareTrack\'s interactive gecko morph and trait playground. Select leopard gecko morphs and traits to preview a fun cartoon gecko visualization and learn how CareTrack supports reptile care and breeder records.';
 
 const defaultMorph = geckoMorphOptions[0];
+const rarityOrder: GeckoRarity[] = ['common', 'uncommon', 'rare', 'legendary'];
+
+const normalizeGeckoType = (value: string) => {
+  const normalized = value.trim();
+  if (normalized === 'AFT') {
+    return 'AFT Gecko';
+  }
+  return normalized;
+};
+
+const extractGeckoTypes = (speciesValue: string) =>
+  speciesValue
+    .split('/')
+    .map(normalizeGeckoType)
+    .filter(Boolean);
+
+const extractTraitTags = (traitGeneticsValue: string) => {
+  const headline = splitTraitGenetics(traitGeneticsValue).headline;
+  return splitTraitHeadlineIntoChips(headline);
+};
+
+const toggleFilterValue = <T,>(currentValues: T[], value: T) => {
+  if (currentValues.includes(value)) {
+    return currentValues.filter((item) => item !== value);
+  }
+  return [...currentValues, value];
+};
 
 export function Playground() {
   const [selectedMorphId, setSelectedMorphId] = useState<string>(defaultMorph.id);
+  const [selectedRarityFilters, setSelectedRarityFilters] = useState<GeckoRarity[]>([]);
+  const [selectedTraitFilters, setSelectedTraitFilters] = useState<string[]>([]);
+  const [selectedGeckoTypeFilters, setSelectedGeckoTypeFilters] = useState<string[]>([]);
+
+  const rarityFilterOptions = useMemo(() => {
+    const raritySet = new Set<GeckoRarity>(geckoMorphOptions.map((option) => option.rarity));
+    return rarityOrder.filter((rarity) => raritySet.has(rarity));
+  }, []);
+
+  const traitFilterOptions = useMemo(() => {
+    const traitSet = new Set<string>();
+    geckoMorphOptions.forEach((option) => {
+      extractTraitTags(option.traitGenetics).forEach((chip) => traitSet.add(chip));
+    });
+    return Array.from(traitSet).sort((left, right) => left.localeCompare(right));
+  }, []);
+
+  const geckoTypeFilterOptions = useMemo(() => {
+    const typeSet = new Set<string>();
+    geckoMorphOptions.forEach((option) => {
+      extractGeckoTypes(option.species).forEach((typeValue) => typeSet.add(typeValue));
+    });
+    return Array.from(typeSet).sort((left, right) => left.localeCompare(right));
+  }, []);
+
+  const filteredMorphOptions = useMemo(
+    () =>
+      geckoMorphOptions.filter((option) => {
+        if (
+          selectedRarityFilters.length > 0 &&
+          !selectedRarityFilters.includes(option.rarity)
+        ) {
+          return false;
+        }
+
+        if (selectedTraitFilters.length > 0) {
+          const optionTraitTags = extractTraitTags(option.traitGenetics);
+          const matchesTraitFilter = selectedTraitFilters.some((trait) =>
+            optionTraitTags.includes(trait),
+          );
+          if (!matchesTraitFilter) {
+            return false;
+          }
+        }
+
+        if (selectedGeckoTypeFilters.length > 0) {
+          const optionTypes = extractGeckoTypes(option.species);
+          const matchesTypeFilter = selectedGeckoTypeFilters.some((typeValue) =>
+            optionTypes.includes(typeValue),
+          );
+          if (!matchesTypeFilter) {
+            return false;
+          }
+        }
+
+        return true;
+      }),
+    [selectedRarityFilters, selectedTraitFilters, selectedGeckoTypeFilters],
+  );
+
+  useEffect(() => {
+    if (filteredMorphOptions.length === 0) {
+      return;
+    }
+
+    const selectedMorphStillVisible = filteredMorphOptions.some(
+      (option) => option.id === selectedMorphId,
+    );
+
+    if (!selectedMorphStillVisible) {
+      setSelectedMorphId(filteredMorphOptions[0].id);
+    }
+  }, [filteredMorphOptions, selectedMorphId]);
 
   const selectedMorph =
     geckoMorphOptions.find((option) => option.id === selectedMorphId) ?? defaultMorph;
@@ -26,6 +127,29 @@ export function Playground() {
   const handleMorphSelect = (morphId: string) => {
     setSelectedMorphId(morphId);
   };
+
+  const toggleRarityFilter = (rarity: GeckoRarity) => {
+    setSelectedRarityFilters((currentValues) => toggleFilterValue(currentValues, rarity));
+  };
+
+  const toggleTraitFilter = (trait: string) => {
+    setSelectedTraitFilters((currentValues) => toggleFilterValue(currentValues, trait));
+  };
+
+  const toggleGeckoTypeFilter = (typeValue: string) => {
+    setSelectedGeckoTypeFilters((currentValues) => toggleFilterValue(currentValues, typeValue));
+  };
+
+  const clearAllFilters = () => {
+    setSelectedRarityFilters([]);
+    setSelectedTraitFilters([]);
+    setSelectedGeckoTypeFilters([]);
+  };
+
+  const hasActiveFilters =
+    selectedRarityFilters.length > 0 ||
+    selectedTraitFilters.length > 0 ||
+    selectedGeckoTypeFilters.length > 0;
 
   usePageMeta({
     title: SEO_TITLE,
@@ -109,9 +233,21 @@ export function Playground() {
               </div>
 
               <MorphSelector
-                options={geckoMorphOptions}
+                options={filteredMorphOptions}
                 selectedMorphId={selectedMorph.id}
                 onSelect={handleMorphSelect}
+                rarityFilterOptions={rarityFilterOptions}
+                selectedRarityFilters={selectedRarityFilters}
+                onToggleRarityFilter={toggleRarityFilter}
+                traitFilterOptions={traitFilterOptions}
+                selectedTraitFilters={selectedTraitFilters}
+                onToggleTraitFilter={toggleTraitFilter}
+                geckoTypeFilterOptions={geckoTypeFilterOptions}
+                selectedGeckoTypeFilters={selectedGeckoTypeFilters}
+                onToggleGeckoTypeFilter={toggleGeckoTypeFilter}
+                onClearAllFilters={clearAllFilters}
+                hasActiveFilters={hasActiveFilters}
+                totalCount={geckoMorphOptions.length}
               />
 
               <div className="space-y-4 sm:hidden">
