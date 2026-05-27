@@ -2,10 +2,19 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft,
+  ArrowRight,
+  BadgeCheck,
   CalendarRange,
   Dna,
+  IdCard,
+  Megaphone,
   Mic2,
+  Palette,
+  QrCode,
+  Scale,
   Store,
+  Tag,
+  UtensilsCrossed,
   type LucideIcon,
 } from 'lucide-react';
 import { Footer } from './shared/Footer';
@@ -13,6 +22,14 @@ import { TopNav } from './shared/TopNav';
 import { trackEvent } from '../utils/analytics';
 import { SITE_URL } from '../utils/seo';
 import { usePageMeta } from '../utils/usePageMeta';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from './ui/dialog';
 
 type PartnerStep = {
   label: string;
@@ -43,6 +60,25 @@ type PartnerTypeConfig = {
   steps: PartnerStep[];
   disclosure?: string;
   icon: LucideIcon;
+};
+
+type BreederTrustItem = {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  iconClassName: string;
+};
+
+type BreederOfferCard = {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  iconClassName: string;
+};
+
+type BreederMetric = {
+  value: string;
+  label: string;
 };
 
 const stepIndicatorStyles = {
@@ -347,6 +383,431 @@ const partnerConfigs: Record<PartnerTypeConfig['slug'], PartnerTypeConfig> = {
   },
 };
 
+const breederHorizontalSteps: PartnerStep[] = [
+  {
+    label: 'Pairing & Lineage',
+    description: 'Define pairs with precision. Log genetic traits and avoid high COI.',
+  },
+  {
+    label: 'Clutches & Incubation',
+    description: 'Track copulation, ovulation, and monitor incubation temperatures.',
+  },
+  {
+    label: 'Hatchlings & Morphs',
+    description: 'Log hatch dates, assign IDs, and track complex morph development.',
+  },
+  {
+    label: 'Offline-First Records',
+    description: 'Log meals, sheds, and weights right from the reptile room.',
+  },
+  {
+    label: 'The Buyer Handover',
+    description: 'Transfer a complete, verifiable digital history in seconds.',
+  },
+];
+
+const breederTrustItems: BreederTrustItem[] = [
+  {
+    title: 'Complete Feeding History',
+    description: 'Proof of what they ate, when, and if it was live or frozen/thawed.',
+    icon: UtensilsCrossed,
+    iconClassName: 'bg-emerald-100 text-emerald-700',
+  },
+  {
+    title: 'Shed & Weight Logs',
+    description: 'Demonstrating consistent, healthy growth rates over time.',
+    icon: Scale,
+    iconClassName: 'bg-blue-100 text-blue-700',
+  },
+  {
+    title: 'Verified Morph & Trait Info',
+    description: 'Clear documentation of visual traits and known hets based directly on pairing logs.',
+    icon: Tag,
+    iconClassName: 'bg-violet-100 text-violet-700',
+  },
+];
+
+const breederOfferCards: BreederOfferCard[] = [
+  {
+    title: 'Featured Partner Profiles',
+    description:
+      'Become a recognized CareTrack Partner. We highlight trusted breeders on our platform who maintain high standards of digital record-keeping.',
+    icon: IdCard,
+    iconClassName: 'bg-indigo-100 text-indigo-700',
+  },
+  {
+    title: 'QR-Code Handovers',
+    description:
+      'Generate unique QR codes for each animal or your entire list at expos. Buyers simply scan to view public history or claim the transfer to their account.',
+    icon: QrCode,
+    iconClassName: 'bg-emerald-100 text-emerald-700',
+  },
+  {
+    title: 'Breeder Referral Program',
+    description:
+      'Receive a unique affiliate link. Earn credit, premium features, or payouts for every new user who signs up through your link or QR code.',
+    icon: Megaphone,
+    iconClassName: 'bg-amber-100 text-amber-700',
+  },
+  {
+    title: 'Co-Branded Materials',
+    description:
+      'We provide optional co-branded care guides, social media templates, and digital badges to display on your website, showing your commitment to quality.',
+    icon: Palette,
+    iconClassName: 'bg-sky-100 text-sky-700',
+  },
+];
+
+const breederHeroMetrics: BreederMetric[] = [
+  { value: '5-Step', label: 'Workflow from pairing to handover' },
+  { value: 'Offline-First', label: 'Record updates from reptile room to expo' },
+  { value: 'Buyer-Ready', label: 'Transfer clean digital history in seconds' },
+];
+
+function BreederPartnerPage() {
+  const config = partnerConfigs.breeders;
+  const partnerEmailAddress = 'info@osacore.com';
+  const partnerEmailHref = `mailto:${partnerEmailAddress}?subject=CareTrack%20Breeder%20Partnership%20Inquiry`;
+  const [activeStep, setActiveStep] = useState(0);
+  const [StepIndicatorComponent, setStepIndicatorComponent] = useState<null | ((props: any) => JSX.Element)>(null);
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const stepLabels = useMemo(() => breederHorizontalSteps.map((step) => step.label), []);
+  const selectedStep = breederHorizontalSteps[activeStep] ?? breederHorizontalSteps[0];
+
+  usePageMeta({
+    title: config.seoTitle,
+    description: config.seoDescription,
+    path: config.path,
+    type: 'website',
+    image: '/og-image.jpg',
+    imageAlt: `${config.breadcrumbLabel} partnership page in CareTrack`,
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: config.h1,
+        url: `${SITE_URL}${config.path}`,
+        description: config.seoDescription,
+        isPartOf: {
+          '@type': 'WebSite',
+          name: 'CareTrack',
+          url: SITE_URL,
+        },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: SITE_URL,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Partners',
+            item: `${SITE_URL}/partners`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: config.breadcrumbLabel,
+            item: `${SITE_URL}${config.path}`,
+          },
+        ],
+      },
+    ],
+  });
+
+  useEffect(() => {
+    trackEvent('partners_segment_page_view', { segment: config.slug });
+  }, [config.slug]);
+
+  const handleBecomePartnerClick = (placement: 'hero' | 'partner_with_us') => {
+    trackEvent('partners_segment_primary_cta_click', {
+      segment: config.slug,
+      partner_type: config.partnerTypePrefill,
+      placement,
+    });
+    setIsPartnerModalOpen(true);
+  };
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    // react-native-step-indicator expects a Node-style global in web runtime.
+    if (typeof (globalThis as typeof globalThis & { global?: typeof globalThis }).global === 'undefined') {
+      (globalThis as typeof globalThis & { global?: typeof globalThis }).global = globalThis;
+    }
+
+    let isMounted = true;
+    import('react-native-step-indicator')
+      .then((module) => {
+        if (isMounted) {
+          setStepIndicatorComponent(() => module.default as (props: any) => JSX.Element);
+        }
+      })
+      .catch(() => {
+        setStepIndicatorComponent(null);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      <TopNav
+        rightSlot={(
+          <Link
+            to="/partners"
+            className="flex items-center gap-2 text-slate-600 transition-colors hover:text-slate-900"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Partners
+          </Link>
+        )}
+      />
+
+      <main className="px-4 pb-24 pt-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl space-y-8">
+          <nav aria-label="Breadcrumb" className="text-sm text-slate-600">
+            <Link to="/" className="text-slate-600 underline hover:text-slate-900">
+              Home
+            </Link>{' '}
+            /{' '}
+            <Link to="/partners" className="text-slate-600 underline hover:text-slate-900">
+              Partners
+            </Link>{' '}
+            / <span className="text-slate-900">Breeders</span>
+          </nav>
+
+          <section
+            className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white px-6 py-12 shadow-sm sm:px-10 sm:py-14"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.16) 1px, transparent 1px)',
+              backgroundSize: '16px 16px',
+            }}
+          >
+            <div className="pointer-events-none absolute -top-16 right-0 h-56 w-56 rounded-full bg-emerald-100/70 blur-3xl" />
+            <div className="mx-auto max-w-4xl text-center">
+              <p className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-100/70 px-4 py-1 text-xs font-semibold text-emerald-800">
+                <BadgeCheck className="h-3.5 w-3.5" />
+                The Mark of Responsible Breeding
+              </p>
+              <h1 className="mt-4 text-balance text-4xl leading-tight text-slate-900 sm:text-5xl">
+                Elevate Your{' '}
+                <span className="text-emerald-600">Breeding Program</span>
+              </h1>
+              <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600">
+                CareTrack isn&apos;t just an app; it&apos;s a quality mark. Streamline your
+                record-keeping, increase the value of your hatchlings, and build unbreakable trust
+                with your buyers through verifiable digital histories.
+              </p>
+
+              <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => handleBecomePartnerClick('hero')}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3 text-base text-white transition-colors hover:bg-emerald-700"
+                >
+                  Become a Partner
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+                <a
+                  href="#breeder-workflow"
+                  className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-7 py-3 text-base text-slate-800 transition-colors hover:bg-slate-100"
+                >
+                  See How It Works
+                </a>
+              </div>
+              <div className="mt-8 grid gap-3 text-left sm:grid-cols-3">
+                {breederHeroMetrics.map((metric) => (
+                  <div key={metric.label} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+                    <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">
+                      {metric.value}
+                    </p>
+                    <p className="mt-1 text-sm text-slate-600">{metric.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="breeder-workflow"
+            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+              Workflow
+            </p>
+            <h2 className="text-3xl text-slate-900">Breeder</h2>
+            <p className="mt-2 text-slate-600">
+              Click each stage to review the collaboration flow from pairing to buyer handover.
+            </p>
+            <div className="mt-6">
+              {StepIndicatorComponent ? (
+                <div className="overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  <div className="min-w-[760px]">
+                    <StepIndicatorComponent
+                      direction="horizontal"
+                      currentPosition={activeStep}
+                      stepCount={breederHorizontalSteps.length}
+                      labels={stepLabels}
+                      customStyles={stepIndicatorStyles}
+                      onPress={(position: number) => {
+                        setActiveStep(position);
+                        trackEvent('partners_segment_step_change', {
+                          segment: config.slug,
+                          step: breederHorizontalSteps[position]?.label ?? String(position + 1),
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <ol className="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+                  {breederHorizontalSteps.map((step, index) => (
+                    <li
+                      key={step.label}
+                      className={[
+                        'rounded-lg border px-3 py-2 text-sm',
+                        index === activeStep
+                          ? 'border-emerald-500 bg-emerald-50 text-emerald-900'
+                          : 'border-slate-200 bg-white text-slate-700',
+                      ].join(' ')}
+                    >
+                      {index + 1}. {step.label}
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </div>
+
+            <div className="mt-5 border-t border-slate-200 pt-4">
+              <p className="text-xs uppercase tracking-wide text-slate-500">
+                Step {activeStep + 1} of {breederHorizontalSteps.length}
+              </p>
+              <h3 className="mt-2 text-2xl text-slate-900">{selectedStep.label}</h3>
+              <p className="mt-2 text-slate-700">{selectedStep.description}</p>
+            </div>
+          </section>
+
+          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+              Trust Signals
+            </p>
+            <h2 className="text-3xl text-slate-900 sm:text-4xl">Build Trust with Verifiable Data</h2>
+            <p className="mt-3 max-w-3xl text-lg text-slate-600">
+              A complete history increases the value of every animal you sell. CareTrack helps you
+              provide undeniable proof of health and genetics. When you transfer an animal, the
+              buyer receives a comprehensive digital passport.
+            </p>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {breederTrustItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <article key={item.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-center">
+                    <span className={`mx-auto inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${item.iconClassName}`}>
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <h3 className="mt-4 text-xl text-slate-900">{item.title}</h3>
+                    <p className="mt-2 text-slate-600">{item.description}</p>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+            <p className="text-center text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+              Collaboration Models
+            </p>
+            <header className="text-center">
+              <h2 className="text-3xl text-slate-900 sm:text-4xl">Partner With Us</h2>
+              <p className="mx-auto mt-3 max-w-3xl text-lg text-slate-600">
+                We offer several ways to collaborate, grow your business, and promote responsible
+                husbandry alongside CareTrack.
+              </p>
+            </header>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {breederOfferCards.map((card) => {
+                const Icon = card.icon;
+                return (
+                  <article
+                    key={card.title}
+                    className="h-full rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center transition-shadow hover:shadow-sm"
+                  >
+                    <span className={`mx-auto inline-flex h-10 w-10 items-center justify-center rounded-xl ${card.iconClassName}`}>
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="mt-4 text-xl text-slate-900">{card.title}</h3>
+                    <p className="mt-2 leading-relaxed text-slate-600">{card.description}</p>
+                  </article>
+                );
+              })}
+            </div>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <button
+                type="button"
+                onClick={() => handleBecomePartnerClick('partner_with_us')}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3 text-base text-white transition-colors hover:bg-emerald-700"
+              >
+                Become a Partner
+                <ArrowRight className="h-4 w-4" />
+              </button>
+              <Link
+                to="/partners"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-7 py-3 text-base text-slate-800 transition-colors hover:bg-slate-100"
+              >
+                View All Partner Types
+              </Link>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <Dialog open={isPartnerModalOpen} onOpenChange={setIsPartnerModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Become a Partner</DialogTitle>
+            <DialogDescription>
+              To become a partner, please send an email to{' '}
+              <a
+                href={partnerEmailHref}
+                className="font-medium text-emerald-700 underline hover:text-emerald-800"
+              >
+                {partnerEmailAddress}
+              </a>
+              .
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <button
+              type="button"
+              onClick={() => setIsPartnerModalOpen(false)}
+              className="rounded-lg border border-slate-300 px-4 py-2 text-slate-800 transition-colors hover:bg-slate-100"
+            >
+              Close
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Footer />
+    </div>
+  );
+}
+
 function PartnerTypePage({ config }: { config: PartnerTypeConfig }) {
   const Icon = config.icon;
   const applicationLink = `/partners?partnerType=${encodeURIComponent(config.partnerTypePrefill)}#partner-form`;
@@ -635,7 +1096,7 @@ function PartnerTypePage({ config }: { config: PartnerTypeConfig }) {
 }
 
 export function PartnerBreedersPage() {
-  return <PartnerTypePage config={partnerConfigs.breeders} />;
+  return <BreederPartnerPage />;
 }
 
 export function PartnerReptileShopsPage() {

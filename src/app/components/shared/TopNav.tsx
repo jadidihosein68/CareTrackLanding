@@ -69,53 +69,8 @@ export function TopNav({ rightSlot }: TopNavProps) {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Intentionally hidden for now; kept in code for quick re-enable later. */}
-              <div className="hidden">
-                <DropdownMenu modal={false}>
-                  <DropdownMenuTrigger className={dropdownTriggerClass}>
-                    Partners
-                    <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-60">
-                    <DropdownMenuItem asChild>
-                      <Link to="/partners" className="cursor-pointer text-sm font-normal">
-                        All Partners
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild>
-                      <Link to="/partners/breeders" className="cursor-pointer text-sm font-normal">
-                        Breeders
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link to="/partners/breeders2" className="cursor-pointer text-sm font-normal">
-                        Breeders 2 (Handover)
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link to="/partners/reptile-shops" className="cursor-pointer text-sm font-normal">
-                        Reptile Shops
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link to="/partners/creators" className="cursor-pointer text-sm font-normal">
-                        Creators / Educators
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link to="/partners/events" className="cursor-pointer text-sm font-normal">
-                        Expos / Events
-                      </Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-              <Link
-                to="/partners"
-                className={`hidden ${navItemClass}`}
-              >
-                Partners
+              <Link to="/partners/breeders" className={navItemClass}>
+                Breeders
               </Link>
 
               <Link
