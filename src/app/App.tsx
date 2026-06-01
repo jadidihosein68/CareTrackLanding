@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { AppRoutes } from './AppRoutes';
+import { AppRoutesClient } from './AppRoutesClient';
 import { initializeAnalytics } from './utils/analytics';
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <AppRoutesClient />
     </BrowserRouter>
   );
 }

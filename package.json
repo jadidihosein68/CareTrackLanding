@@ -6,12 +6,13 @@
   "scripts": {
     "prebuild": "npm run seo:sitemap",
     "build": "vite build",
-    "postbuild": "npm run build:ssr && npm run seo:route-html && npm run seo:verify",
+    "postbuild": "npm run build:ssr && npm run seo:route-html && npm run seo:optimize-css && npm run seo:verify",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr",
     "dev": "vite",
     "seo:sitemap": "node scripts/generate-sitemap.mjs",
     "seo:route-html": "node scripts/generate-route-html.mjs",
-    "seo:verify": "node scripts/verify-indexability.mjs"
+    "seo:verify": "node scripts/verify-indexability.mjs",
+    "seo:optimize-css": "node scripts/optimize-css-loading.mjs"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

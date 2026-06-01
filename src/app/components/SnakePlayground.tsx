@@ -116,6 +116,7 @@ function SnakeMorphImagePreview({ selectedMorph }: { selectedMorph: SnakeMorph }
   }, [selectedMorph.id, selectedMorph.imageSrc]);
 
   const isDefault = selectedMorph.id === DEFAULT_MORPH_ID;
+  const priorityAttr = ({ fetchpriority: isDefault ? 'high' : 'auto' } as Record<string, string>);
 
   return (
     <figure className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xl sm:p-6">
@@ -133,7 +134,7 @@ function SnakeMorphImagePreview({ selectedMorph }: { selectedMorph: SnakeMorph }
             height={900}
             loading={isDefault ? 'eager' : 'lazy'}
             decoding="async"
-            fetchPriority={isDefault ? 'high' : 'auto'}
+            {...priorityAttr}
             className="mx-auto h-auto max-h-[460px] w-full rounded-lg object-contain"
             onError={(event) => {
               if (event.currentTarget.src.endsWith(FALLBACK_IMAGE)) {

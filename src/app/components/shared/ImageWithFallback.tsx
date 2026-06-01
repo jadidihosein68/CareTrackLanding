@@ -5,6 +5,7 @@ const ERROR_IMG_SRC =
 
 type ImageWithFallbackProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'alt'> & {
   alt: string
+  fetchpriority?: 'high' | 'low' | 'auto'
 }
 
 export function ImageWithFallback(props: ImageWithFallbackProps) {
@@ -14,7 +15,8 @@ export function ImageWithFallback(props: ImageWithFallbackProps) {
     setDidError(true)
   }
 
-  const { src, alt, style, className, ...rest } = props
+  const { src, alt, style, className, fetchpriority, ...rest } = props
+  const priorityAttr = fetchpriority ? ({ fetchpriority } as Record<string, string>) : {}
 
   return didError ? (
     <div
@@ -22,10 +24,10 @@ export function ImageWithFallback(props: ImageWithFallbackProps) {
       style={style}
     >
       <div className="flex items-center justify-center w-full h-full">
-        <img src={ERROR_IMG_SRC} alt={alt} {...rest} data-original-url={src} />
+        <img src={ERROR_IMG_SRC} alt={alt} {...rest} {...priorityAttr} data-original-url={src} />
       </div>
     </div>
   ) : (
-    <img src={src} alt={alt} className={className} style={style} {...rest} onError={handleError} />
+    <img src={src} alt={alt} className={className} style={style} {...rest} {...priorityAttr} onError={handleError} />
   )
 }

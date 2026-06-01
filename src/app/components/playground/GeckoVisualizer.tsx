@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { motion } from 'motion/react';
 import { type GeckoMorphOption } from '../../data/gecko-playground-catalog';
 
 type GeckoVisualizerProps = {
@@ -44,14 +43,11 @@ export function GeckoVisualizer({
         compact ? 'p-3 sm:p-4' : 'p-4 sm:p-6',
       )}
     >
-      <motion.div
+      <div
         key={visualKey}
         className="relative overflow-hidden rounded-xl bg-slate-50 p-3"
-        initial={{ opacity: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.25, ease: 'easeOut' }}
       >
-        <motion.img
+        <img
           src={imagePath}
           alt={`${selectedMorph.name} leopard gecko morph preview in CareTrack playground`}
           className={clsx(
@@ -64,7 +60,7 @@ export function GeckoVisualizer({
             event.currentTarget.src = fallbackImage;
           }}
         />
-      </motion.div>
+      </div>
 
       {showCaption ? (
         <figcaption className="mt-3 text-sm text-slate-600">
