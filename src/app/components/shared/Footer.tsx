@@ -97,6 +97,17 @@ export function Footer() {
         </div>
         <div className="pt-8 border-t border-slate-800 text-center text-slate-400">
           <p>&copy; 2025 CareTrack. All rights reserved. Built by reptile keepers for reptile keepers</p>
+          <p className="mt-3 text-sm">
+            Powered by{' '}
+            <a
+              href="https://osacore.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-slate-200 underline-offset-4 transition-colors hover:text-white hover:underline"
+            >
+              Osacore
+            </a>
+          </p>
         </div>
       </div>
     </footer>
